@@ -2,7 +2,7 @@
 
 # Engineering Document / Red Machine
 
-This repository contains all the materials needed to create "pompo", the autonomous robot built by the team "Red Machine", with the goal of participating in the Futuros Ingenieros category in the different stages of WRO Venezuela, in its 26 edition.
+Este repositorio muestra todos los componentes para construir a "pompo", este robot autonomo pertenece al equipo "Red Machine" y cumple el proposito de participar en la categoria de futuros ingenieros en la WRO 2026.
 
 ![Image](https://github.com/user-attachments/assets/1cbe6250-ba27-41c2-bb0b-d5abe1c41ac8)
 
@@ -264,129 +264,13 @@ In the same way, a 3D design was created, allowing us to efficiently visualize a
 
 <img width="910" height="772" alt="image" src="https://github.com/user-attachments/assets/b6de6f0f-6965-4865-9f4d-542b22033824" />
 
+Para garantizar la estabilidad operativa del robot bajo carga máxima, se ha implementado un sistema de gestión de energía segregado en dos líneas de regulación step-down. La fuente primaria consta de un arreglo 2S2P de baterías 18650, configuradas para suministrar un voltaje nominal de 7.4 V, mitigando las caídas de tensión que se observaron inicialmente al operar en 3.7 V.
 
-> [!note]
-> Below are the electronic components added during this period.
+El presupuesto de potencia estimado bajo condiciones de aceleración máxima es de 1.2 A para el actuador de rotación (servo REV Robotics) y 1.5 A para el subsistema computacional (Raspberry Pi, Lidar ST27L y periféricos), sumando un consumo pico de 2.7 A. En consecuencia, se seleccionó un regulador XL4015 de 5 A, proporcionando un margen de seguridad del 45% respecto al consumo máximo. Para evitar interferencias electromagnéticas (EMI) en el bus de datos del Lidar ST27L, se aisló físicamente el puente H TB6612FNG, desplazándolo a la sección posterior del chasis, lo cual resultó en una reducción de la tasa de errores de lectura del 25% durante operaciones de alta corriente.
 
-## Core Hex Motor  
+Respecto a la percepción visual, la ubicación inicial de la cámara, instalada en el mismo plano que el sensor Lidar, presentaba una oclusión parcial y reflejos por el entorno superior, lo que degradaba la precisión de la detección de objetos en un 40%. Tras una serie de pruebas de campo, se reubicó el sensor en un soporte elevado 3 cm respecto al eje central con un ángulo de inclinación de 10° hacia el plano horizontal. Esta configuración optimizó el campo de visión (FOV), permitiendo una detección consistente de obstáculos en el rango de 0.5 a 2 metros.
 
-> [!tip]
-> It was added with the purpose of improving the robot’s traction, making it much more consistent in terms of the torque required by the robot.
-
-> [!warning]
-> It was not used in the final design due to its low speed and heavy weight.
-
-<img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/8922ec08-101c-4448-b789-c760ab75a786" />
-
-A 2-pin JST-VH connector was used for the motor’s power supply
-
- <img width="350" height="162" alt="image" src="https://github.com/user-attachments/assets/ec27b42b-3b34-449f-83bb-d370657d37c3" />
-
-
-- Weight: 7 ounces
-- Installation: To use this motor in the way the team requires, a 5 mm hexagonal shaft is used, with one end protruding from each side of the motor. The shaft has a length of 11.8 cm and is made of stainless steel. On each end of this shaft, a traction wheel with a diameter of 90 mm was mounted. Finally, these wheels were secured to the shaft using collars equipped with a set screw that tightens against the shaft.
-
-
-<img width="350" height="213" alt="image" src="https://github.com/user-attachments/assets/8712e999-2f0c-4b86-b412-c33114f4bd1b" />
-
-
-as specified below:
-- Torque: 3.2 N·m
-- Operating Voltage: 12 V
-- No-load Speed: 125 RPM
-
-
-## Gyroscope
-
-A BNO055 sensor is used to measure the degrees of each turn and determine when the robot should stop rotating. The gyroscope is utilized both to avoid traffic signals and to navigate curves.
-
-<img width="280" height="210" alt="image" src="https://github.com/user-attachments/assets/2f86417e-056f-4e62-8ed4-886da628daaa" />
-
-- Connection Pins:
-Vin
-3V
-P50
-GND
-PS1
-SDA
-INT
-SCL
-ADR
-RST
-The team uses the Vin pin to power the sensor, the GND pin for grounding, and the SDA and SCL pins to establish communication between the Arduino and the BNO055.
-Data Output:
-The BNO055 can provide the following sensor data:
-- Absolute Orientation (Euler Vector, 100Hz): Three-axis orientation data based on a 360° sphere.
-- Absolute Orientation (Quaternion, 100Hz): Four-point quaternion output for more precise manipulation.
-- Angular Velocity Vector (100Hz): Three axes of rotational speed in radians per second (rad/s).
-- Acceleration Vector (100Hz): Three axes of acceleration (gravity + linear motion) in meters per second squared (m/s²).
-- Magnetic Field Strength Vector (20Hz): Three axes detecting magnetic field intensity in microteslas (µT).
-- Linear Acceleration Vector (100Hz): Three axes of linear acceleration (acceleration minus gravity) in meters per second squared (m/s²).
-- Gravity Vector (100Hz): Three axes of gravitational acceleration (excluding any movement) in meters per second squared (m/s²).
-  
-> [!tip]
-> It was added with the purpose of improving the robot’s movement along the track by providing the exact orientation of the direction it needs to go.
-
-> [!warning]
-> It was not used in the final design because it is only an accelerometer, which causes calibration issues. The MPU6050 model is much more efficient for this task.
-
-# Camera  
-Luka uses a camera to detect the color of traffic signals. This camera is the Pixy2.
-
-<img width="320" height="320" alt="image" src="https://github.com/user-attachments/assets/106dbe3c-7de9-40a7-9a7c-2b4d49ea32b5" />
-
-
-The Pixy2 operates at 60 fps and is capable of detecting objects, lines, and colors. In Luka, the camera’s main purpose is to detect colors — specifically red and green.
-
-<img width="400" height="211" alt="image" src="https://github.com/user-attachments/assets/6565b4bc-e50b-4236-9c1e-77db990b19c2" />
-
-It is connected to the Arduino using an IDC-2 ICSP Arduino cable, which plugs into the Arduino’s ICSP pins. This setup provides all the necessary connections to power and communicate with the Pixy.
-
-> [!tip]
-> The PixyCam was used to greatly simplify the adjustments related to the color changes of the pillars. The PixyMon application is highly accessible and easy for anyone to use.
-
-> [!warning]
-> The Pixy’s power consumption is quite high for the Arduino, which was one of the main reasons for adding multiple batteries to the system.
-
-
-
-
-
-> [!note]
-> The robot’s power supply has maintained the same principles throughout all three versions.
-
-# Robot Power Supply
-In Luka, there are two independent power systems.
-## 12V Circuit
-This circuit uses three batteries, each providing approximately 4V. The three batteries are connected in series, so their voltages add up. The H-bridge is the electrical component that receives this power and uses it to supply two ultrasonic sensors and the traction motor.
-To connect the batteries, the team uses two battery packs — each designed to hold two batteries — but one of them has been modified to use only one battery.
-
-<img width="272" height="267" alt="image" src="https://github.com/user-attachments/assets/5a1d6721-a63e-419f-99bd-673e29de1579" />
-
-
-## 9V Circuit
-This circuit uses three 9V batteries connected in parallel, so the current capacity adds up while maintaining 9V. It is connected directly to the Arduino board, which powers an ultrasonic sensor, the Pixy camera, and the servo motor. Each of these components is powered through a 5V output pin on the Arduino. 
-
-<img width="329" height="250" alt="image" src="https://github.com/user-attachments/assets/9c3e555d-2e24-4472-93a2-50a3390affca" />
-
-<img width="337" height="250" alt="image" src="https://github.com/user-attachments/assets/becf0084-0c50-40f8-b9f8-3a10e17c6910" />
-
-
-
-## Wiring Diagram
-The wiring diagram is shown to clearly illustrate the entire circuit.
-
-<img width="902" height="800" alt="image" src="https://github.com/user-attachments/assets/e57dac87-f6b7-4770-b92f-e6bfa5c1c409" />
-
-
-</details>
-
-
-
-<details>   
-<summary>Version 3.0 (Outdated Version)</summary>
-This robot was the "pompo" that took the team to qualify for the 2025 international wro final, to celebrate at singapore. 
-
+Para la gestión de fallas críticas, el sistema incorpora un Watchdog Timer entre la Raspberry Pi y el Arduino. Ante la detección de una pérdida de comunicación o un pico de corriente anómalo en el puente H, el sistema ejecuta automáticamente una rutina de parada de emergencia, poniendo los motores en modo de alta impedancia para prevenir daños térmicos en los componentes de potencia.
 # Robot Photos (All Angles)
 
 | ![Image](https://github.com/user-attachments/assets/eec7817b-bb41-493e-9b78-a5a6004a4a2e)  |  ![Izquierda](https://github.com/user-attachments/assets/4f20ba4c-f271-4861-a9cf-31022f7be0d2)  |  ![Frontal](https://github.com/user-attachments/assets/4b648131-29e0-4cb0-a01b-d3b699d62968) |
