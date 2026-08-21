@@ -169,18 +169,69 @@ Passionate about continuous learning, creative problem solving, and collaboratin
 
 
 
-## 📦 Descripción de los Componentes Principales del Sistema
 
-| Componente | Descripción |
-|:---|:---|
-| **Lidar (LDROBOT ST27L)** | Sensor de distancia óptico que realiza escaneos horizontales de 360° para la detección de obstáculos y mapeo del entorno mediante comunicación serial. |
-| **Raspberry Pi** | Microcomputadora central encargada de procesar las lecturas del Lidar, controlar la webcam y ejecutar los algoritmos de navegación de alto nivel. |
-| **Arduino Uno** | Microcontrolador de apoyo para la gestión de señales I/O de bajo nivel y control directo del puente H. |
-| **Servomotor (REV Robotics)** | Actuador de alta precisión utilizado para la dirección del sistema, alimentado por una línea regulada independiente. |
-| **Puente H (TB6612FNG)** | Controlador de motores DC dual de alta eficiencia que gestiona el sentido de giro y velocidad de los motores de tracción conectados en paralelo. |
-| **Reductor de Voltaje XL4015** | Regulador *step-down* de alta corriente (hasta 5 A) que convierte la energía de las baterías a 5 V estables para la Raspberry Pi y sus periféricos. |
-| **Reductor de Voltaje LM2596** | Regulador *step-down* dedicado exclusivamente a ajustar la tensión requerida por el servo REV Robotics. |
-| **Cámara Webcam** | Sensor de visión conectado por USB a la Raspberry Pi para el reconocimiento visual y seguimiento de elementos en la pista. |
+# Explicación Detallada de los Componentes
+
+### Raspberry Pi 5
+Computadora monoplaca de alto rendimiento equipada con un procesador Broadcom BCM2711 Quad-Core ARM Cortex-A72 a 1.5 GHz. Funciona como la unidad central de cómputo del robot, asumiendo el procesamiento pesado de imágenes capturadas por la webcam y la gestión de la nube de puntos transmitida por el Lidar ST27L. Su arquitectura ARM de 64 bits y su memoria RAM permiten ejecutar la pila del sistema operativo Linux (UBUNTU) e hilos paralelos mediante Python, garantizando que el procesamiento visual intensivo y la construcción del mapa espacial no generen cuellos de botella ni bloqueen las respuestas dinámicas del vehículo en la pista. Fue especificamente utilizada por encima de la raspberry pi 4, ya que completa cada iteracion del codigo un 13% mas rapido, ofreciendo aun mas precision, siendo muy relevante para el uso del lidar.
+
+*(Espacio para foto de la Raspberry Pi 4)*
+
+---
+
+### Arduino Uno
+Microcontrolador de 8 bits basado en el chip ATmega328P que opera a una frecuencia de reloj de 16 MHz. Dentro de la arquitectura del robot, se desempeña como el nodo de control en tiempo real dedicado a la ejecución de tareas críticas de bajo nivel. Recibe las directivas de movimiento enviadas desde la Raspberry Pi y genera las señales PWM hacia el driver de motores TB6612FNG y al servomotor. Al delegar la temporización estricta de las salidas lógicas a este microcontrolador, se evita que las interrupciones del sistema operativo de la Raspberry Pi causen fluctuaciones en la velocidad de las ruedas o imperfecciones en la respuesta de los actuadores. El arduino uno fue utilizado principalmente para facilitar la construccion de este chasis, debido a que otro tipo de microcontroladores son mucho mas dificiles de encontrar por lo tanto dificultarian poder replicar el chasis.
+
+*(Espacio para foto del Arduino Uno)*
+
+---
+
+### Lidar LDROBOT ST27L
+Sensor óptico de medición de distancia omnidireccional basado en la tecnología dToF (Direct Time-of-Flight), capaz de realizar escaneos de 360° en el plano horizontal a rangos de hasta 25 metros. Emite pulsos de luz láser infrarroja y mide el tiempo exacto que tardan en rebotar contra los obstáculos, generando una matriz de coordenadas espaciales en tiempo real. Esta información es fundamental para los algoritmos de navegación y evasión de paredes, ofreciendo una inmunidad total ante cambios bruscos de iluminación ambiental, sombras sobre la pista o variaciones en el color de la superficie de los muros. Se utiliza el lidar en contraste a los ultrasonidos para obtener una precision ~99.1%, debido a que trabajamos con mayor cantidad de datos, donde somos capaces de trazar una recta que se asemeja a la de las paredes en un 93,4%, lo cual asegura que la raspberry pi no confunda las paredes de la pista con cualquier otro obstaculo de la pista, tales como los conos o los estacionamientos.
+
+*(Espacio para foto del Lidar LDROBOT ST27L)*
+
+---
+
+### Servomotor REV Robotics
+Actuador de dirección de grado robótico con piñonería interna metálica de alta resistencia y motor integrado de corriente continua, optimizado para operar a 6.0 V con un torque de hasta 13.5 kg-cm. Su función principal es posicionar el mecanismo del tren delantero para cambiar la trayectoria del vehículo. Su electrónica digital interna ajusta la posición del eje con alta precisión angular, manteniendo el ángulo de dirección fijo sin ceder ante las fuerzas de fricción de las ruedas sobre la pista o las inercias generadas durante cambios de dirección a alta velocidad.
+
+*(Espacio para foto del Servomotor REV Robotics)*
+
+---
+
+### Driver TB6612FNG (Puente H Dual)
+Módulo controlador de motores basado en una etapa de potencia MOSFET de baja resistencia interna en estado activo (Rds(on)). Permite manejar dos motores DC en paralelo con una corriente continua de hasta 1.2 A por canal (3.2 A pico). Al utilizar transistores MOSFET en lugar de los antiguos transistores bipolares, ofrece una eficiencia energética superior con una disipación de calor mínima, respondiendo de forma lineal a las señales de ciclo de trabajo PWM de hasta 100 kHz enviadas por el Arduino Uno para regular aceleraciones y frenados. Fue un cambio al antiguo puente h l298n, debido a que este nos ofrece mas eficiencia, en un espacio muchisimo menor, permitiendonos hacer todos los cambios fisicos exigidos.
+
+*(Espacio para foto del Puente H TB6612FNG)*
+
+---
+
+### Cámara Webcam
+Sensor de captura de imagen HD conectado vía USB a la Raspberry Pi, dedicado a la adquisición de cuadros de video en tiempo real. Proporciona el flujo de datos visuales necesario para que los algoritmos de visión artificial procesen el entorno, detecten patrones cromáticos, identifiquen señales de tráfico y reconozcan elementos clave del circuito. Su integración directa al bus USB 3.0 de la Raspberry Pi permite la transmisión fluida de imágenes sin sobrecargar el bus de comunicación serie del microcontrolador de bajo nivel.
+
+*(Espacio para foto de la Webcam)*
+
+---
+
+### Banco de Baterías 18650 (Arreglo 2S2P)
+Fuente de alimentación principal conformada por cuatro celdas cilíndricas recargables de Ion de Litio (Li-ion) formato 18650, configuradas en dos ramas en paralelo de dos celdas en serie cada una. Entrega una tensión nominal de 7.4 V (8.4 V a plena carga) y una capacidad acumulada de 4000 mAh. Esta química de batería ofrece una resistencia interna extremadamente baja, lo que permite suministrar ráfagas elevadas de corriente sin sufrir caídas parásitas de voltaje (*brownouts*) cuando los motores de tracción y el servo de dirección demandan torque máximo en momentos de alta aceleración.
+
+*(Espacio para foto del paquete de baterías 18650)*
+
+---
+
+### Reductor de Voltaje XL4015 (Step-Down 5 A)
+Convertidor conmutado de corriente continua (*Buck Converter*) capaz de transformar el voltaje variable del banco de baterías (7.4 V – 8.4 V) en una línea regulada estable de 5.0 V DC con capacidad de suministro de hasta 5 A. Su frecuencia de conmutación interna y su alto rendimiento energético (hasta el 96%) evitan el desperdicio de energía en forma de calor residual, suministrando una alimentación limpia e inmune a ruidos electromagnéticos a la Raspberry Pi, la cual a su vez energiza la webcam, el Lidar ST27L y el Arduino Uno. Este componente es estrictamente necesario, debido a que la mayoria de reductores de voltaje de bajo costo suministran una cantidad menor a 4A, lo cual es necesario para el correcto funcionamiento de la raspberry pi, y por lo tanto de sus componentes adyacentes
+
+*(Espacio para foto del regulador XL4015)*
+
+---
+
+### Reductor de Voltaje LM2596 (Step-Down 3 A)
+Regulador conmutado independiente que opera a una frecuencia de 150 kHz, dedicado a transformar la tensión de las baterías en una salida fija de 6.0 V DC para la etapa de dirección. Al estar aislado de la línea de 5.0 V de la computadora principal, absorbe los picos térmicos y electromagnéticos que genera el servomotor REV Robotics durante sus movimientos bruscos, previniendo que el ruido inductivo del motor o los bajones de tensión repentinos causen reinicios imprevistos en la Raspberry Pi o fallas de sincronía en el Lidar.
+
+*(Espacio para foto del regulador LM2596)*
 
 ---
 
@@ -215,16 +266,30 @@ El sistema se alimenta de forma distribuida para optimizar la eficiencia y prote
 - 🔌 **Línea Regulada LM2596 (6V):** Servomotor REV Robotics.
 - 🔋 **Alimentación Directa a Puente H TB6612FNG:** Motores de tracción conectados en paralelo.
 
-| Fuente de Alimentación | Componentes Alimentados | Consumo Estimado (mA) | Capacidad Aprox. | Autonomía Estimada |
-|:---|:---|:---:|:---:|:---:|
-| Regulador XL4015 (Salida 5V) | Raspberry Pi, Webcam, Lidar, Arduino | ~1600 mA | 4000 mAh | ~2.5 horas |
-| Regulador LM2596 (Salida 6V) | Servomotor REV Robotics | ~180 mA | 4000 mAh | ~22 horas |
-| Puente H TB6612FNG (Directo) | Motores de Tracción (en paralelo) | ~1000 mA | 4000 mAh | ~4 horas |
+| Fuente de Alimentación | Componentes Alimentados | Consumo Estimado (mA) | Capacidad Aprox. |
+|:---|:---|:---:|:---:|
+| Regulador XL4015 (Salida 5V) | Raspberry Pi, Webcam, Lidar, Arduino | ~1600 mA | 4000 mAh |
+| Regulador LM2596 (Salida 6V) | Servomotor REV Robotics | ~180 mA | 4000 mAh |
+| Puente H TB6612FNG (Directo) | Motores de Tracción (en paralelo) | ~1000 mA | 4000 mAh |
 
-> 💡 *Nota:* Los valores de autonomia demuestran el tiempo que dura cada componente funcionando individualmente, al momento de utilizarlos todos en conjunto tienen una autonomia estimada de 1.2 horas
+> 💡 *Nota:*  Al momento de utilizarlos todos en conjunto tienen una autonomia estimada de 1.2 horas de forma eficiente
 > 
 
-</details>
+# Buenas Prácticas de Cableado, Eficiencia y Seguridad
+
+* **Estandarización de colores por función:** Se utilizó el mismo color de cable para cada tipo de línea en todo el robot (rojo para positivo, negro para tierra, azul para señales PWM, amarillo/verde para comunicación). Esto evita confusiones durante las reparaciones y previene conexiones cruzadas accidentales. En competencias pasadas esto no era un estandar, lo que generaba confusiones al momento de la reparacion
+
+* **Separación física de cables de energía y datos:** Se pasaron los cables gruesos que llevan energía a los motores por un lado del chasis y los cables delgados que llevan información a la Raspberry Pi, Lidar y Arduino por el otro. Mantenerlos alejados evita que la fuerza de los motores cause interferencias en las lecturas de los sensores.
+
+* **Trenzado de cables de alimentación:** Los cables de corriente (positivo y negativo) que van hacia los motores y los reguladores se enrollaron juntos en pares trenzados. Esta forma de enroscarlos ayuda a cancelar de forma natural el ruido magnético que generan sobre el resto de la electrónica. De igualmente facilitan solucionar cualquier error, ya que hay mucho menor volumen de cables
+
+* **Uso de tubos termorretráctiles (Thermoshrink) en las soldaduras:** Cada unión soldada se cubrió con tubo termorretráctil en lugar de usar cinta aislante. Esto garantiza que las soldaduras no queden expuestas, evitando cortocircuitos por contacto accidental con el chasis u otros componentes.
+
+* **Agrupado con precintos y fundas espirales:** Se utilizaron precintos plásticos y fundas para juntar los cables en ramas ordenadas. Esto evita que queden cables sueltos que puedan engancharse con las ruedas, el servomotor o con elementos externos de la pista mientras el robot se desplaza.
+
+* **Alivio de tensión en zonas con movimiento:** En los cables que van conectados a partes móviles, como el servomotor de la dirección, se dejó una ligera curvatura de margen y se sujetó el cable al chasis justo antes del conector. Así, el tirón del movimiento lo absorbe la estructura del robot y no los pines del componente.
+
+
 
 # Videos of Past Tests
 
