@@ -73,7 +73,7 @@ Throughout this document and the entire repository, all the design, programming 
 ## 👤 Juan Diego Cano Barros
 
 ### Role in the team
-Responsible for the robot programming.
+Responsible for the robot programming and the robot's electronics.
 
 ### 🧠 Academic Achievements
 
@@ -104,7 +104,7 @@ Eat, Sleep, Meet People, Enjoy Trips, and Sleep
 ## 👤 Samuel José Galban Franco
 
 ### Role in the team
-Responsible for the robot's electronics.
+Responsible for the robot's repository.
 
 ### 🧠 Academic Achievements
 
@@ -288,8 +288,784 @@ El sistema se alimenta de forma distribuida para optimizar la eficiencia y prote
 * **Agrupado con precintos y fundas espirales:** Se utilizaron precintos plásticos y fundas para juntar los cables en ramas ordenadas. Esto evita que queden cables sueltos que puedan engancharse con las ruedas, el servomotor o con elementos externos de la pista mientras el robot se desplaza.
 
 * **Alivio de tensión en zonas con movimiento:** En los cables que van conectados a partes móviles, como el servomotor de la dirección, se dejó una ligera curvatura de margen y se sujetó el cable al chasis justo antes del conector. Así, el tirón del movimiento lo absorbe la estructura del robot y no los pines del componente.
+* 
+# Guía de Configuración y Ejecución del Proyecto WRO Reto Abierto (ROS 2 + Arduino)
+
+**Versión completa – Todo en un solo bloque para copiar y pegar**
+
+Esta guía te llevará desde la instalación del sistema operativo en la Raspberry Pi hasta la ejecución conjunta del nodo ROS 2 en Python y del sketch en Arduino Uno. Está pensada para que puedas copiar cada bloque de comandos sin errores.
 
 
+
+## Preparación de la Raspberry Pi
+
+### Descarga e instalación de Ubuntu Server en la microSD
+
+En tu ordenador local, descarga e instala **Raspberry Pi Imager** desde [https://www.raspberrypi.com/software/](https://www.raspberrypi.com/software/). En Ubuntu, puedes instalarlo con:
+
+```bash
+sudo snap install rpi-imager
+```
+
+Inserta la microSD (mínimo 16 GB, clase 10) en tu lector. Abre Raspberry Pi Imager y sigue estos pasos:
+- **Choose OS** → Other specific-purpose OS → Ubuntu → **Ubuntu Server 22.04 LTS (64‑bit)**.
+- **Choose Storage** → selecciona tu microSD.
+
+Haz clic en el engranaje (⚙️) para la configuración avanzada:
+- Marca **Set hostname** y escribe, por ejemplo, `wro-robot`.
+- Marca **Enable SSH** y elige **Use password authentication**.
+- Establece el usuario y contraseña que usarás, por ejemplo: Usuario: `wro`, Contraseña: `wro2025`.
+- Marca **Configure wireless LAN** e introduce el SSID y la contraseña de tu red Wi‑Fi.
+- Marca **Set locale settings**: elige `es_ES.UTF-8` y `Europe/Madrid`.
+
+Haz clic en **Write** y espera a que termine la escritura. Una vez escrita, retira la microSD, insértala en la Raspberry Pi y conecta la alimentación USB‑C.
+
+### Primer arranque y configuración inicial
+
+Al encender, Ubuntu Server arrancará y mostrará un prompt de inicio de sesión. Inicia sesión con el usuario y contraseña que configuraste.
+
+Ejecuta los siguientes comandos para actualizar el sistema e instalar herramientas básicas:
+
+```bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y net-tools git vim curl wget htop
+```
+
+Configura la zona horaria y sincroniza la hora (importante para ROS 2 y certificados):
+
+```bash
+sudo timedatectl set-timezone Europe/Madrid
+sudo apt install -y ntp
+sudo timedatectl set-ntp true
+```
+
+Reinicia para asegurar que todos los cambios se aplican:
+
+```bash
+sudo reboot
+```
+
+### Configuración de la red (Wi‑Fi e IP fija)
+
+Si configuraste el Wi‑Fi en el Imager, ya deberías tener conexión. Para verificar:
+
+```bash
+ip a
+ping -c 4 google.es
+```
+
+Para asignar una IP fija (recomendado para SSH), editamos el archivo de configuración de Netplan:
+
+```bash
+sudo nano /etc/netplan/50-cloud-init.yaml
+```
+
+Sustituye el contenido por el siguiente (ajusta la IP, puerta de enlace y SSID/contraseña a tu red):
+
+```yaml
+network:
+  version: 2
+  ethernets:
+    eth0:
+      dhcp4: true
+      optional: true
+  wifis:
+    wlan0:
+      dhcp4: false
+      addresses:
+        - 192.168.1.100/24
+      routes:
+        - to: default
+          via: 192.168.1.1
+      nameservers:
+        addresses: [8.8.8.8, 1.1.1.1]
+      access-points:
+        "nombre_de_tu_wifi":
+          password: "tu_contraseña"
+```
+
+Guarda con `Ctrl+O`, Enter, y sal con `Ctrl+X`. Aplica la configuración:
+
+```bash
+sudo netplan apply
+```
+
+Verifica que tienes la IP asignada:
+
+```bash
+hostname -I
+```
+
+Anota la IP (ej. `192.168.1.100`).
+
+### Habilitación y configuración de SSH
+
+SSH ya debería estar activo si lo marcaste en el Imager. Para asegurarte:
+
+```bash
+sudo systemctl enable ssh
+sudo systemctl start ssh
+```
+
+Desde tu ordenador local, prueba la conexión:
+
+```bash
+ssh wro@192.168.1.100
+```
+
+Si todo funciona, ya puedes trabajar sin monitor ni teclado.
+
+---
+
+## Instalación de ROS 2 Humble en la Raspberry Pi
+
+Seguimos la [guía oficial de ROS 2 Humble para Ubuntu 22.04](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html).
+
+### Configuración del locale
+
+```bash
+sudo apt update && sudo apt install -y locales
+sudo locale-gen es_ES es_ES.UTF-8
+sudo update-locale LC_ALL=es_ES.UTF-8 LANG=es_ES.UTF-8
+export LANG=es_ES.UTF-8
+```
+
+Añade la variable al final de `~/.bashrc` para que persista:
+
+```bash
+echo "export LANG=es_ES.UTF-8" >> ~/.bashrc
+```
+
+### Adición del repositorio de ROS 2
+
+```bash
+sudo apt install -y software-properties-common
+sudo add-apt-repository universe
+sudo apt update && sudo apt install -y curl
+sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+```
+
+### Instalación de ROS 2 Humble
+
+```bash
+sudo apt update
+sudo apt upgrade -y
+sudo apt install -y ros-humble-desktop
+sudo apt install -y python3-colcon-common-extensions python3-rosdep python3-pip
+```
+
+### Configuración del entorno
+
+Añade el sourcing de ROS 2 a tu `.bashrc`:
+
+```bash
+echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
+echo "source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash" >> ~/.bashrc
+source ~/.bashrc
+```
+
+Inicializa `rosdep`:
+
+```bash
+sudo rosdep init
+rosdep update
+```
+
+---
+
+## Configuración del entorno de desarrollo en tu ordenador local
+
+Vamos a usar **Visual Studio Code** con la extensión **Remote‑SSH** para editar y ejecutar código directamente en la Raspberry Pi.
+
+### Instalación de Visual Studio Code
+
+Descarga e instala VS Code desde [https://code.visualstudio.com/](https://code.visualstudio.com/). En Ubuntu:
+
+```bash
+sudo snap install --classic code
+```
+
+### Instalación de la extensión Remote‑SSH
+
+Abre VS Code, ve a la pestaña de Extensiones (Ctrl+Shift+X) y busca **Remote - SSH**. Instala la extensión de Microsoft.
+
+### Configuración de la clave SSH para la Raspberry Pi (recomendado)
+
+Para no tener que escribir contraseña cada vez, genera un par de claves en tu ordenador local:
+
+```bash
+ssh-keygen -t rsa -b 4096 -C "wro-robot"
+```
+
+Copia tu clave pública a la Raspberry Pi:
+
+```bash
+ssh-copy-id wro@192.168.1.100
+```
+
+Prueba que ya no pide contraseña: `ssh wro@192.168.1.100`.
+
+### Conexión remota a la Raspberry Pi desde VS Code
+
+En VS Code, haz clic en el icono de **Remote Explorer**. Elige **"Add New SSH Host..."** y escribe `wro@192.168.1.100`. Una vez añadido, haz clic en el icono de conexión para abrir una sesión remota.
+
+---
+
+## Preparación del código en la Raspberry Pi
+
+### Creación del workspace de ROS 2
+
+```bash
+mkdir -p ~/wro_ws/src
+cd ~/wro_ws
+```
+
+### Creación del paquete y del nodo
+
+```bash
+cd ~/wro_ws/src
+ros2 pkg create --build-type ament_python wro_reto_abierto
+cd wro_reto_abierto
+rm -rf wro_reto_abierto/*.py
+touch wro_reto_abierto/wro_reto_abierto_node.py
+chmod +x wro_reto_abierto/wro_reto_abierto_node.py
+```
+
+Edita el `setup.py` para que el punto de entrada apunte a nuestro nodo:
+
+```python
+entry_points={
+    'console_scripts': [
+        'wro_node = wro_reto_abierto.wro_reto_abierto_node:main',
+    ],
+},
+```
+
+### Instalación de dependencias Python
+
+```bash
+sudo pip3 install numpy pyserial
+```
+
+---
+
+## Configuración del Arduino Uno
+
+### Instalación del Arduino IDE en Ubuntu
+
+```bash
+sudo apt install -y arduino arduino-core
+```
+
+### Configuración de permisos del puerto serial
+
+```bash
+sudo usermod -a -G dialout wro
+```
+
+### Conexión física del Arduino Uno a la Raspberry Pi
+
+Conecta el Arduino Uno a la Raspberry Pi mediante un cable USB tipo B.
+
+### Compilación y carga del código en el Arduino
+
+Crea un archivo `sketch.ino`:
+
+```bash
+mkdir -p ~/arduino_sketch
+nano ~/arduino_sketch/sketch.ino
+```
+
+Código completo del Arduino:
+
+```cpp
+#include <Servo.h>
+
+const int pinMotor1 = 4;
+const int pinMotor2 = 5;
+const int pinServo  = 7;
+
+Servo miServo;
+
+void fijarMotor(int velocidad) {
+  velocidad = constrain(velocidad, -150, 150);
+  if (velocidad > 0) {
+    int pwmResta = 150 - velocidad; 
+    analogWrite(pinMotor1, 150);
+    analogWrite(pinMotor2, pwmResta);
+  } else if (velocidad < 0) {
+    int pwmResta = 150 - abs(velocidad);
+    analogWrite(pinMotor1, pwmResta);
+    analogWrite(pinMotor2, 150);
+  } else {
+    digitalWrite(pinMotor1, LOW);
+    digitalWrite(pinMotor2, LOW);
+  }
+}
+
+void setup() {
+  Serial.begin(115200); 
+  pinMode(pinMotor1, OUTPUT);
+  pinMode(pinMotor2, OUTPUT);
+  miServo.attach(pinServo);
+  miServo.write(57);
+  fijarMotor(0);
+}
+
+void loop() {
+  if (Serial.available() > 0) {
+    String entrada = Serial.readStringUntil('\n');
+    entrada.trim();
+    if (entrada.length() > 0) {
+      char tipoComando = toupper(entrada.charAt(0)); 
+      if (tipoComando == 'S') {
+        int angulo = entrada.substring(1).toInt();
+        angulo = constrain(angulo, 30, 90);
+        miServo.write(angulo);
+      } else if (tipoComando == 'M') {
+        int velocidad = entrada.substring(1).toInt();
+        fijarMotor(velocidad);
+      } else if (isDigit(tipoComando) || tipoComando == '-') {
+        int angulo = entrada.toInt();
+        angulo = constrain(angulo, 30, 90);
+        miServo.write(angulo);
+      }
+    }
+  }
+}
+```
+
+**Carga del sketch** con `arduino-cli`:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
+sudo mv bin/arduino-cli /usr/local/bin/
+arduino-cli compile --fqbn arduino:avr:uno ~/arduino_sketch/
+arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:uno ~/arduino_sketch/
+```
+
+---
+
+## Comunicación Serial entre ROS 2 y Arduino
+
+### Identificación del puerto serial
+
+```bash
+ls /dev/ttyACM*
+```
+
+Normalmente aparecerá `/dev/ttyACM0`.
+
+### Permisos del puerto serial
+
+```bash
+sudo chmod 666 /dev/ttyACM0
+sudo usermod -a -G dialout $USER
+```
+
+### Creación de una regla udev permanente
+
+```bash
+sudo nano /etc/udev/rules.d/99-arduino.rules
+```
+
+Contenido:
+```
+SUBSYSTEM=="usb", ATTRS{idVendor}=="2341", ATTRS{idProduct}=="0043", MODE="0666"
+```
+
+Recarga las reglas:
+
+```bash
+sudo udevadm control --reload-rules
+sudo udevadm trigger
+```
+
+---
+
+## Compilación y ejecución del proyecto
+
+### Compilación del workspace
+
+```bash
+cd ~/wro_ws
+colcon build --symlink-install
+```
+
+### Configuración de variables de entorno
+
+```bash
+echo "source ~/wro_ws/install/setup.bash" >> ~/.bashrc
+source ~/.bashrc
+```
+
+### Creación del archivo del nodo Python
+
+```bash
+nano ~/wro_ws/src/wro_reto_abierto/wro_reto_abierto/wro_reto_abierto_node.py
+```
+
+### Ejecución del nodo
+
+```bash
+ros2 run wro_reto_abierto wro_node
+```
+
+---
+
+## Explicación Detallada del Código y su Lógica
+
+He diseñado este sistema con una arquitectura cliente-servidor donde la Raspberry Pi (ROS 2) actúa como el cerebro principal que procesa los datos del LiDAR y toma decisiones de alto nivel, mientras que el Arduino Uno se encarga del control en tiempo real de los actuadores.
+
+### Lógica de Navegación Global
+
+El flujo de navegación que he implementado sigue un ciclo continuo basado en la detección del entorno:
+
+```
+[INICIO] → [Leer LiDAR] → [¿Pared frontal?]
+                              ↓
+                          Sí → [¿Sentido definido?] → No → [Comparar laterales] → [Fijar sentido]
+                              ↓                                              ↓
+                              Sí → [Girar 90° según sentido]                [Girar]
+                              ↓
+                          No → [¿Sentido definido?] → No → [Avanzar recto buscando pared]
+                              ↓
+                              Sí → [Seguir pared según sentido]
+                              ↓
+                         [Volver a leer LiDAR]
+```
+
+### Análisis del Código Python (Nodo ROS 2)
+
+He estructurado el nodo en varias capas funcionales para mantener el código limpio y modular.
+
+#### 1. Configuración Inicial y Parámetros
+
+En el método `__init__`, he declarado todos los parámetros ajustables que permiten modificar el comportamiento del robot sin recompilar:
+
+```python
+self.declare_parameter('sentido', 0)                    # Dirección de giro (0=desconocido)
+self.declare_parameter('distancia_objetivo', 0.4)      # Distancia deseada a la pared (metros)
+self.declare_parameter('distancia_frontal_obstaculo', 0.35)  # Umbral para detectar pared frontal
+self.declare_parameter('velocidad_motor', 20)          # Velocidad constante
+self.declare_parameter('limite_angulo_max', 38.0)      # Límite de corrección angular
+```
+
+He incluido un sistema PID completo para controlar tanto la distancia como el ángulo respecto a la pared. Los parámetros Kp, Ki y Kd permiten ajustar la respuesta del robot a diferentes velocidades y superficies.
+
+#### 2. Callback del LiDAR (Función Principal)
+
+He implementado la lógica principal en `lidar_callback`, que se ejecuta cada vez que llega un nuevo escaneo del LiDAR:
+
+```python
+def lidar_callback(self, msg):
+    # Calculo del tiempo entre frames para los PID
+    current_time = self.get_clock().now()
+    dt = (current_time - self.last_time).nanoseconds / 1e9
+    self.last_time = current_time
+    
+    # Lectura y filtrado de distancias
+    self.detectardistancias(msg)
+    
+    # Lógica de decisión según obstáculos
+    if self.d < dist_frontal_limite and self.d > 0:
+        # Obstáculo frontal detectado
+        if self.sentido == 0:
+            self.detectarlado_en_pared()
+        # Ejecución de giro
+    else:
+        # Navegación normal
+```
+
+#### 3. Filtrado de Datos del LiDAR
+
+He creado `detectardistancias()` para extraer únicamente los puntos relevantes del escaneo:
+
+- **Frente**: Ángulos de 75° a 105° (para detección de obstáculos frontales)
+- **Derecha**: Ángulos de 165° a 195° (para seguimiento de pared derecha)
+- **Izquierda**: Ángulos de 345° a 15° (para seguimiento de pared izquierda)
+
+Utilizo el valor mínimo de cada sector como distancia representativa, lo que asegura que el robot reaccione al obstáculo más cercano.
+
+#### 4. Determinación del Sentido de Navegación
+
+El método `detectarlado_en_pared()` compara las distancias laterales cuando el robot encuentra su primera pared frontal:
+
+```python
+def detectarlado_en_pared(self):
+    if self.dd < self.di:
+        self.sentido = 2  # Girar a la derecha y seguir pared derecha
+    else:
+        self.sentido = 1  # Girar a la izquierda y seguir pared izquierda
+```
+
+Esta decisión se toma UNA SOLA VEZ en toda la ejecución, permitiendo que el robot mantenga una estrategia consistente durante todo el recorrido.
+
+#### 5. Algoritmo de Seguimiento de Pared con SVD (Singular Value Decomposition)
+
+He implementado un método avanzado de seguimiento de pared utilizando SVD, que es más robusto que simplemente usar la distancia mínima:
+
+**Proceso matemático implementado en `calcular_pid_svd()`:**
+
+1. **Transformación de coordenadas polares a cartesianas**: Convierto las lecturas de distancia (r) y ángulo (θ) a coordenadas X,Y:
+   ```python
+   X = r * cos(θ)
+   Y = r * sin(θ)
+   ```
+
+2. **Cálculo de la línea de la pared**: Utilizo SVD para encontrar la línea que mejor se ajusta a todos los puntos:
+   ```python
+   X_c = X - mean(X)
+   Y_c = Y - mean(Y)
+   _, _, Vh = np.linalg.svd(np.vstack([X_c, Y_c]).T)
+   dir_x, dir_y = Vh[0]  # Vector dirección de la pared
+   norm_x, norm_y = Vh[1]  # Vector normal a la pared
+   ```
+
+3. **Cálculo de errores**:
+   - **Error de distancia**: Distancia deseada (0.4m) menos distancia real a la pared
+   - **Error de ángulo**: Diferencia entre la orientación de la pared y la dirección deseada (paralela al robot)
+
+4. **Control PID**: Calculo dos salidas PID (una para distancia y otra para ángulo) que se combinan para producir la corrección final del servo:
+   ```python
+   salida_distancia = Kp_d * error_distancia + Kd_d * derivada_dist + Ki_d * integral_dist
+   salida_angulo = Kp_a * error_angulo + Kd_a * derivada_ang
+   correccion_total = salida_distancia + salida_angulo
+   ```
+
+#### 6. Comunicación con el Arduino
+
+He diseñado el protocolo de comunicación para ser simple y robusto:
+
+```python
+def enviar_a_arduino(self, velocidad, angulo_servo):
+    self.arduino.write(f"M{velocidad}\n".encode('utf-8'))
+    self.arduino.write(f"S{angulo_servo}\n".encode('utf-8'))
+```
+
+- **M<velocidad>**: Controla la velocidad del motor (rango -150 a 150)
+- **S<ángulo>**: Controla el ángulo del servo (rango 30 a 90 grados)
+
+### Análisis del Código Arduino (Controlador de Bajo Nivel)
+
+El sketch de Arduino actúa como un intérprete de comandos seriales:
+
+#### 1. Control del Motor con PWM
+
+He implementado `fijarMotor()` para controlar un motor DC mediante un puente H (TB6612FNG). La lógica de PWM es:
+
+- **Velocidad positiva (0 a 150)**: PWM variable en pinMotor1, PWM fijo en pinMotor2
+- **Velocidad negativa (-150 a 0)**: PWM fijo en pinMotor1, PWM variable en pinMotor2
+- **Velocidad 0**: Ambos motores en LOW
+
+```cpp
+if (velocidad > 0) {
+    int pwmResta = 150 - velocidad; 
+    analogWrite(pinMotor1, 150);      // PWM fijo
+    analogWrite(pinMotor2, pwmResta); // PWM variable
+}
+```
+
+Esta técnica permite un control de velocidad suave y mantiene el torque constante.
+
+#### 2. Manejo de Comandos Seriales
+
+El bucle principal escucha constantemente el puerto serial y procesa comandos:
+
+```cpp
+if (Serial.available() > 0) {
+    String entrada = Serial.readStringUntil('\n');
+    char tipoComando = toupper(entrada.charAt(0));
+    
+    if (tipoComando == 'S') {
+        int angulo = entrada.substring(1).toInt();
+        miServo.write(constrain(angulo, 30, 90));
+    }
+    else if (tipoComando == 'M') {
+        int velocidad = entrada.substring(1).toInt();
+        fijarMotor(velocidad);
+    }
+}
+```
+
+### Diagrama de Flujo del Sistema Completo
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                        RASPBERRY PI (ROS 2)                    │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │               NODO WRO_RETO_ABIERTO                    │   │
+│  │                                                         │   │
+│  │  ┌─────────────────────────────────────────────────┐   │   │
+│  │  │            lidar_callback()                    │   │   │
+│  │  │  ┌────────────────────────────────────────┐   │   │   │
+│  │  │  │  detectardistancias(msg)              │   │   │   │
+│  │  │  │  • Frente (75°-105°) → self.d        │   │   │   │
+│  │  │  │  • Derecha (165°-195°) → self.dd     │   │   │   │
+│  │  │  │  • Izquierda (345°-15°) → self.di    │   │   │   │
+│  │  │  └────────────────────────────────────────┘   │   │   │
+│  │  │                  ↓                            │   │   │
+│  │  │  ┌────────────────────────────────────────┐   │   │   │
+│  │  │  │  ¿self.d < umbral?                    │   │   │   │
+│  │  │  │  ↓ Sí              ↓ No               │   │   │   │
+│  │  │  │  Obstáculo       Sin obstáculo        │   │   │   │
+│  │  │  │  frontal         → Navegación         │   │   │   │
+│  │  │  └────────────────────────────────────────┘   │   │   │
+│  │  │                  ↓                            │   │   │
+│  │  │  ┌────────────────────────────────────────┐   │   │   │
+│  │  │  │  ¿sentido == 0? (primera vez)         │   │   │   │
+│  │  │  │  ↓ Sí                                 │   │   │   │
+│  │  │  │  detectarlado_en_pared()              │   │   │   │
+│  │  │  │  • Si dd < di → sentido = 2          │   │   │   │
+│  │  │  │  • Si di < dd → sentido = 1          │   │   │   │
+│  │  │  └────────────────────────────────────────┘   │   │   │
+│  │  │                  ↓                            │   │   │
+│  │  │  ┌────────────────────────────────────────┐   │   │   │
+│  │  │  │  sentido=1 → detectarizquierda()     │   │   │   │
+│  │  │  │  sentido=2 → detectarderecha()       │   │   │   │
+│  │  │  └────────────────────────────────────────┘   │   │   │
+│  │  └─────────────────────────────────────────────────┘   │   │
+│  │                                                         │   │
+│  │  ┌─────────────────────────────────────────────────┐   │   │
+│  │  │         detectarizquierda() / derecha()        │   │   │
+│  │  │  ┌────────────────────────────────────────┐   │   │   │
+│  │  │  │  obtener_puntos_sector()              │   │   │   │
+│  │  │  │  • Extrae puntos en rango de ángulos  │   │   │   │
+│  │  │  └────────────────────────────────────────┘   │   │   │
+│  │  │                  ↓                            │   │   │
+│  │  │  ┌────────────────────────────────────────┐   │   │   │
+│  │  │  │  calcular_pid_svd()                   │   │   │   │
+│  │  │  │  • SVD: encuentra línea de la pared   │   │   │   │
+│  │  │  │  • PID: calcula corrección            │   │   │   │
+│  │  │  │  • Retorna: corrección_total          │   │   │   │
+│  │  │  └────────────────────────────────────────┘   │   │   │
+│  │  │                  ↓                            │   │   │
+│  │  │  ┌────────────────────────────────────────┐   │   │   │
+│  │  │  │  angulo_servo = rec ± corrección      │   │   │   │
+│  │  │  │  enviar_a_arduino(vel, angulo_servo)  │   │   │   │
+│  │  │  └────────────────────────────────────────┘   │   │   │
+│  │  └─────────────────────────────────────────────────┘   │   │
+│  └─────────────────────────────────────────────────────────┘   │
+│                              ↓                                  │
+│                    ┌──────────────────┐                        │
+│                    │  SERIAL / USB   │                        │
+│                    │  /dev/ttyACM0   │                        │
+│                    └──────────────────┘                        │
+└─────────────────────────────────────────────────────────────────┘
+                               ↓
+┌─────────────────────────────────────────────────────────────────┐
+│                         ARDUINO UNO                            │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │                    SKETCH.INO                          │   │
+│  │                                                         │   │
+│  │  ┌─────────────────────────────────────────────────┐   │   │
+│  │  │                 setup()                        │   │   │
+│  │  │  • Serial.begin(115200)                       │   │   │
+│  │  │  • Configura pines y servo                    │   │   │
+│  │  │  • miServo.write(57)  (centro)               │   │   │
+│  │  │  • fijarMotor(0)      (reposo)               │   │   │
+│  │  └─────────────────────────────────────────────────┘   │   │
+│  │                  ↓                                      │   │
+│  │  ┌─────────────────────────────────────────────────┐   │   │
+│  │  │                 loop()                         │   │   │
+│  │  │  ┌────────────────────────────────────────┐   │   │   │
+│  │  │  │  ¿Serial.available() > 0?             │   │   │   │
+│  │  │  │  ↓ Sí                                 │   │   │   │
+│  │  │  │  Lee comando (String)                 │   │   │   │
+│  │  │  └────────────────────────────────────────┘   │   │   │
+│  │  │                  ↓                            │   │   │
+│  │  │  ┌────────────────────────────────────────┐   │   │   │
+│  │  │  │  tipoComando = 'S' → S<ángulo>       │   │   │   │
+│  │  │  │  • miServo.write(ángulo)             │   │   │   │
+│  │  │  │  • constrain(30, 90)                 │   │   │   │
+│  │  │  │                                       │   │   │   │
+│  │  │  │  tipoComando = 'M' → M<velocidad>    │   │   │   │
+│  │  │  │  • fijarMotor(velocidad)             │   │   │   │
+│  │  │  │  • constrain(-150, 150)              │   │   │   │
+│  │  │  └────────────────────────────────────────┘   │   │   │
+│  │  └─────────────────────────────────────────────────┘   │   │
+│  │                                                         │   │
+│  │  ┌─────────────────────────────────────────────────┐   │   │
+│  │  │         fijarMotor(int velocidad)              │   │   │
+│  │  │  • Velocidad > 0 → PWM en pinMotor1           │   │   │
+│  │  │  • Velocidad < 0 → PWM en pinMotor2           │   │   │
+│  │  │  • Velocidad = 0 → Motor detenido             │   │   │
+│  │  └─────────────────────────────────────────────────┘   │   │
+│  └─────────────────────────────────────────────────────────┘   │
+│                              ↓                                  │
+│                    ┌──────────────────┐                        │
+│                    │   ACTUADORES    │                        │
+│                    │  • Motor DC     │                        │
+│                    │  • Servo        │                        │
+│                    └──────────────────┘                        │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Solución de problemas comunes
+
+### No se conecta al puerto serial /dev/ttyUSB0 o /dev/ttyACM0
+
+Verifica que el Arduino está conectado y reconocido:
+
+```bash
+lsusb
+ls -l /dev/ttyACM0
+```
+
+Si no tienes permisos, ejecuta:
+
+```bash
+sudo chmod 666 /dev/ttyACM0
+sudo usermod -a -G dialout $USER
+```
+
+### ROS 2 no encuentra el paquete o el nodo
+
+Asegúrate de haber hecho source del workspace:
+
+```bash
+source ~/wro_ws/install/setup.bash
+```
+
+Verifica que el nombre del paquete y del ejecutable coinciden en `setup.py`. Recompila si es necesario:
+
+```bash
+colcon build --packages-select wro_reto_abierto
+```
+
+### El servo no responde o los motores no giran
+
+Comprueba que el Arduino recibe los comandos. Abre el monitor serial en el Arduino IDE (a 115200 baudios) y envía manualmente `S45` y `M20` para ver si hay respuesta. Verifica la conexión de los cables y que los límites del servo sean correctos (30-90).
+
+### Las lecturas del LiDAR son erróneas
+
+Asegúrate de que el tópico `/scan` se publica correctamente:
+
+```bash
+ros2 topic echo /scan
+```
+
+Comprueba que los rangos de ángulos en el código coinciden con la orientación del LiDAR. Puedes modificar los límites (75-105, 165-195, 345-15) según la posición del sensor.
+
+### El robot gira en sentido incorrecto
+
+Revisa la lógica de `detectarlado_en_pared()`. Si la pared derecha está más cerca, `sentido=2` (gira a la derecha). Para invertir el comportamiento, intercambia los valores.
+
+---
+
+## Recomendaciones finales
+
+- **Prueba los comandos por separado**: antes de ejecutar el nodo completo, verifica que el Arduino responde a comandos manuales desde el monitor serial y que el LiDAR publica datos correctamente.
+- **Ajusta los parámetros PID**: los valores de `Kp_dist`, `Kd_dist`, etc. dependen de la velocidad y características físicas del robot. Puedes modificarlos en tiempo real con `ros2 param set`.
+- **Usa `rqt_graph`** para visualizar los nodos y tópicos: `rqt_graph`.
+- **Guarda los logs**: redirige la salida a un archivo con `ros2 run wro_reto_abierto wro_node > logs.txt 2>&1`.
 
 # Videos of Past Tests
 
