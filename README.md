@@ -288,12 +288,6 @@ El sistema se alimenta de forma distribuida para optimizar la eficiencia y prote
 * **Agrupado con precintos y fundas espirales:** Se utilizaron precintos plásticos y fundas para juntar los cables en ramas ordenadas. Esto evita que queden cables sueltos que puedan engancharse con las ruedas, el servomotor o con elementos externos de la pista mientras el robot se desplaza.
 
 * **Alivio de tensión en zonas con movimiento:** En los cables que van conectados a partes móviles, como el servomotor de la dirección, se dejó una ligera curvatura de margen y se sujetó el cable al chasis justo antes del conector. Así, el tirón del movimiento lo absorbe la estructura del robot y no los pines del componente.
-* 
-# Guía de Configuración y Ejecución del Proyecto WRO Reto Abierto (ROS 2 + Arduino)
-
-**Versión completa – Todo en un solo bloque para copiar y pegar**
-
-Esta guía te llevará desde la instalación del sistema operativo en la Raspberry Pi hasta la ejecución conjunta del nodo ROS 2 en Python y del sketch en Arduino Uno. Está pensada para que puedas copiar cada bloque de comandos sin errores.
 
 
 
