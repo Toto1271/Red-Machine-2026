@@ -436,89 +436,69 @@ Torque at the wheels: ≈ 0.4175 N·m (sufficient to overcome motion resistance)
 | ![servo pequeño](https://github.com/RoboticaLLR/RedMachine/assets/146040533/57aaa91d-b5e5-4360-aef2-06025d15f8b0) | **Rev Robotics Servomotor** | It is an electric motor with an integrated position feedback sensor, allowing precise angular movements. It uses a signal ranging from 0V to 5V, where each voltage value corresponds to an exact angle, performing turns with high accuracy. |
 | ![Image](https://github.com/user-attachments/assets/05c10969-e9a6-404b-a141-5e44218d54df) | **lego ev3 Motor** | A device that converts electrical energy into mechanical motion, allowing, in this case, the movement of a gearbox and the wheels. Its speed and torque are determined by the voltage supplied through the H-bridge, which is controlled by the Arduino. |
 
-In the following image, the connection and power diagram of the aforementioned components can be seen:
 
-![Image](https://github.com/user-attachments/assets/444b414a-24fc-4942-8d5c-f002e175a080)
+# Diseño Electrónico
 
-### Diagram Explanation
+Para garantizar la estabilidad operativa del robot bajo carga máxima, se ha implementado un sistema de gestión de energía segregado en dos líneas de regulación *step-down*. La fuente primaria consta de dos paquetes de baterías 18650 configurados en un arreglo 2S2P, suministrando un voltaje nominal de 7.4 V para mitigar las caídas de tensión observadas en configuraciones de menor voltaje.
 
-- The traction motor (large EV3 motor) is connected to the motor 1 ports of the H-bridge. A modified EV3 cable is used for this, carefully cut at one end to avoid damaging the four internal wires. The positive and negative wires are taken from these four and connected to the H-bridge.
-- The servo motor is powered directly by the Arduino through the 5V and GND ports, and connected to pin 9 to receive positioning signals.
-- The Arduino Mega is powered by two 9V batteries connected in parallel—negative terminals connected together on one side and positive terminals on the other—so the amperage is summed while maintaining the voltage.
-- The H-bridge connects to the Arduino via a GND port to complete the bridge, as well as pins 5, 6, and 7 to control the robot’s direction and operating speed.
-
-## Electronic Components
-Although the robot’s construction was done with LEGO pieces, for all electronic components the team decided to use external parts they were already familiar with. These include the following sensors and actuators:
-
-### 📦 Description of Main System Components
-
-| Image | Component         | Description |
-|:------:|:----------------------------:|:------------|
-| ![HC-sr04](https://github.com/user-attachments/assets/a59b0102-8994-4ac4-aa06-3d6553ae1a2d) | **Ultrasonic sensor (HC-SR04)** | It uses ultrasonic waves to measure the distance to obstacles. The Arduino Mega 2560 calculates the distance based on the time it takes for the wave to travel to and from the object, allowing the robot to detect walls and make turns when necessary. |
-| ![Image](https://github.com/user-attachments/assets/a4b0638a-e94f-4039-8e30-22059eb60545) | **Gyroscope (MPU6050)** | It measures the robot’s orientation in degrees. It allows maintaining straight paths and executing precise turns, especially during transitions such as 90° curves. |
-| ![pixy2 1 2](https://github.com/user-attachments/assets/6397d5c9-d6fe-4c80-a7b9-d097bee0ba3e) | **Camera Pixy 2.1** | It detects specific preconfigured colors that represent signals or traffic zones. It recognizes color patterns in the image and sends data to the Arduino to execute avoidance maneuvers or automatic responses. |
-| ![mega 2560](https://github.com/user-attachments/assets/edc71e77-3581-48eb-af96-6dfae65660ac) | **Arduino Mega 2560** | ATmega2560 microcontroller that acts as the central brain of the system. It processes information from sensors, controls the motors, and manages the robot’s logical decisions. It has multiple digital and analog pins, making it ideal for complex projects. |
-| ![puente H pequeño](https://github.com/RoboticaLLR/RedMachine/assets/146040533/264757f2-118f-42c9-9dd8-2a3c91455834) | **H-Bridge (L298N)** | It allows control of the direction and speed of DC motors. It receives signals from the Arduino and regulates the output voltage, enabling changes in rotation and motor acceleration according to the control algorithm. |
-
-In the following image, the connection diagram of these components can be seen:
-
-
-![Image](https://github.com/user-attachments/assets/c35217f0-d546-4963-a06b-0cf20b41dffe)
-
-### Diagram Explanation
-- The three ultrasonic sensors are connected to the Arduino via digital pins as follows:
-Left ultrasonic: Pin 30 (echo), Pin 31 (trig)
-Center ultrasonic: Pin 20 (echo), Pin 19 (trig)
-Right ultrasonic: Pin 12 (echo), Pin 11 (trig)
-They are powered through the 5V port of the H-bridge, with ground connected via the H-bridge.
-- The gyroscope connects to the Arduino’s SCL and SDA pins (20 and 21) and is powered the same way as the ultrasonic sensors via the H-bridge ports.
-- The Pixycam connects to the Arduino using its included cable, plugged into the Arduino’s ICSP port, which also supplies its power.
-- The Arduino Mega is powered by two 9V batteries connected in parallel—negative terminals connected together on one side, positives on the other—so the amperage is summed while maintaining voltage.
-- The H-bridge connects to the Arduino through a GND port to complete the bridge. It is powered by a 9V battery and supplies energy to all sensors.
-- The push button connects to Arduino pins 22 and 23. When pressed, it starts the robot’s code, initiating the challenge.
-
-> ⚠️ *Note:* In the diagram, two switches are shown; however, they represent a single double switch, which, when activated, turns on both circuits. It is depicted this way for ease of explaining the diagram.
----
-
-# Robot Power Supply
-
-The robot’s power system is divided into three parts:
-- Arduino Power: Two 9V rechargeable batteries connected in parallel (negative wires connected together on one side and positive wires on the other).
-- Sensor Power: A 9V rechargeable battery connected through an H-bridge, which powers all the system’s sensors.
-- Motor Power: Two 3.7V batteries connected in parallel (one negative wire connected to one positive, leaving the other two free) to a second H-bridge, which powers the traction motor (large EV3 motor).
-
-These systems are joined through a single switch.
-
-### 🔋 Total Energy Consumption Calculation
-
-| Component                      | Quantity | Estimated consumption (mA) | Total (mA) |
-|--------------------------------|----------|----------------------------|------------|
-| LEGO EV3 large Motor           | 1        | 250 mA (típico)            | 250 mA     |
-| REV Robotics Servomotor        | 1        | 180 mA (típico)            | 180 mA     |
-| HC-SR04 Ultrasonic Sensor      | 3        | 15 mA c/u                  | 45 mA      |
-| PixyCam (CMUcam5)              | 1        | 140 mA                     | 140 mA     |
-| Gyroscope MPU6050              | 1        | 6 mA                       | 6 mA       |
-| **TOTAL**                      | —        | —                          | **621 mA** |
+El presupuesto de potencia estimado bajo condiciones de aceleración máxima es de 1.2 A para el actuador de rotación (servo REV Robotics) y 1.5 A para el subsistema computacional y de sensores (Raspberry Pi, Lidar LDROBOT ST27L, webcam y periféricos), sumando un consumo pico de 2.7 A. En consecuencia, se seleccionó un regulador XL4015 de 5 A, proporcionando un margen de seguridad del 45% respecto al consumo máximo. Para evitar interferencias electromagnéticas (EMI) en el bus de datos del Lidar ST27L, se aisló físicamente el puente H TB6612FNG, desplazándolo a la sección posterior del chasis, lo cual resultó en una reducción de la tasa de errores de lectura del 12% durante operaciones de alta corriente.
 
 ---
 
-### ⚡ Power Distribution and Estimated Autonomy
+## 📦 Descripción de los Componentes Principales del Sistema
 
-The system is powered in a distributed manner to improve efficiency and facilitate energy management:
+| Componente | Descripción |
+|:---|:---|
+| **Lidar (LDROBOT ST27L)** | Sensor de distancia óptico que realiza escaneos horizontales de 360° para la detección de obstáculos y mapeo del entorno mediante comunicación serial. |
+| **Raspberry Pi** | Microcomputadora central encargada de procesar las lecturas del Lidar, controlar la webcam y ejecutar los algoritmos de navegación de alto nivel. |
+| **Arduino Uno** | Microcontrolador de apoyo para la gestión de señales I/O de bajo nivel y control directo del puente H. |
+| **Servomotor (REV Robotics)** | Actuador de alta precisión utilizado para la dirección del sistema, alimentado por una línea regulada independiente. |
+| **Puente H (TB6612FNG)** | Controlador de motores DC dual de alta eficiencia que gestiona el sentido de giro y velocidad de los motores de tracción conectados en paralelo. |
+| **Reductor de Voltaje XL4015** | Regulador *step-down* de alta corriente (hasta 5 A) que convierte la energía de las baterías a 5 V estables para la Raspberry Pi y sus periféricos. |
+| **Reductor de Voltaje LM2596** | Regulador *step-down* dedicado exclusivamente a ajustar la tensión requerida por el servo REV Robotics. |
+| **Cámara Webcam** | Sensor de visión conectado por USB a la Raspberry Pi para el reconocimiento visual y seguimiento de elementos en la pista. |
 
-- 🔌 **2 × 9V batteries**: Power the Arduino and the servo motor.
-- 🔋 **1 × 9V battery**: Supplies energy to all sensors (ultrasonics, MPU6050, PixyCam).
-- 🔋 **2 × 18650 batteries (3.7V, 2000 mAh each, connected in series for 7.4V)**: Power the large EV3 motor.
+---
 
-| Power Source                 | Powered Components                 | Estimated consumption (mA) | Approx. Capacity | Estimated Autonomy  |
-|------------------------------|------------------------------------|----------------------------|------------------|---------------------|
-| 2x 9V                        | Arduino + REV Servo                | ~230 mA                    | ~500 mAh         | ~2 horas            |
-| 1x 9V                        | Sensors (PixyCam, HC-SR04, MPU)    | ~191 mA                    | ~500 mAh         | ~2.6 horas          |
-| 2x 18650 (7.4V, 4000 mAh)    | Large EV3 Motor                    | ~250 mA                    | 4000 mAh         | ~16 horas           |
+# Alimentación del Robot
 
-> 💡 *Note:* The autonomy values are theoretical and may vary depending on real conditions such as motor load, visual processing, or sensor usage intensity.
+El sistema de energía del robot está estructurado mediante dos reguladores *step-down* conectados al paquete principal de baterías:
+
+- **Línea de Cómputo y Percepción:** El regulador XL4015 reduce el voltaje de las baterías a 5 V estables para alimentar la Raspberry Pi. Esta, a su vez, distribuye energía al Arduino Uno, al Lidar LDROBOT ST27L y a la webcam a través de sus puertos USB e interfaces de alimentación.
+- **Línea de Actuación (Servo):** El regulador LM2596 ajusta la tensión a 6 V para alimentar de forma dedicada el servomotor REV Robotics, aislando sus picos de corriente del resto del circuito lógico.
+- **Línea de Tracción:** Las baterías alimentan directamente la entrada de potencia del puente H TB6612FNG, el cual distribuye la energía a ambos motores de tracción conectados en paralelo.
+
+---
+
+### 🔋 Cálculo del Consumo Total de Energía
+
+| Componente | Cantidad | Consumo estimado (mA) | Total (mA) |
+|:---|:---:|:---:|:---:|
+| Raspberry Pi (con Webcam) | 1 | 1200 mA | 1200 mA |
+| Lidar LDROBOT ST27L | 1 | 350 mA | 350 mA |
+| Arduino Uno | 1 | 50 mA | 50 mA |
+| Servomotor REV Robotics | 1 | 180 mA (típico) | 180 mA |
+| Motores de Tracción (en paralelo) | 2 | 500 mA c/u | 1000 mA |
+| **TOTAL** | — | — | **2780 mA** |
+
+---
+
+### ⚡ Distribución de Potencia y Autonomía Estimada
+
+El sistema se alimenta de forma distribuida para optimizar la eficiencia y proteger los componentes sensibles contra ruido inductivo:
+
+- 🔌 **Línea Regulada XL4015 (5V):** Raspberry Pi, Webcam, Lidar ST27L y Arduino Uno.
+- 🔌 **Línea Regulada LM2596 (6V):** Servomotor REV Robotics.
+- 🔋 **Alimentación Directa a Puente H TB6612FNG:** Motores de tracción conectados en paralelo.
+
+| Fuente de Alimentación | Componentes Alimentados | Consumo Estimado (mA) | Capacidad Aprox. | Autonomía Estimada |
+|:---|:---|:---:|:---:|:---:|
+| Regulador XL4015 (Salida 5V) | Raspberry Pi, Webcam, Lidar, Arduino | ~1600 mA | 4000 mAh | ~2.5 horas |
+| Regulador LM2596 (Salida 6V) | Servomotor REV Robotics | ~180 mA | 4000 mAh | ~22 horas |
+| Puente H TB6612FNG (Directo) | Motores de Tracción (en paralelo) | ~1000 mA | 4000 mAh | ~4 horas |
+
+> 💡 *Nota:* Los valores de autonomia demuestran el tiempo que dura cada componente funcionando individualmente, al momento de utilizarlos todos en conjunto tienen una autonomia estimada de 1.2 horas
 > 
-
 
 </details>
 
