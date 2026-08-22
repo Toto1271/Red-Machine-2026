@@ -167,7 +167,75 @@ Passionate about continuous learning, creative problem solving, and collaboratin
 
 ![Image](https://github.com/user-attachments/assets/b1555ddb-f7c7-47b6-b690-13382831a981)
 
+# ⚙️ Diseño y Fabricación Mecánica
 
+## 1. Fabricación Digital y Selección de Materiales
+
+* **Diseño CAD en Fusion 360 e Impresión 3D:** El vehículo fue modelado íntegramente en **Autodesk Fusion 360**, lo que nos permitió diseñar un chasis adaptado al 100% a las necesidades geométricas del proyecto. Toda la fabricación física se realizó en una impresora **Creality K1 Max**. Esta combinación nos dio una flexibilidad total durante el desarrollo para realizar modificaciones estructurales rápidas, ajustar tolerancias de ensamble sobre la marcha e iterar el diseño a medida que agregábamos componentes mecánicos sin depender de piezas comerciales rígidas.
+
+* **Elección del PETG frente a otros materiales:** Evaluamos las distintas opciones de filamentos en el mercado (PLA, ABS, ASA y Nylon) y seleccionamos **PETG** como el material definitivo por las siguientes razones:
+  * **Frente al PLA:** El PLA es excesivamente rígido y cristalino, lo que lo vuelve quebradizo ante choques, impactos o vibraciones continuas. El PETG ofrece una tenacidad superior con la flexibilidad justa para absorber esfuerzos mecánicos sin fracturarse.
+  * **Frente al ABS y ASA:** Aunque el ABS y el ASA ofrecen alta resistencia térmica, sufren de una fuerte contracción al enfriarse (*warping*), lo que dificulta la precisión dimensional en piezas estructurales planas como los pisos del chasis. El PETG ofrece una estabilidad dimensional excelente al imprimirse, sin deformaciones en las esquinas.
+  * **Frente al Nylon (PA):** El Nylon es altamente resistente pero requiere condiciones extremas de secado y procesado por su alta higroscopía. El PETG proporciona una rigidez estructural y resistencia al impacto óptimas para las cargas de la competencia sin la complejidad de manipulación del Nylon.
+  * **En conclusión:** El PETG representó el equilibrio perfecto entre **tenacidad a impactos, rigidez dimensional, durabilidad mecánica y facilidad de procesamiento**.
+
+* **Parámetros de Impresión Predeterminados (Creality Print):**
+  * **Temperatura de Boquilla (Nozzle Temperature):** $240^\circ\text{C} - 245^\circ\text{C}$ (garantiza fusión completa y máxima adhesión intercapa).
+  * **Temperatura de la Cama (Bed Temperature):** $70^\circ\text{C} - 80^\circ\text{C}$ (previene desprendimientos o *warping*).
+  * **Velocidad de Impresión (Print Speed):** $50\text{ mm/s} - 100\text{ mm/s}$ (mantiene la precisión dimensional en voladizos y orificios).
+  * **Relleno (Infill) y Patrón:** $15\% - 20\%$ con patrón Grid / Gyroid (balance entre rigidez y bajo peso).
+  * **Enfriamiento de Capa (Fan Speed):** $30\% - 50\%$ (equilibrio entre acabado estético y cohesión estructural).
+
+---
+
+## 2. Evolución del Chasis y Prototipado CAD
+
+* **Prototipo 1 (Boceto Base y Silueta Monocapa):** Diseñamos una placa plana inicial en Fusion 360 para definir las dimensiones generales del robot y evaluar la posición física de los componentes. Incluyó un hueco rectangular posterior para la transmisión y cuatro columnas verticales para proyectar la altura del segundo nivel. Confirmó que la estructura impresa resultaba sumamente ligera, permitiéndonos trabajar con motores estándar sin perder agilidad.
+
+(INSERTA AQUÍ LA FOTO DEL PROTOTIPO 1 CAD - WhatsApp Image 2026-08-22 at 11.13.13 AM.jpeg)
+
+* **Prototipo 2 (Chasis con Caja Inferior Integrada):** Rediseñamos la sección delantera del chasis incorporando una estructura en forma de caja en la parte inferior. Este subchasis encajonado albergó el servomotor de dirección y la transmisión en ranuras a medida, fijando la arquitectura base: **tracción trasera y dirección delantera**.
+
+(INSERTA AQUÍ LA FOTO DEL PROTOTIPO 2 CAD - WhatsApp Image 2026-08-22 at 11.15.01 AM.jpeg)
+
+* **Prototipos Intermedios (Evolución del Segundo Piso y Torre LiDAR):** Se diseñó el plato del piso superior con una elevación tipo escalón/cantiléver en la zona frontal. Este desnivel se concibió específicamente para montar el sensor LiDAR por encima de la dirección pero por delante de la Raspberry Pi 5, logrando una visión hacia el frente y laterales de ~270° totalmente despejada.
+
+(INSERTA AQUÍ LA FOTO DEL CAD PISO 2 Y TORRE LIDAR - image_01017c.png)
+
+* **Prototipo Final Ensamblado (Red Machine):** Consolidamos el ensamble integral uniendo el chasis de PETG con la electrónica y la mecánica de precisión:
+  * **Estructura Vertical de Dos Niveles:**
+    * **Nivel Inferior:** Encajonado para albergar el Arduino Uno, driver puente H y reguladores de voltaje, aislándolos de interferencias externas y caídas.
+    * **Nivel Superior:** Diseñado para alojar la Raspberry Pi 5 con disipador de aluminio y ventilador, asegurando un flujo de aire constante para el procesador.
+  * **Rigidez Estructural por Anclaje Dual:** La firmeza del piso superior se logró mediante una combinación estratégica: en los laterales, la estructura propia de los portabaterías actúa como pared portante fija, mientras que en la parte delantera se colocaron dos tornillos de sujeción directa sobre las columnas principales. Este anclaje cancela cualquier flexión o juego del segundo piso, manteniéndolo completamente estático ante vibraciones o movimientos bruscos.
+  * **Integración del Portabaterías 18650:** Las baterías Li-Ion de 3.7V se alojaron lateralmente formando una pared estructural entre el primer y segundo piso. Esta disposición ahorra volumen interno y sitúa la masa de las baterías en el centro geométrico del vehículo para equilibrar el peso.
+  * **Torre Frontal del LiDAR:** El soporte en escalón fija el LiDAR a una altura estratégica cercana a los 10 cm mediante tornillería M3 y espárragos roscados. Esta elevación sitúa el plano de escaneo justo en la parte superior del tope de las paredes de la pista, asegurando una lectura panorámica despejada hacia el frente y los costados (sin el bloqueo posterior de la Raspberry Pi) y libre de interferencias causadas por los bordes de los muros.
+  * **Dirección Híbrida PETG-Lego:** El servomotor acciona directamente un subensambaje de manguetas y brazos de dirección Lego Technic. Esta combinación eliminó las holguras mecánicas de los prototipos impresos previos, proporcionando giros de alta precisión.
+  * **Geometría de Trocha Reducida:** Como se aprecia en la estructura frontal del robot real, las ruedas de dirección están sensiblemente más juntas que las ruedas traseras de tracción. Esta configuración acorta el eje transversal de giro, garantizando un agarre óptimo del tren delantero y eliminando los derrapes indeseados (*oversteer*) en las curvas.
+
+(INSERTA AQUÍ LA FOTO DEL ROBOT IMPRESO CON LIDAR/DIRECCIÓN - WhatsApp Image 2026-08-22 at 11.17.11 AM.jpeg)
+
+(INSERTA AQUÍ LA FOTO DEL ROBOT COMPLETO CON RASPBERRY Y BATERÍAS - image_010486.jpg)
+
+---
+
+## 3. Módulo de Tracción y Centro de Masa
+
+* **Tracción Trasera y Distribución de Pesos ($CoG$):** Los motores envían la potencia directamente a las ruedas traseras desde la caja inferior. Al situar los componentes pesados (baterías en los laterales bajos, Arduino, puente H y reguladores) en el primer piso, logramos mantener un **centro de gravedad bajo y centrado**, lo que garantiza estabilidad en curva y una adherencia constante del tren trasero sin riesgo de vuelco.
+
+---
+
+## 4. Módulo de Dirección y Comportamiento Dinámico
+
+* **Optimización de la Trocha Delantera (Ancho de Eje):** Inicialmente las ruedas delanteras tenían la misma separación que las traseras. Sin embargo, al acercar las ruedas delanteras entre sí (trocha estrecha), logramos eliminar el problema de sobreviraje (*coleo/drifting*) en los giros.
+* **Explicación Técnica del Agarre:** Al acortar el eje delantero, se reduce el momento de inercia lateral y el brazo de palanca al girar. Esto evita que el tren delantero muerda el suelo de forma violenta, permitiendo que las ruedas traseras mantengan el empuje en línea recta de forma homogénea y el vehículo tome las curvas de manera fluida y precisa.
+* **Acoplamiento Servo-Lego:** La integración de componentes Lego en la articulación de la dirección eliminó las holguras mecánicas de la pieza impresa previa, permitiendo un movimiento suave, preciso y de fácil mantenimiento.
+
+---
+
+## 5. Integración de Sensores y Estructura Superior
+
+* **Soporte y Posicionamiento del LiDAR:** La elevación frontal coloca al sensor justo sobre el límite superior de las paredes de la pista (~10 cm), permitiendo captar el entorno sin obstaculizar su rango de visión.
+* **Estabilidad de Sensores y Cableado:** Gracias a la fijación con los dos tornillos delanteros y la rigidez lateral de los portabaterías, el segundo piso no flexiona, manteniendo las lecturas del LiDAR y de la Raspberry Pi totalmente estables sin sufrir descalibraciones por movimientos indeseados del chasis. Se incorporaron canales y pasajes entre ambos pisos para mantener el cableado protegido, ordenado y accesible.
 
 
 # Explicación Detallada de los Componentes
