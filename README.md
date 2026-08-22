@@ -175,35 +175,35 @@ Passionate about continuous learning, creative problem solving, and collaboratin
 ### Raspberry Pi 5
 Computadora monoplaca de alto rendimiento equipada con un procesador Broadcom BCM2711 Quad-Core ARM Cortex-A72 a 1.5 GHz. Funciona como la unidad central de cómputo del robot, asumiendo el procesamiento pesado de imágenes capturadas por la webcam y la gestión de la nube de puntos transmitida por el Lidar ST27L. Su arquitectura ARM de 64 bits y su memoria RAM permiten ejecutar la pila del sistema operativo Linux (UBUNTU) e hilos paralelos mediante Python, garantizando que el procesamiento visual intensivo y la construcción del mapa espacial no generen cuellos de botella ni bloqueen las respuestas dinámicas del vehículo en la pista. Fue especificamente utilizada por encima de la raspberry pi 4, ya que completa cada iteracion del codigo un 13% mas rapido, ofreciendo aun mas precision, siendo muy relevante para el uso del lidar.
 
-*(Espacio para foto de la Raspberry Pi 4)*
+<img width="547" height="365" alt="Image" src="https://github.com/user-attachments/assets/ee4a2d47-cdb3-4551-9ac5-bdc70aca7ef5" />
 
 ---
 
 ### Arduino Uno
 Microcontrolador de 8 bits basado en el chip ATmega328P que opera a una frecuencia de reloj de 16 MHz. Dentro de la arquitectura del robot, se desempeña como el nodo de control en tiempo real dedicado a la ejecución de tareas críticas de bajo nivel. Recibe las directivas de movimiento enviadas desde la Raspberry Pi y genera las señales PWM hacia el driver de motores TB6612FNG y al servomotor. Al delegar la temporización estricta de las salidas lógicas a este microcontrolador, se evita que las interrupciones del sistema operativo de la Raspberry Pi causen fluctuaciones en la velocidad de las ruedas o imperfecciones en la respuesta de los actuadores. El arduino uno fue utilizado principalmente para facilitar la construccion de este chasis, debido a que otro tipo de microcontroladores son mucho mas dificiles de encontrar por lo tanto dificultarian poder replicar el chasis.
 
-*(Espacio para foto del Arduino Uno)*
+<img width="554" height="554" alt="Image" src="https://github.com/user-attachments/assets/f3303144-e0d6-4a5d-963b-7fc49d130d49" />
 
 ---
 
 ### Lidar LDROBOT ST27L
 Sensor óptico de medición de distancia omnidireccional basado en la tecnología dToF (Direct Time-of-Flight), capaz de realizar escaneos de 360° en el plano horizontal a rangos de hasta 25 metros. Emite pulsos de luz láser infrarroja y mide el tiempo exacto que tardan en rebotar contra los obstáculos, generando una matriz de coordenadas espaciales en tiempo real. Esta información es fundamental para los algoritmos de navegación y evasión de paredes, ofreciendo una inmunidad total ante cambios bruscos de iluminación ambiental, sombras sobre la pista o variaciones en el color de la superficie de los muros. Se utiliza el lidar en contraste a los ultrasonidos para obtener una precision ~99.1%, debido a que trabajamos con mayor cantidad de datos, donde somos capaces de trazar una recta que se asemeja a la de las paredes en un 93,4%, lo cual asegura que la raspberry pi no confunda las paredes de la pista con cualquier otro obstaculo de la pista, tales como los conos o los estacionamientos.
 
-*(Espacio para foto del Lidar LDROBOT ST27L)*
+<img width="1560" height="1040" alt="Image" src="https://github.com/user-attachments/assets/46ac07cd-9cbf-48de-8fcb-77f954027434" />
 
 ---
 
 ### Servomotor REV Robotics
 Actuador de dirección de grado robótico con piñonería interna metálica de alta resistencia y motor integrado de corriente continua, optimizado para operar a 6.0 V con un torque de hasta 13.5 kg-cm. Su función principal es posicionar el mecanismo del tren delantero para cambiar la trayectoria del vehículo. Su electrónica digital interna ajusta la posición del eje con alta precisión angular, manteniendo el ángulo de dirección fijo sin ceder ante las fuerzas de fricción de las ruedas sobre la pista o las inercias generadas durante cambios de dirección a alta velocidad.
 
-*(Espacio para foto del Servomotor REV Robotics)*
+<img width="447" height="447" alt="Image" src="https://github.com/user-attachments/assets/8abc1899-f602-4f87-bb8d-5500465385a9" />
 
 ---
 
 ### Driver TB6612FNG (Puente H Dual)
 Módulo controlador de motores basado en una etapa de potencia MOSFET de baja resistencia interna en estado activo (Rds(on)). Permite manejar dos motores DC en paralelo con una corriente continua de hasta 1.2 A por canal (3.2 A pico). Al utilizar transistores MOSFET en lugar de los antiguos transistores bipolares, ofrece una eficiencia energética superior con una disipación de calor mínima, respondiendo de forma lineal a las señales de ciclo de trabajo PWM de hasta 100 kHz enviadas por el Arduino Uno para regular aceleraciones y frenados. Fue un cambio al antiguo puente h l298n, debido a que este nos ofrece mas eficiencia, en un espacio muchisimo menor, permitiendonos hacer todos los cambios fisicos exigidos.
 
-*(Espacio para foto del Puente H TB6612FNG)*
+<img width="600" height="600" alt="Image" src="https://github.com/user-attachments/assets/c2a01a8a-279a-4ffb-bbfb-bd9812285ecc" />
 
 ---
 
@@ -217,21 +217,22 @@ Sensor de captura de imagen HD conectado vía USB a la Raspberry Pi, dedicado a 
 ### Banco de Baterías 18650 (Arreglo 2S2P)
 Fuente de alimentación principal conformada por cuatro celdas cilíndricas recargables de Ion de Litio (Li-ion) formato 18650, configuradas en dos ramas en paralelo de dos celdas en serie cada una. Entrega una tensión nominal de 7.4 V (8.4 V a plena carga) y una capacidad acumulada de 4000 mAh. Esta química de batería ofrece una resistencia interna extremadamente baja, lo que permite suministrar ráfagas elevadas de corriente sin sufrir caídas parásitas de voltaje (*brownouts*) cuando los motores de tracción y el servo de dirección demandan torque máximo en momentos de alta aceleración.
 
-*(Espacio para foto del paquete de baterías 18650)*
+<img width="447" height="447" alt="Image" src="https://github.com/user-attachments/assets/49806f89-29f1-40ea-af4c-96aacd6fbabc" />
 
 ---
 
 ### Reductor de Voltaje XL4015 (Step-Down 5 A)
 Convertidor conmutado de corriente continua (*Buck Converter*) capaz de transformar el voltaje variable del banco de baterías (7.4 V – 8.4 V) en una línea regulada estable de 5.0 V DC con capacidad de suministro de hasta 5 A. Su frecuencia de conmutación interna y su alto rendimiento energético (hasta el 96%) evitan el desperdicio de energía en forma de calor residual, suministrando una alimentación limpia e inmune a ruidos electromagnéticos a la Raspberry Pi, la cual a su vez energiza la webcam, el Lidar ST27L y el Arduino Uno. Este componente es estrictamente necesario, debido a que la mayoria de reductores de voltaje de bajo costo suministran una cantidad menor a 4A, lo cual es necesario para el correcto funcionamiento de la raspberry pi, y por lo tanto de sus componentes adyacentes
 
-*(Espacio para foto del regulador XL4015)*
+
+<img width="500" height="314" alt="Image" src="https://github.com/user-attachments/assets/575e3060-acd1-46a1-82d9-acdd8987e7ab" />
 
 ---
 
 ### Reductor de Voltaje LM2596 (Step-Down 3 A)
 Regulador conmutado independiente que opera a una frecuencia de 150 kHz, dedicado a transformar la tensión de las baterías en una salida fija de 6.0 V DC para la etapa de dirección. Al estar aislado de la línea de 5.0 V de la computadora principal, absorbe los picos térmicos y electromagnéticos que genera el servomotor REV Robotics durante sus movimientos bruscos, previniendo que el ruido inductivo del motor o los bajones de tensión repentinos causen reinicios imprevistos en la Raspberry Pi o fallas de sincronía en el Lidar.
 
-*(Espacio para foto del regulador LM2596)*
+<img width="554" height="554" alt="Image" src="https://github.com/user-attachments/assets/fc3d9751-dfd1-4643-af99-ec4f98f1a798" />
 
 ---
 
@@ -302,7 +303,7 @@ sudo snap install rpi-imager
 ```
 
 Inserta la microSD (mínimo 16 GB, clase 10) en tu lector. Abre Raspberry Pi Imager y sigue estos pasos:
-- **Choose OS** → Other specific-purpose OS → Ubuntu → **Ubuntu Server 22.04 LTS (64‑bit)**.
+- **Choose OS** → Other specific-purpose OS → Ubuntu → **Ubuntu Server 24.04 LTS (64‑bit)**.
 - **Choose Storage** → selecciona tu microSD.
 
 Haz clic en el engranaje (⚙️) para la configuración avanzada:
@@ -411,9 +412,9 @@ Si todo funciona, ya puedes trabajar sin monitor ni teclado.
 
 ---
 
-## Instalación de ROS 2 Humble en la Raspberry Pi
+## Instalación de ROS 2 Jazzy en la Raspberry Pi
 
-Seguimos la [guía oficial de ROS 2 Humble para Ubuntu 22.04](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html).
+Seguimos la [guía oficial de ROS 2 Jazzy para Ubuntu 24.04](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html).
 
 ### Configuración del locale
 
@@ -445,7 +446,7 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-a
 ```bash
 sudo apt update
 sudo apt upgrade -y
-sudo apt install -y ros-humble-desktop
+sudo apt install -y ros-Jazzy-desktop
 sudo apt install -y python3-colcon-common-extensions python3-rosdep python3-pip
 ```
 
@@ -454,7 +455,7 @@ sudo apt install -y python3-colcon-common-extensions python3-rosdep python3-pip
 Añade el sourcing de ROS 2 a tu `.bashrc`:
 
 ```bash
-echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
+echo "source /opt/ros/jazzy/setup.bash" >> ~/.bashrc
 echo "source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash" >> ~/.bashrc
 source ~/.bashrc
 ```
