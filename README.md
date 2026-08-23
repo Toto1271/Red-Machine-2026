@@ -363,6 +363,35 @@ El sistema se alimenta de forma distribuida para optimizar la eficiencia y prote
 * **Alivio de tensión en zonas con movimiento:** En los cables que van conectados a partes móviles, como el servomotor de la dirección, se dejó una ligera curvatura de margen y se sujetó el cable al chasis justo antes del conector. Así, el tirón del movimiento lo absorbe la estructura del robot y no los pines del componente.
 
 
+##  Arquitectura Funcional y Distribución Eléctrica
+
+El diseño eléctrico e informático del vehículo se estructura en cuatro capas principales, ideadas para maximizar el rendimiento computacional, aislar las interferencias electromagnéticas y asegurar tiempos de reacción inmediatos en la pista:
+
+#### 1. Capa de Distribución Energética (Power Layer)
+El suministro eléctrico nace de un arreglo de almacenamiento principal (dos paquetes de dos baterías 18650 conectadas en paralelo). A partir de este nodo, la energía se ramifica de manera independiente:
+
+*   **Regulador XL4015 (Núcleo Lógico):** Convierte el voltaje del banco de baterías en una salida constante de 5.0V con un límite de hasta 5A. Esta fuente de alta capacidad está dedicada enteramente a sostener el consumo de la Raspberry Pi 5, permitiéndole alimentar sin problemas a los dispositivos conectados a sus propios puertos.
+*   **Regulador LM2596 (Fuerza de Dirección):** Crea una línea de alimentación completamente aislada del resto del sistema, enfocada de manera exclusiva en el servomotor REV Robotics. Esta separación física evita que las caídas de voltaje producidas al girar las ruedas delanteras interfieran con la estabilidad de los procesadores.
+*   **Derivación Directa a Tracción:** El voltaje íntegro de las celdas 18650 se conecta de forma directa a la entrada de fuerza del controlador de motores (TB6612FNG), asegurando que los motores tengan acceso instantáneo a la corriente máxima requerida para la aceleración.
+
+#### 2. Nivel de Procesamiento Jerárquico (Compute Layer)
+La inteligencia del robot opera mediante un esquema de delegación de tareas para evitar sobrecargas informáticas:
+
+*   **Computadora Central (Raspberry Pi 5):** Funciona como el cerebro de la operación. Aprovechando su gran poder de cálculo, gestiona de forma exclusiva los algoritmos pesados de visión artificial y la construcción del mapa Lidar. Paralelamente, actúa como el concentrador central (Hub) que provee datos y energía USB al resto de la electrónica lógica.
+*   **Controlador Cinético (Arduino Uno):** Alimentado y comunicado a través de un puerto USB de la Raspberry Pi 5, este microcontrolador se libera de los cálculos complejos para enfocarse 100% en el manejo de tiempos reales. Transforma las instrucciones recibidas en señales PWM exactas para gobernar el puente H y el servomotor.
+*   **Unificación de Masas (Star Grounding):** Para garantizar que los niveles lógicos sean leídos correctamente, todos los retornos negativos (GND) se referencian a un único punto central vinculado a la Raspberry Pi 5, previniendo errores de voltaje en las comunicaciones.
+
+#### 3. Etapa de Tracción y Movilidad (Motor Control Layer)
+La ejecución física de los comandos de aceleración recae sobre el puente H TB6612FNG, optimizado para operaciones de alta eficiencia:
+
+*   **Traducción de Comandos:** Recibe las señales digitales (dirección y PWM) enviadas por los pines de salida del Arduino Uno. Gracias a sus transistores internos de baja pérdida, reacciona instantáneamente para aplicar frenados dinámicos o cambios de velocidad.
+*   **Empuje Sincronizado:** Las salidas de potencia de este módulo se enlazan a los dos motores de tracción que comparten una conexión en paralelo. Esto fuerza a ambos motores a recibir el mismo diferencial eléctrico, garantizando un empuje equilibrado y lineal en las ruedas.
+
+#### 4. Subsistema de Percepción del Entorno (Sensor Layer)
+El monitoreo del circuito se lleva a cabo mediante periféricos de alto flujo de datos conectados de forma nativa a los puertos de la computadora principal:
+
+*   **Escaneo Láser (Lidar LDROBOT ST27L):** Aporta la telemetría espacial escaneando los obstáculos a su alrededor en 360 grados. Obtiene tanto su energía como su canal de comunicación a través de un cable USB conectado directo a la Raspberry Pi 5, inyectando su nube de puntos a alta velocidad.
+*   **Visión Computacional (Webcam HD):** Captura las referencias visuales y marcadores de color del circuito. Su interfaz USB envía el flujo de imágenes directamente al procesador de la Raspberry Pi 5 sin pasar por el Arduino, evitando cualquier tipo de retraso o cuello de botella en los buses del microcontrolador de bajo nivel.
 
 ## Preparación de la Raspberry Pi
 
@@ -789,19 +818,7 @@ He diseñado este sistema con una arquitectura cliente-servidor donde la Raspber
 
 El flujo de navegación que he implementado sigue un ciclo continuo basado en la detección del entorno:
 
-```
-[INICIO] → [Leer LiDAR] → [¿Pared frontal?]
-                              ↓
-                          Sí → [¿Sentido definido?] → No → [Comparar laterales] → [Fijar sentido]
-                              ↓                                              ↓
-                              Sí → [Girar 90° según sentido]                [Girar]
-                              ↓
-                          No → [¿Sentido definido?] → No → [Avanzar recto buscando pared]
-                              ↓
-                              Sí → [Seguir pared según sentido]
-                              ↓
-                         [Volver a leer LiDAR]
-```
+<img width="732" height="607" alt="Image" src="https://github.com/user-attachments/assets/148062c2-443f-4c86-8c87-0ded89104d98" />
 
 ### Explicacion codigo Reto Abierto (Nodo ROS 2)
 
@@ -969,9 +986,7 @@ if (Serial.available() > 0) {
 }
 ```
 
-### Diagrama de Flujo del Sistema Completo
 
-<img width="732" height="607" alt="Image" src="https://github.com/user-attachments/assets/148062c2-443f-4c86-8c87-0ded89104d98" />
 
 ## Solución de problemas comunes
 
