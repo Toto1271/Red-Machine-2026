@@ -1,17 +1,17 @@
 
 
-# Engineering Document / Red Machine
+# Documento de Ingeniería / Red Machine
 
 Este repositorio muestra todos los componentes para construir a "pompo", este robot autonomo pertenece al equipo "Red Machine" y cumple el proposito de participar en la categoria de futuros ingenieros en la WRO 2026.
 
 ![Image](https://github.com/user-attachments/assets/1cbe6250-ba27-41c2-bb0b-d5abe1c41ac8)
 
 
-# INDEX - REDMACHINE 2025
+# INDICE - REDMACHINE 2026
 
-## 📌 MAIN CONTENT
-1. [Engineering Document / Red Machine](#Engineering-Document--red-machine)
-2. [Red-Machine-Members](https://github.com/Samu4035/REDMACHINE-2025/tree/main?tab=readme-ov-file#Red-Machine-Members)
+## 📌 CONTINIDO PRINCIPAL
+1. [Documento de Ingeniería / Red Machine](#Engineering-Document--red-machine)
+2. [Miembros de Red Machine](https://github.com/Samu4035/REDMACHINE-2025/tree/main?tab=readme-ov-file#Red-Machine-Members)
    - [Juan Diego Cano Barros](#-juan-diego-cano-barros)
    - [Samuel José Galban Franco](#-samuel-josé-galban-franco)
    - [Angel Saúl Rodriguez Guerra](#-angel-saúl-rodriguez-guerra)
@@ -44,124 +44,128 @@ Este repositorio muestra todos los componentes para construir a "pompo", este ro
     - [2025 Season](#2025-Season)
     - [Robots Evolution](#julian-luka-and-pompo)
 
-## 📂 REPOSITORY STRUCTURE
-- [t-photos/](https://github.com/Samu4035/REDMACHINE-2025/tree/main/t-photos) - Team photos
-- [v-photos/](https://github.com/Samu4035/REDMACHINE-2025/tree/main/v-photos) - Vehicle photos
-- [schemes/](https://github.com/Samu4035/REDMACHINE-2025/tree/main/schemes) - Eschematic diagrams
-- [src/](https://github.com/Samu4035/REDMACHINE-2025/tree/main/src) - Code
-- [models/](https://github.com/Samu4035/REDMACHINE-2025/tree/main/models) - 3D Designs
-- [otros/](https://github.com/Samu4035/REDMACHINE-2025/tree/main/otros) - Other archives
+## 📂 ESTRUCTURA DEL REPOSITORIO
+- [t-photos/](https://github.com/Samu4035/REDMACHINE-2025/tree/main/t-photos) - Fotos del equipo
+- [v-photos/](https://github.com/Samu4035/REDMACHINE-2025/tree/main/v-photos) - Fotos del vehículo 
+- [schemes/](https://github.com/Samu4035/REDMACHINE-2025/tree/main/schemes) - Diagramas Esquemáticos
+- [src/](https://github.com/Samu4035/REDMACHINE-2025/tree/main/src) - Código
+- [models/](https://github.com/Samu4035/REDMACHINE-2025/tree/main/models) - Diseño 3D
+- [otros/](https://github.com/Samu4035/REDMACHINE-2025/tree/main/otros) - Otros archivos 
 
-# Repository contents
+# Contenido
 
-This repository contains the following directories to organize our project:
+Este repositorio contiene los siguientes directorios para organizar nuestro proyecto:
 
-* `t-photos`: Includes team photos, as well as photos of the work done during all competition years and photos of the robots built by the team.
-* `v-photos`: Contains 6 photos of the vehicle (from all angles).
-* `schemes`: Schematic diagrams (JPEG, PNG or PDF) of the electromechanical components, illustrating the wiring of electronic elements and motors, plus an explanation of the function of each.
-* `src`: Control software code for all components programmed for the competition.
-* `models`: Files for the vehicle's 3D design.
-* `other`: Additional files to understand how to prepare the vehicle for the competition.
+* `t-photos`: Incluye fotos del equipo, así como fotos del trabajo realizado durante todos los años de competencia y fotos de los robots construidos por el equipo.
+* `v-photos`: Contiene 6 fotos del vehículo (desde todos los ángulos).
+* `schemes`: Diagramas esquemáticos (JPEG, PNG o PDF) de los componentes electromecánicos, que ilustran el cableado de los elementos electrónicos y motores, además de una explicación de la función de cada uno.
+* `src`: Código del software de control para todos los componentes programados para la competencia.
+* `models`: Archivos para el diseño 3D del vehículo.
+* `other`: Archivos adicionales para entender cómo preparar el vehículo para la competencia.
      
-# Introduction
-The team has put their greatest effort into building the best possible robot. Our preparation for these olympiads has been based on extensive learning in construction, design and programming, and the experience from previous competitions has been fundamental. Long hours of track analysis and study have led to the creation of our own strategy, based on the components the team chose to work with, aiming for the best possible performance in the various stages of this competition.
-Throughout this document and the entire repository, all the design, programming and construction work of the robot is explained precisely.
+# Introduccion
+El equipo ha puesto su mayor esfuerzo en construir el mejor robot posible. Nuestra preparación para estas olimpiadas se ha basado en un amplio aprendizaje en construcción, diseño y programación, y la experiencia de competencias anteriores ha sido fundamental. Largas horas de análisis de pistas y estudio han llevado a la creación de nuestra propia estrategia, basada en los componentes con los que el equipo decidió trabajar, apuntando al mejor rendimiento posible en las distintas etapas de esta competencia.
+A lo largo de este documento y de todo el repositorio, se explica con precisión todo el trabajo de diseño, programación y construcción del robot.
 
-# Red Machine Members
 
+# Miembros de Red Machine
 
 ## 👤 Juan Diego Cano Barros
 
-### Role in the team
-Responsible for the robot programming and the robot's electronics.
+### Rol en el equipo
+Responsable de la programación del robot y de la electrónica del mismo.
 
-### 🧠 Academic Achievements
+### 🧠 Logros académicos
 
-- 🥉 **Bronze Medal – Ibero-American Mathematics Olympiad (2023)**
-He represented Venezuela in the 29th edition of this international competition organized by the OMA in Argentina, after being selected as one of the top 10 of the second national level by @acmvenojm.
+- 🥉 **Medalla de Bronce – Olimpiada Iberoamericana de Matemáticas (2023)**
+Representó a Venezuela en la 29ª edición de esta competencia internacional organizada por la OMA en Argentina, tras ser seleccionado entre los 10 mejores del segundo nivel nacional por @acmvenojm.
 
-- 🥈 **Runner-up – Argentine Mathematics Olympiad Ñandú (2019)**
-Participated in the oral exam in Buenos Aires, standing out as the runner-up in Level 1.
-
----
-
-### Robotics Background
-
-- 🇻🇪 **Two-time National Champion – Futuros Ingenieros Category (WRO Venezuela)**
-Winner of the National Robotics Olympiad in two consecutive editions, representing Zulia state and qualifying for the international finals.
-
-- 🌍 **International Finalist – WRO Panama 2023**
-Represented Venezuela at the World Robotics Olympiad, placing 25th out of 40 teams in the Futuros Ingenieros category.
-
-- 🇹🇷 **International Participation – WRO Turkey 2024**
-Was part of the Venezuelan delegation that competed at the world edition held in Turkey, consolidating experience in high-level global events.
+- 🥈 **Subcampeón – Argentine Mathematics Olympiad Ñandú (2019)**
+Participó en el examen oral en Buenos Aires, destacándose como subcampeón en el Nivel 1.
 
 ---
 
-### 💡 Motivation and Focus
-Eat, Sleep, Meet People, Enjoy Trips, and Sleep
+### Antecedentes en robótica
+
+- 🇻🇪 **Tricampeón Nacional – Categoría Futuros Ingenieros (WRO Venezuela)**
+Ganador de la Olimpiada Nacional de Robótica en tres ediciones consecutivas, representando al estado Zulia y clasificando a las finales internacionales.
+
+- 🌍 **Finalista Internacional – WRO Panamá 2023**
+Representó a Venezuela en la Olimpiada Mundial de Robótica, ubicándose en el puesto 25 de 40 equipos en la categoría Futuros Ingenieros.
+
+- 🇹🇷 **Participación Internacional – WRO Turquía 2024**
+Formó parte de la delegación venezolana que compitió en la edición mundial celebrada en Turquía, consolidando experiencia en eventos globales de alto nivel.
+
+---
+
+### 💡 Motivación y Enfoque
+Comer, dormir, conocer gente, disfrutar de los viajes y dormir
 
 ## 👤 Samuel José Galban Franco
 
-### Role in the team
-Responsible for the robot's repository.
+### Rol en el equipo
+Responsable del repositorio del robot.
 
-### 🧠 Academic Achievements
+### 🧠 Logros académicos
 
-- 🥈 **Runner-up – National Chemistry Olympiad (2024)**
-Represented Liceo Los Robles in the most recent edition of this competition organized by AVOQUIM.
+- 🥈 **Subcampeón – Olimpiada Nacional de Química (2024)**
+Representó al Liceo Los Robles dicha edición de esta competencia organizada por AVOQUIM.
 
-- 🥈 **Runner-up – VIRTUAL MISSIONS PANAMA 2023 CHALLENGE**
-Second place in this international competition, representing Venezuela during the WRO 2023 international final held in Panama.
+- 🥈 **Subcampeón – DESAFÍO VIRTUAL MISSIONS PANAMÁ 2023**
+Segundo lugar en esta competencia internacional, representando a Venezuela durante la final internacional de la WRO 2023 celebrada en Panamá.
 
----
-
-### 🤖 Robotics Background
-
-- 🇻🇪 **Two-time National Champion – Futuros Ingenieros Category (WRO Venezuela)**
-Winner of the National Robotics Olympiad in two consecutive editions, representing Zulia state and qualifying for the international finals.
-
-- 🌍 **International Finalist – WRO Panama 2023**
-Represented Venezuela at the World Robotics Olympiad, placing 25th out of 40 teams in the Futuros Ingenieros category.
-
-- 🇹🇷 **International Participation – WRO Turkey 2024**
-Was part of the Venezuelan delegation that competed at the world edition held in Turkey, gaining technical and cultural experience in high-level competitive environments.
+- 🥈 **Medalla de plata – Olimpiada internacional de nanotecnología INOHS**
+Participación destacada en la final internacional, formando parte de la delegación Venezolana el año 2025. 
 
 ---
 
-### 💡 Motivation and Focus
-Meet people, enjoy trips, and look for study opportunities
+### 🤖 Antecedentes en robótica
+
+- 🇻🇪 **Tricampeón Nacional – Categoría Futuros Ingenieros (WRO Venezuela)**
+Ganador de la Olimpiada Nacional de Robótica en tres ediciones consecutivas, representando al estado Zulia y clasificando a las finales internacionales.
+
+- 🌍 **Finalista Internacional – WRO Panamá 2023**
+Representó a Venezuela en la Olimpiada Mundial de Robótica, ubicándose en el puesto 25 de 40 equipos en la categoría Futuros Ingenieros.
+
+- 🇹🇷 **Participación Internacional – WRO Turquía 2024**
+Formó parte de la delegación venezolana que compitió en la edición mundial celebrada en Turquía, consolidando experiencia en eventos globales de alto nivel.
+
+---
+
+### 💡 Motivación y Enfoque
+Conocer gente, disfrutar de los viajes y buscar oportunidades de estudio
 
 
 
 ## 👤 Angel Saúl Rodriguez Guerra
 
-### Role in the team
-Responsible for the robot's mechanics.
+### Rol en el equipo
+Responsable de la mecánica del robot
 
-### 🧠 Academic Achievements
-- 🥇 **Qualified for the World – World Youth Mathematics Olympiad (WYMO) (2024)**
-He represented Venezuela at the World Youth Mathematics Olympiad, an international competition that brings together young mathematical talents from around the world to tackle highly challenging problems.
+### 🧠 Logros académicos
+- 🥇 **Clasificado para el Mundial – Olimpiada Mundial Juvenil de Matemáticas (WYMO) (2024)**
+Representó a Venezuela en la Olimpiada Mundial Juvenil de Matemáticas, una competencia internacional que reúne a jóvenes talentos de las matemáticas de todo el mundo para enfrentarse a problemas de alto nivel de exigencia.
 
-- 🔬 **Notable Participant – Chemistry and Mathematics Olympiads in Venezuela**
-Competed in various editions of the Venezuelan Olympiads, demonstrating excellence and passion for the exact sciences from an early age.
-
---- 
-
-### 🤖 Robotics Background
-- 🇻🇪 **Two-time National Champion – Futuros Ingenieros Category (WRO Venezuela)**
-Winner in two consecutive editions of the National Robotics Olympiad, representing Zulia state and earning selection for international competitions as part of the national delegation.
-
-- 🌍 **International Finalist – WRO Panama 2023**
-Participated in the World Robotics Olympiad held in Panama, placing 25th among 40 international teams in the Futuros Ingenieros category.
-
-- 🇹🇷 **International Participation – WRO Turkey 2024**
-Member of the Venezuelan delegation that competed in the world edition held in Turkey, accumulating technical and cultural experience in high-level competitive settings.
+- 🔬 **Participante destacado – Olimpiadas de Química y Matemáticas en Venezuela**
+Competido en varias ediciones de las Olimpiadas venezolanas, demostrando excelencia y pasión por las ciencias exactas desde una edad temprana.
 
 --- 
 
-### 💡 Motivation and Focus
-Passionate about continuous learning, creative problem solving, and collaborating in multidisciplinary teams. His track record in academic and technological competitions reflects a genuine motivation to create impact through knowledge and to keep exploring new frontiers of scientific thought and innovation.
+### 🤖 Antecedentes en robótica
+
+- 🇻🇪 **Tricampeón Nacional – Categoría Futuros Ingenieros (WRO Venezuela)**
+Ganador de la Olimpiada Nacional de Robótica en tres ediciones consecutivas, representando al estado Zulia y clasificando a las finales internacionales.
+
+- 🌍 **Finalista Internacional – WRO Panamá 2023**
+Representó a Venezuela en la Olimpiada Mundial de Robótica, ubicándose en el puesto 25 de 40 equipos en la categoría Futuros Ingenieros.
+
+- 🇹🇷 **Participación Internacional – WRO Turquía 2024**
+Formó parte de la delegación venezolana que compitió en la edición mundial celebrada en Turquía, consolidando experiencia en eventos globales de alto nivel.
+
+--- 
+
+### 💡 Motivación y Enfoque
+Apasionado por el aprendizaje continuo, la resolución creativa de problemas y la colaboración en equipos multidisciplinarios. Su trayectoria en competencias académicas y tecnológicas refleja una motivación genuina para generar un impacto a través del conocimiento y seguir explorando nuevas fronteras del pensamiento científico y la innovación.
 
 ---
 
@@ -1028,43 +1032,45 @@ Revisa la lógica de `detectarlado_en_pared()`. Si la pared derecha está más c
 - **Usa `rqt_graph`** para visualizar los nodos y tópicos: `rqt_graph`.
 - **Guarda los logs**: redirige la salida a un archivo con `ros2 run wro_reto_abierto wro_node > logs.txt 2>&1`.
 
-# Videos of Past Tests
 
-## Version 1.0 Robot Videos
-### First challenge
+
+# Videos
+
+## Videos del robot versión 1.0
+### Primer reto (prueba abierta)
 [<img width="926" height="515" alt="image" src="https://github.com/user-attachments/assets/bcca2144-03be-48d7-a760-bc5364874bd4" />](https://youtu.be/W26b5g69BQQ?si=Y7qg7TaV6iR0McLb)
 
-### Second challenge test
+### Segundo reto (prueba cerrada)
 [<img width="453" height="583" alt="image" src="https://github.com/user-attachments/assets/5d6ff46e-4ade-4e43-bef0-940c5f0850ff" />](https://youtube.com/shorts/cc8yKOo6g8U?si=XeC0w1IYvneSmaU0)
 
 
 
-## Version 2.0 Robot Videos
+## Videos del robot versión 2.0
 
-### Complete Challenge 1 Video, All Variants
+### Video del Reto 1, Todas las Variantes
 [<img width="336" height="188" alt="image" src="https://github.com/user-attachments/assets/dfae6ff3-cb71-4b5f-9016-ae2efeb6b23f" />
 ](https://www.youtube.com/watch?v=HS7eLoFSOkU)
 
-### Complete Challenge 2 Video
+### Video del reto 2 completo 
 [<img width="336" height="188" alt="image" src="https://github.com/user-attachments/assets/5868e78c-5e65-40ab-8b85-4ca204db4f23" />
 ](https://www.youtube.com/watch?v=cjjnRDXaDAU&t=56s)
 
-## Robot videos
-### Color Detection Demonstration
+## Videos del robot
+### Demostración de Detección de Color
 [<img width="270" height="480" alt="image" src="https://github.com/user-attachments/assets/b3d6a860-b0d2-4d91-bf3d-b9a8c1924240" />
 ](https://www.youtube.com/shorts/HLt_O2JlURQ)
 
-### Continuity Test
+### Prueba de Continuidad
 [<img width="270" height="480" alt="image" src="https://github.com/user-attachments/assets/dd85f7af-9fe4-475b-be93-eda2947dddbc" />](https://www.youtube.com/shorts/jUmZjaQ_be8)
 
-## Videos about Red Machine
-### National Presentation 2023
+## Videos sobre Red Machine
+### Presentación Nacional 2023
 [<img width="336" height="188" alt="image" src="https://github.com/user-attachments/assets/00664584-bacb-41d2-8210-cb014d690640" />](https://www.youtube.com/watch?v=fVg6WCavaBU)
-### Red Machine National 2023
+### Red Machine Nacional 2023
 [<img width="336" height="188" alt="image" src="https://github.com/user-attachments/assets/525ffe10-d1de-4dda-a9da-bc815b110c35" />](https://www.youtube.com/watch?v=FSo2NadI6ec&pp=0gcJCbIJAYcqIYzv)
-### Red Machine Team Presentation
+### Presentación de Red Machine
 [<img width="320" height="180" alt="image" src="https://github.com/user-attachments/assets/f27d65da-cd69-4e9f-b46f-22959dfdb275" />](https://www.youtube.com/watch?v=EYFYI9Z96V4&t=25s)
-### Educational Robotics
+### Robótica educacional
 [<img width="320" height="180" alt="image" src="https://github.com/user-attachments/assets/2ca73ef3-91ca-4155-91c7-0617813404df" />](https://www.youtube.com/watch?v=Is-765hQCRY)
 
 
@@ -1074,14 +1080,14 @@ Revisa la lógica de `detectarlado_en_pared()`. Si la pared derecha está más c
 
 
 
-# History and Timeline of Red Machine
+# Historia y Cronología de Red Machine
 
-1. 2023 Season
+1. Temporada 2023
 - [Julio 2023](https://github.com/Samu4035/REDMACHINE-2025/blob/main/t-photos/Historia.md#Julio-2023)
 - [Agosto 2023](https://github.com/Samu4035/REDMACHINE-2025/blob/main/t-photos/Historia.md#Agosto-2023)
 - [Septiembre 2023](https://github.com/Samu4035/REDMACHINE-2025/blob/main/t-photos/Historia.md#Septiembre-2023)
 - [Octubre 2023](https://github.com/Samu4035/REDMACHINE-2025/blob/main/t-photos/Historia.md#Octubre-2023)
-2. 2024 Season
+2. Temporada 2024
 - [Febrero 2024](https://github.com/Samu4035/REDMACHINE-2025/blob/main/t-photos/Historia.md#Febrero-2024)
 - [Marzo 2024](https://github.com/Samu4035/REDMACHINE-2025/blob/main/t-photos/Historia.md#Marzo-2024)
 - [Abril 2024](https://github.com/Samu4035/REDMACHINE-2025/blob/main/t-photos/Historia.md#Abril-2024)
@@ -1089,12 +1095,12 @@ Revisa la lógica de `detectarlado_en_pared()`. Si la pared derecha está más c
 - [Junio 2024](https://github.com/Samu4035/REDMACHINE-2025/blob/main/t-photos/Historia.md#Junio-2024)
 - [Octubre 2024](https://github.com/Samu4035/REDMACHINE-2025/blob/main/t-photos/Historia.md#Octubre-2024)
 - [Noviembre 2024](https://github.com/Samu4035/REDMACHINE-2025/blob/main/t-photos/Historia.md#Noviembre-2024)
-3. 2025 Season
+3. Temporada 2025
 - [Febrero 2025](https://github.com/Samu4035/REDMACHINE-2025/blob/main/t-photos/Historia.md#Febrero-2025)
 - [Marzo 2025](https://github.com/Samu4035/REDMACHINE-2025/blob/main/t-photos/Historia.md#Marzo-2025)
 - [Abril 2025](https://github.com/Samu4035/REDMACHINE-2025/blob/main/t-photos/Historia.md#Abril-2025)
 - [Mayo 2025](https://github.com/Samu4035/REDMACHINE-2025/blob/main/t-photos/Historia.md#Mayo-2025)
-4. Julian, Luka and Pompo
+4. Julian, Luka y Pompo
 - [JULIAN 1.0](https://github.com/Samu4035/REDMACHINE-2025/blob/main/t-photos/Historia.md#JULIAN-1.0)
 - [JULIAN 2.0](https://github.com/Samu4035/REDMACHINE-2025/blob/main/t-photos/Historia.md#JULIAN-2.0)
 - [JULIAN 3.0](https://github.com/Samu4035/REDMACHINE-2025/blob/main/t-photos/Historia.md#JULIAN-3.0)
@@ -1113,215 +1119,221 @@ Revisa la lógica de `detectarlado_en_pared()`. Si la pared derecha está más c
 - [POMPO 3.0](https://github.com/Samu4035/REDMACHINE-2025/blob/main/t-photos/Historia.md#POMPO-3.0)
 
     
-## 2023 Season
+## Temporada 2023
 
-### July 2023
+### Julio 2023
 
-After participating in a regional robotics competition, the team decided to take part in the WRO, specifically in the Future Engineers category. As a first step, the team began studying and analyzing the competition rules.
+Después de participar en una competencia regional de robótica, el equipo decidió participar en la WRO, específicamente en la categoría Future Engineers. Como primer paso, el equipo comenzó a estudiar y analizar las reglas de la competencia.
 
 ![1ra julio](https://github.com/RoboticaLLR/redmachine2024/assets/155327813/66f7c8f1-b10c-4261-86b3-32c87bcd3b81)
 
-In the following days, the team began studying what could be the first version of the chassis and investigated various ways to address the initial challenges, which were how to design the steering system and which motor to use to achieve the required speed and torque.
+En los días siguientes, el equipo comenzó a estudiar lo que podría ser la primera versión del chasis e investigó varias formas de abordar los retos iniciales, que consistían en cómo diseñar el sistema de dirección y qué motor utilizar para lograr la velocidad y el par (torque) requeridos.
 
 ![2da julio](https://github.com/RoboticaLLR/redmachine2024/assets/155327813/3c73dc50-b3c4-4f2d-a4ad-92f87ee21a87)
 
-Next, the team began searching for motors that could be used, disassembling toys, printers, and other devices, ultimately obtaining the necessary motor by dismantling a Nikko Dodge T-rex Ram remote-controlled car, which provided the mechanical parts needed to design the steering system.
+A continuación, el equipo comenzó a buscar motores que pudieran utilizarse, desarmando juguetes, impresoras y otros dispositivos, obteniendo finalmente el motor necesario al desmantelar un coche a control remoto Nikko Dodge T-rex Ram, lo que proporcionó las piezas mecánicas necesarias para diseñar el sistema de dirección.
 
 ![3rajulio](https://github.com/RoboticaLLR/redmachine2024/assets/155327813/dbdfbd4e-9594-40f0-b34e-6d0528d7b328) 
 
 ![4julio](https://github.com/RoboticaLLR/redmachine2024/assets/155327813/32158385-5185-4d74-b19a-fd5dca851590)
 
-Subsequently, the team proceeded to assemble both systems, along with the various devices the robot would need, onto acrylic bases, completing the first prototype of what would become the chassis and allowing them to move forward with the programming phase.
+Posteriormente, el equipo procedió a ensamblar ambos sistemas, junto con los diversos dispositivos que el robot necesitaría, sobre bases de acrílico, completando el primer prototipo de lo que se convertiría en el chasis y permitiéndoles avanzar con la fase de programación.
 
 ![5julio](https://github.com/RoboticaLLR/redmachine2024/assets/155327813/5d1d2414-1c38-4973-b7b8-8c7c55b3b648)
 
-For programming, an Arduino Mega 2560 was used as the controller, a dual H-bridge as a power and speed regulator, and an ultrasonic sensor to measure distance. Subsequently, the team resumed searching for solutions to detect traffic light colors, deciding to use an ESP32-CAM with an OV2640 lens, with the next challenge being how to program it with Arduino.
+Para la programación, se utilizó un Arduino Mega 2560 como controlador, un puente H dual como regulador de potencia y velocidad, y un sensor ultrasónico para medir la distancia. Posteriormente, el equipo reanudó la búsqueda de soluciones para detectar los colores del semáforo, decidiendo utilizar una ESP32-CAM con una lente OV2640, siendo el siguiente desafío cómo programarla con Arduino.
 
 ![6julio](https://github.com/RoboticaLLR/redmachine2024/assets/155327813/eb1e7891-75de-4a19-87ab-400c2de48bbc)
 
-The team investigated which power source to use for the robot, since after using 9V batteries, they realized these were not ideal as they depleted very quickly. Consequently, two battery packs were connected, each containing eight 1.2V rechargeable cells in series, ultimately providing a total of 9.6V.
+El equipo investigó qué fuente de alimentación utilizar para el robot, ya que tras usar baterías de 9V, se dieron cuenta de que no eran ideales ya que se agotaban muy rápidamente. En consecuencia, se conectaron dos paquetes de baterías, cada uno conteniendo ocho celdas recargables de 1.2V en serie, proporcionando finalmente un total de 9.6V.
 
-Due to space requirements, a second prototype was designed, adding a second level to the robot. The electronics were placed on the upper level, while the first level housed the batteries, the traction system, and the steering system.
+Debido a requerimientos de espacio, se diseñó un segundo prototipo, añadiendo un segundo nivel al robot. La electrónica se colocó en el nivel superior, mientras que el primer nivel albergó las baterías, el sistema de tracción y el sistema de dirección.
 ![7julio](https://github.com/RoboticaLLR/redmachine2024/assets/155327813/aa52095a-ea01-412f-901e-da4eb791124c)
 
-Without being able to solve the programming yet, it was decided to use an RGB 34725 sensor so that the robot could detect which direction it should cross.
+Sin poder resolver la programación todavía, se decidió utilizar un sensor RGB 34725 para que el robot pudiera detectar en qué dirección debía cruzar.
 
 ![8julio](https://github.com/RoboticaLLR/redmachine2024/assets/155327813/e1047aac-374b-4cdb-8531-4b916cac0f36)
 
-A strategy was proposed: it was decided to cross by detecting the color of the track lines, also using two additional ultrasonic sensors, one on each side of the robot, so that once it detected a wall, it could cross to avoid a collision. However, these two ultrasonic sensors ended up being more of a problem than a help, because when they detected something, the robot lost its trajectory. Consequently, it was ultimately decided not to use these two ultrasonic sensors.
+Se propuso una estrategia: se decidió cruzar detectando el color de las líneas de la pista, utilizando también dos sensores ultrasónicos adicionales, uno a cada lado del robot, para que una vez que detectara una pared, pudiera cruzar para evitar una colisión. Sin embargo, estos dos sensores ultrasónicos terminaron siendo más un problema que una ayuda, porque cuando detectaban algo, el robot perdía su trayectoria. En consecuencia, finalmente se decidió no utilizar estos dos sensores ultrasónicos.
 
 ![9julio](https://github.com/RoboticaLLR/redmachine2024/assets/155327813/c96458f7-a354-4cbc-b139-bbab67d7a71c)
 
-Before the competition, the team found rechargeable batteries with a higher voltage (3.7 V), so it was decided to remove one of the two battery packs and modify the remaining pack to operate with 3 batteries.
+Antes de la competencia, el equipo encontró baterías recargables con un voltaje mayor (3.7 V), por lo que se decidió retirar uno de los dos paquetes de baterías y modificar el paquete restante para operar con 3 baterías.
 
 ![10julio](https://github.com/RoboticaLLR/redmachine2024/assets/155327813/cab0ff29-43a8-4808-9a1b-f93d4ca45027)
 
-### August 2023
+### Agosto 2023
 
-After participating in the first regional competition, the team began seeking solutions to the problems encountered. It was decided to change the steering system, creating a new one using parts from a Spike Prime robotics kit, number 45678, since this new steering system would allow a larger turning radius as well as more precise turns.
+Después de participar en la primera competencia regional, el equipo comenzó a buscar soluciones a los problemas encontrados. Se decidió cambiar el sistema de dirección, creando uno nuevo utilizando piezas de un kit de robótica Spike Prime, número 45678, ya que este nuevo sistema de dirección permitiría un radio de giro mayor así como giros más precisos.
 
 ![1ago](https://github.com/RoboticaLLR/redmachine2024/assets/155327813/2e470dc5-3636-41a1-9733-a62f20ae0db0)
 
-New strategies were proposed, for which it was decided that the ideal way to cross would be with the help of ultrasonic sensors, and that the TCS34725 sensor would only detect the first line to determine whether the robot should cross clockwise or counterclockwise.
+Se propusieron nuevas estrategias, para las cuales se decidió que la manera ideal de cruzar sería con la ayuda de sensores ultrasónicos, y que el sensor TCS34725 solo detectaría la primera línea para determinar si el robot debía cruzar en sentido horario o antihorario.
 
-Continuing with the second part of the challenge, the team began programming the camera, looking for a way to transfer the camera’s information to the Arduino without using Wi-Fi. After researching several sources, they found a solution: transmitting the data through serial ports.
+Continuando con la segunda parte del reto, el equipo comenzó a programar la cámara, buscando una forma de transferir la información de la cámara al Arduino sin utilizar Wi-Fi. Tras investigar varias fuentes, encontraron una solución: transmitir los datos a través de puertos serie.
 
-Then, the motor used during all this time began to fail frequently, preventing the team from progressing in the second challenge. A few days before the competition, the team extracted the motor—and consequently the gearbox—from another remote-controlled car to integrate it into the robot.
+Luego, el motor utilizado durante todo este tiempo comenzó a fallar frecuentemente, impidiendo que el equipo avanzara en el segundo reto. Pocos días antes de la competencia, el equipo extrajo el motor —y en consecuencia la caja de cambios— de otro coche a control remoto para integrarlo en el robot.
 
 ![2ago](https://github.com/RoboticaLLR/redmachine2024/assets/155327813/6dbc1ef9-7d96-4ca5-839e-63c8bb6c3e24)
 
-To provide a larger turning radius, the steering system was modified using pieces from a Lego Spike Prime kit.
+Para proporcionar un radio de giro mayor, el sistema de dirección se modificó utilizando piezas de un kit Lego Spike Prime.
 
 ![3ago](https://github.com/RoboticaLLR/redmachine2024/assets/155327813/528c8a5c-2b6b-4996-9143-c09bb9472b1b)
 
-### September 2023
+### Septiembre 2023
 
-Practice sessions were conducted on the track to improve the robot’s performance in challenges one and two, aiming for the best results in the 2023 national championship. The report was drafted and updated based on the progress achieved so far, followed by additional track practice to further enhance the robot’s performance in challenges one and two for the 2023 national championship.
+Se realizaron sesiones de práctica en la pista para mejorar el rendimiento del robot en los retos uno y dos, con el objetivo de obtener los mejores resultados en el campeonato nacional 2023. Se redactó y actualizó el informe basándose en el progreso alcanzado hasta el momento, seguido de prácticas adicionales en la pista para mejorar aún más el rendimiento del robot en los retos uno y dos para el campeonato nacional 2023.
 
 ![4ago](https://github.com/RoboticaLLR/redmachine2024/assets/155327813/e132722b-7d13-4236-8e9b-7d837b6f065d) ![5 ago](https://github.com/RoboticaLLR/redmachine2024/assets/155327813/eb82c5c2-2d85-4bf3-a0a5-0326dc07f3d5)
 
-The time has come for the national competition, where the team successfully achieved the goal of qualifying for the 2023 WRO World Cup in Panama.
+Ha llegado el momento de la competencia nacional, donde el equipo logró con éxito el objetivo de clasificar para la Copa Mundial WRO 2023 en Panamá.
 
 ![sep2](https://github.com/RoboticaLLR/redmachine2024/assets/155327813/41c23672-ecf9-4970-a691-882c736f0801)![sep1](https://github.com/RoboticaLLR/redmachine2024/assets/155327813/454f09af-68c2-41fe-842e-51191bca02c3)
  
 
-### October 2023
+### Octubre 2023
 
-Work continued on programming the camera for Challenge 2. The wheels of the steering system were changed to improve safety and aesthetics, and the construction of the third prototype of the robot began, focusing on restoring the acrylic parts and organizing the cables through connectors to enhance the robot’s overall appearance.
+Se continuó trabajando en la programación de la cámara para el Reto 2. Se cambiaron las ruedas del sistema de dirección para mejorar la seguridad y la estética, y comenzó la construcción del tercer prototipo del robot, centrándose en restaurar las piezas de acrílico y organizar los cables mediante conectores para mejorar la apariencia general del robot.
 
 ![sep3](https://github.com/RoboticaLLR/redmachine2024/assets/155327813/38c0d5d6-7739-47c4-ac14-718439dbf9c6)
 
-The time for the World Cup arrives, where the team ranked among the top 25 in the world and within the top 2 among Latin American countries.
+Llega el momento de la Copa Mundial, donde el equipo se posicionó entre los 25 mejores del mundo y dentro de los 2 primeros entre los países latinoamericanos.
 
 ![oc1](https://github.com/RoboticaLLR/redmachine2024/assets/155327813/d7f5104d-0fcb-45c1-b448-8e1b9b5449bd)![oct2](https://github.com/RoboticaLLR/redmachine2024/assets/155327813/93173685-2fc5-4110-bf5e-b1adf484abe1)
 
-## 2024 season
+## Temporada 2024
 
-### February 2024
+### Febrero 2024
 
-The first thing the team did to start this season was study the new rulebook, to identify the differences in the challenge and consider possible strategies for the new year.
+Lo primero que hizo el equipo para iniciar esta temporada fue estudiar el nuevo reglamento, para identificar las diferencias en el reto y considerar posibles estrategias para el nuevo año.
 
 ![febrero 1](https://github.com/RoboticaLLR/redmachine2024/assets/155327813/543ccce4-e258-4f4d-ab56-94f6a3207c77)
 
-The team began designing the new robot, taking into account everything they had learned at the World Cup. During this design phase, aspects such as size, weight, which components would be used, their placement, and the distance between the traction and steering systems were considered.
+El equipo comenzó a diseñar el nuevo robot, teniendo en cuenta todo lo aprendido en la Copa Mundial. Durante esta fase de diseño, se consideraron aspectos como el tamaño, el peso, qué componentes se utilizarían, su ubicación y la distancia entre los sistemas de tracción y de dirección.
 
 ![feb2](https://github.com/RoboticaLLR/redmachine2024/assets/155327813/e518fc97-dbcd-4631-86c7-ceff1295411f)
 
-The team continued planning which strategy to use. To avoid revealing the improvements and advancements planned for the new robot, they decided it would be best to compete with Julián (the 2023 robot) during the regional competitions and use the new robot (Luka) in the national competition, which would be the biggest challenge at the time.
+El equipo continuó planificando qué estrategia utilizar. Para evitar revelar las mejoras y avances planeados para el nuevo robot, decidieron que lo mejor sería competir con Julián (el robot de 2023) durante las competencias regionales y utilizar el nuevo robot (Luka) en la competencia nacional, que sería el mayor desafío en ese momento.
 
 ![feb3](https://github.com/RoboticaLLR/redmachine2024/assets/155327813/c918252f-6495-4227-b0c1-6020686d0f09)
 
-### March 2024
+### Marzo 2024
 
-During this month, the construction of the robot for the 2024 national competition began. In the first week of March, the acrylic bases were cut and the missing components for the robot were purchased.
-First, the traction system and the steering system were installed on the robot. At this stage, the steering system was built using three acrylic pieces. Afterward, the Arduino and the Raspberry Pi were installed.
+Durante este mes, comenzó la construcción del robot para la competencia nacional de 2024. En la primera semana de marzo, se cortaron las bases de acrílico y se compraron los componentes faltantes para el robot.  
+
+Primero, se instalaron el sistema de tracción y el sistema de dirección en el robot. En esta etapa, el sistema de dirección se construyó utilizando tres piezas de acrílico. Después, se instalaron el Arduino y la Raspberry Pi.
 
 ![feb4](https://github.com/RoboticaLLR/redmachine2024/assets/155327813/23bb3e40-7f24-499d-9f17-81d077cd7c80)![feb5](https://github.com/RoboticaLLR/redmachine2024/assets/155327813/bf47b801-3b39-4c64-8e48-dd82d7b7f9e9)
 
-At the end of March, the construction of the robot was completed after installing all the sensors it would use. Additionally, programming for Challenge 1 was started, along with Python programming for Challenge 2.
+A finales de marzo, se completó la construcción del robot tras instalar todos los sensores que utilizaría. Asimismo, se inició la programación para el Reto 1, junto con la programación en Python para el Reto 2.
 
 ![feb6](https://github.com/RoboticaLLR/redmachine2024/assets/155327813/ba34c027-6287-45b2-a1b7-981fea57a367)
 
-### April 2024
+### Abril 2024
 
-Since the team decided to participate with Julián in the regional competitions, work began on some improvements to the robot’s performance. One of these improvements was replacing the 34725 RGB sensor with the TCS3200 color sensor.
+Dado que el equipo decidió participar con Julián en las competencias regionales, se comenzó a trabajar en algunas mejoras para el rendimiento del robot. Una de estas mejoras fue reemplazar el sensor RGB 34725 por el sensor de color TCS3200.
 
 ![feb7](https://github.com/RoboticaLLR/redmachine2024/assets/155327813/48b506e4-a226-4501-9297-ab61940ddbd8)
 
-In preparation for the upcoming regional competition, the report was updated according to the work completed so far. The most important updates included the timeline, the wiring diagram, and the specifications of the color sensor.
+En preparación para la próxima competencia regional, se actualizó el informe de acuerdo con el trabajo realizado hasta el momento. Las actualizaciones más importantes incluyeron la cronología, el diagrama de cableado y las especificaciones del sensor de color.
 
 ![feb8](https://github.com/RoboticaLLR/redmachine2024/assets/155327813/e74d6b44-9a5a-4ff3-aa44-223e3d5b8257)
 
-2024 Regional Competitions:
+Competencias Regionales de 2024:
 
 Colegio Santo Tomás de Aquino 05-04-2024
 ![feb9](https://github.com/RoboticaLLR/redmachine2024/assets/155327813/0569d301-fa0c-444f-8521-f688f98e4dcd)
 
-### May 2024
+### Mayo 2024
 Liceo Los Robles 05-18-2024
 ![feb10](https://github.com/RoboticaLLR/redmachine2024/assets/155327813/da1b210c-ddeb-4e1a-85d9-211e8c0ffc5c)
 
 
-### June 2024
+### Junio 2024
 
-In preparation for the national competition, the team continued testing both challenges, focusing primarily on the second one; at the same time, they worked on Luka's report.
-During the tests, it was decided to remove the color sensor, as it was not functioning optimally, and the side ultrasonic sensors began to be used to determine which path Luka should follow.
+En preparación para la competencia nacional, el equipo continuó realizando pruebas en ambos retos, centrándose principalmente en el segundo; al mismo tiempo, trabajaron en el informe de Luka.
+
+Durante las pruebas, se decidió retirar el sensor de color, ya que no funcionaba de manera óptima, y se comenzaron a utilizar los sensores ultrasónicos laterales para determinar qué camino debía seguir Luka.
 
 ![jun1](https://github.com/RoboticaLLR/redmachine2024/assets/155327813/4ec63c83-89a8-4a1b-ab29-952e07b1f754)
 
-The team managed to fully complete the report and finished uploading all the information to GitHub by the end of the month, being fully prepared for the 2024 National WRO competition.
+El equipo logró completar el informe en su totalidad y terminó de subir toda la información a GitHub a finales de mes, quedando completamente preparado para la competencia nacional de la WRO 2024.
 
 ![JUN2](https://github.com/RoboticaLLR/redmachine2024/assets/155327813/ec3a2df2-7dff-4fec-b924-b2d1eb7ead83) ![JUN3](https://github.com/RoboticaLLR/redmachine2024/assets/155327813/cd6712cd-9323-48ea-98b8-636553662499)
 
 
-### October 2024
+### Octubre 2024
 
-After winning the national competition, the team managed to become part of the delegation representing Venezuela in the international finals of the Robotics Olympiad in Izmir, Turkey. This required extensive preparation and practice, so they began working on Luka.
+Tras ganar la competencia nacional, el equipo logró formar parte de la delegación que representó a Venezuela en la final internacional de la Olimpiada de Robótica en Esmirna, Turquía. Esto requirió una extensa preparación y práctica, por lo que comenzaron a trabajar en Luka.
 
-During the first two weeks of preparation, the team started making structural changes to Luka to reduce the size of the robot. To achieve this, both the traction and steering systems were modified. The steering system was rotated 180 degrees so that the wheels were positioned more toward the front, and the traction motor was repositioned vertically to occupy less horizontal space. After this, approximately 5 cm of unused space at the rear of the robot was removed, completing this process with the robot measuring 18 cm in length.
+Durante las primeras dos semanas de preparación, el equipo comenzó a realizar cambios estructurales en Luka para reducir el tamaño del robot. Para lograrlo, se modificaron tanto el sistema de tracción como el de dirección. El sistema de dirección se giró 180 grados para que las ruedas quedaran posicionadas más hacia el frente, y el motor de tracción se reposicionó verticalmente para ocupar menos espacio horizontal. Tras esto, se eliminaron aproximadamente 5 cm de espacio no utilizado en la parte trasera del robot, completando este proceso con un robot de 18 cm de longitud.
 
 ![motor comparation](https://github.com/user-attachments/assets/00b11495-df00-430e-b246-063aeed43f5f)
 ![Traction comparation](https://github.com/user-attachments/assets/34566443-f982-43b6-9cad-7033e43392aa)
 
 
-The third week of work marked the start of programming. After encountering issues with powering the Raspberry Pi, the team decided to look for a new method to detect traffic signals. After evaluating solutions, they chose to use a Pixy Cam because it took up less space, weighed less, and could be powered directly by the Arduino. The team also realized that a gyroscope would be necessary, especially for the second challenge, so they began using the HMS5883L magnetometer.
+La tercera semana de trabajo marcó el inicio de la programación. Tras encontrar problemas con la alimentación de la Raspberry Pi, el equipo decidió buscar un método nuevo para detectar las señales de tráfico. Después de evaluar soluciones, optaron por utilizar una Pixy Cam debido a que ocupaba menos espacio, pesaba menos y podía alimentarse directamente del Arduino. El equipo también se dio cuenta de que un giróscopo sería necesario, especialmente para el segundo reto, por lo que comenzaron a utilizar el magnetómetro HMC5883L.
 
 ![pixy2 1](https://github.com/user-attachments/assets/0d5ba0ac-d5ba-47c5-957f-c5cc7350b439)
 ![HMC5883L](https://github.com/user-attachments/assets/fdfc00e6-27a0-4843-81a8-c86973bba489)
 
 
-The Pixy Cam turned out to be an excellent choice, but the magnetometer was not, so the team started looking for a new one and chose the MPU6050. After extensive practice with the accelerometer, the team was able to use it on full curves, but due to its large margin of error, they could not rely on it to make the car turn exactly 90 degrees.
+La Pixy Cam resultó ser una excelente opción, pero el magnetómetro no lo fue, por lo que el equipo comenzó a buscar uno nuevo y eligió el MPU6050. Tras extensas prácticas con el acelerómetro, el equipo pudo utilizarlo en curvas completas, pero debido a su gran margen de error, no podían depender de él para hacer que el carro girara exactamente 90 grados.
 
 ![prueba pixy](https://github.com/user-attachments/assets/ba0a2a27-5e38-4ecf-aacf-253b168c61ea)
 ![MPU6050](https://github.com/user-attachments/assets/14ad7f2f-d015-4d14-b35c-de9057ae6749)
 
 
-Therefore, the team used the fourth week to design a new strategy. With this new strategy, the robot was calibrated with the outer walls. 
+Por lo tanto, el equipo aprovechó la cuarta semana para diseñar una nueva estrategia. Con esta nueva estrategia, el robot se calibró utilizando las paredes exteriores.
 
-### November 2024
+### Noviembre 2024
 
-The first week of November was devoted entirely to preparation and practice. During this week, the robot managed to complete two consistent laps in the second challenge, but the team remained concerned about the gyroscope issue. 
+La primera semana de noviembre se dedicó por completo a la preparación y la práctica. Durante esta semana, el robot logró completar dos vueltas consistentes en el segundo reto, pero el equipo seguía preocupado por el problema del giróscopo.
 
 ![ramdom practice](https://github.com/user-attachments/assets/0c77eda4-712e-47df-84f0-b20429e7cd49)
 
 
 
-Therefore, in the second week of November, the team began practicing with a new gyroscope, the BNO055. This sensor is a hybrid of a magnetometer and an accelerometer, which allows it to provide almost exact data. 
+En la segunda semana de noviembre, el equipo comenzó a practicar con un nuevo giróscopo, el BNO055. Este sensor es un híbrido entre un magnetómetro y un acelerómetro, lo que le permite proporcionar datos casi exactos.
 
 ![BNO055](https://github.com/user-attachments/assets/9bccdb43-f634-4808-92c7-ae4d567bc054)
 
-Finally, on the 28th, 29th, and 30th of this month, the team competed in the international finals in Turkey, achieving 19th place worldwide and second place in Latin America. 
+Finalmente, los días 28, 29 y 30 de noviembre de este mes, el equipo compitió en la final internacional en Turquía, logrando el puesto 19 a nivel mundial y el segundo lugar en América Latina.
 
 "FOTO"
 
-This competition left the team highly motivated for the upcoming national competitions, with the goal of qualifying and achieving the best results in the international final to be held in Singapore. 
+Esta competencia dejó al equipo altamente motivado para las próximas competencias nacionales, con el objetivo de clasificar y lograr los mejores resultados en la final internacional que se celebrará en Singapur.
 
 ![Image](https://github.com/user-attachments/assets/2f67bc4d-b872-4518-9a7e-bd1731d2f31f)
 
-## 2025 season
+## Temporada 2025
 
-### February 2025
+### Febrero 2025
 
-As in previous years, Red Machine's first action at the start of a new season was to review the changes in the competition rules and scoring. The team carefully studied the new rules to ensure that everything they did was in accordance with them, and to develop and create the best robot possible. 
+Como cada año, la primera acción de Red Machine al iniciar una nueva temporada fue revisar los cambios en el reglamento y la puntuación de la competencia. El equipo estudió minuciosamente las nuevas reglas para garantizar que todo el trabajo estuviera en plena conformidad con ellas, permitiendo así desarrollar y construir el mejor robot posible.
 
-Under these rules, in the following weeks of this first month, work began on creating the first prototype of the new robot, “Pompo.”
+Bajo estas directrices, durante las semanas siguientes de este primer mes, se dio inicio a la creación del primer prototipo del nuevo robot, bautizado como "Pompo".
 
 
-### March 2025
+### Marzo 2025
 
-This month, the team finished the first pompo prototype and began programming, using ROBOTC as the environment to program the ev3 module, which was the brain of this first pompo prototype. 
-After long practice sessions, the team completed the first challenge perfectly, so it was time to move on to the second one. At this point, the team encountered a major problem: adapting the Pixycam to this EV3 module. 
+Este mes, el equipo finalizó el primer prototipo de Pompo y comenzó con la programación, utilizando ROBOTC como entorno para programar el módulo EV3, el cual funcionaba como el cerebro de este primer prototipo.
 
-### April 2025
+Tras largas sesiones de práctica, el equipo completó el primer reto a la perfección, por lo que llegó el momento de pasar al segundo. En este punto, el equipo se enfrentó a un problema importante: adaptar la Pixy Cam a este módulo EV3.
 
-After spending time looking for solutions to this problem, the team decided that it would be best to go back to working with Arduino, as the programming is very similar and the current problem could be solved much more quickly. 
-Based on this, they worked for a long time to modify the entire robot chassis to adapt it to Arduino and the new sensors and motors that would be used, as those from EV3 are not directly compatible with Arduino.
-Once construction was complete, the team returned to programming, but when they tested Pompo on the track, its chassis began to malfunction. 
+### Abril 2025
 
-### May 2025
+Tras dedicar tiempo a buscar soluciones a este inconveniente, el equipo determinó que lo más conveniente era regresar a trabajar con Arduino, ya que la programación es muy similar y el problema actual se podía resolver con mucha mayor rapidez.
 
-For this reason, the team began working again on improving the chassis, finally achieving what would be the first definitive pompo chassis.
-The scheduling of the first challenge was quick, so work on the second challenge began almost immediately. 
+A partir de esta decisión, trabajaron intensamente durante un largo periodo para modificar todo el chasis del robot y adaptarlo a Arduino, así como a los nuevos sensores y motores que se utilizarían, debido a que los componentes de EV3 no son directamente compatibles con Arduino.
+
+Una vez finalizada la construcción, el equipo retomó la programación, pero al probar a Pompo en la pista, su chasis comenzó a presentar fallas de funcionamiento.
+
+### Mayo 2025
+
+Por esta razón, el equipo retomó el trabajo en la mejora del chasis, logrando finalmente consolidar el que sería el primer chasis definitivo de Pompo.
+
+La programación del primer reto avanzó con rapidez, por lo que el trabajo en el segundo reto comenzó casi de inmediato.
 
 ## Julian, luka and pompo
 
