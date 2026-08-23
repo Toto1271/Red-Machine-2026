@@ -777,7 +777,7 @@ ros2 run wro_reto_abierto wro_node
 
 ---
 
-## Explicación Detallada del Código y su Lógica
+## Explicación Detallada del Código del Reto Abierto y su Lógica 
 
 He diseñado este sistema con una arquitectura cliente-servidor donde la Raspberry Pi (ROS 2) actúa como el cerebro principal que procesa los datos del LiDAR y toma decisiones de alto nivel, mientras que el Arduino Uno se encarga del control en tiempo real de los actuadores.
 
@@ -799,7 +799,7 @@ El flujo de navegación que he implementado sigue un ciclo continuo basado en la
                          [Volver a leer LiDAR]
 ```
 
-### Análisis del Código Python (Nodo ROS 2)
+### Explicacion codigo Reto Abierto (Nodo ROS 2)
 
 He estructurado el nodo en varias capas funcionales para mantener el código limpio y modular.
 
@@ -814,6 +814,8 @@ self.declare_parameter('distancia_frontal_obstaculo', 0.35)  # Umbral para detec
 self.declare_parameter('velocidad_motor', 20)          # Velocidad constante
 self.declare_parameter('limite_angulo_max', 38.0)      # Límite de corrección angular
 ```
+> [!NOTE]
+> Esto facilita completamente calibrar cualquier parametro, no es necesario estar conectador por cable ni volver a compilar nada, unicamente mediante ssh se envia el cambio de parametro al nodo de ROS2
 
 He incluido un sistema PID completo para controlar tanto la distancia como el ángulo respecto a la pared. Los parámetros Kp, Ki y Kd permiten ajustar la respuesta del robot a diferentes velocidades y superficies.
 
@@ -840,6 +842,8 @@ def lidar_callback(self, msg):
     else:
         # Navegación normal
 ```
+> [!NOTE]
+> Esta funcion se usa de igual manera en el reto con obstaculos.
 
 #### 3. Filtrado de Datos del LiDAR
 
@@ -850,6 +854,9 @@ He creado `detectardistancias()` para extraer únicamente los puntos relevantes 
 - **Izquierda**: Ángulos de 345° a 15° (para seguimiento de pared izquierda)
 
 Utilizo el valor mínimo de cada sector como distancia representativa, lo que asegura que el robot reaccione al obstáculo más cercano.
+
+> [!NOTE]
+> Esta funcion se usa de igual manera en el reto con obstaculos.
 
 #### 4. Determinación del Sentido de Navegación
 
@@ -865,9 +872,12 @@ def detectarlado_en_pared(self):
 
 Esta decisión se toma UNA SOLA VEZ en toda la ejecución, permitiendo que el robot mantenga una estrategia consistente durante todo el recorrido.
 
+> [!NOTE]
+> Esta funcion se usa de igual manera en el reto con obstaculos.
+
 #### 5. Algoritmo de Seguimiento de Pared con SVD (Singular Value Decomposition)
 
-He implementado un método avanzado de seguimiento de pared utilizando SVD, que es más robusto que simplemente usar la distancia mínima:
+He implementado un método avanzado de seguimiento de pared utilizando SVD, que es más robusto que simplemente usar la distancia mínima, esto es esencial, ya que en la pista existen objetos, tales como conos o los estacionamientos, que impiden el correcto funcionamiento del pid.
 
 **Proceso matemático implementado en `calcular_pid_svd()`:**
 
@@ -897,9 +907,12 @@ He implementado un método avanzado de seguimiento de pared utilizando SVD, que 
    correccion_total = salida_distancia + salida_angulo
    ```
 
+   > [!NOTE]
+> Esta funcion se usa de igual manera en el reto con obstaculos.
+
 #### 6. Comunicación con el Arduino
 
-He diseñado el protocolo de comunicación para ser simple y robusto:
+He diseñado el protocolo de comunicación para ser simple y robusto, esto tambien sirve para manejar el robot de manera inalambrica mediante ssh.
 
 ```python
 def enviar_a_arduino(self, velocidad, angulo_servo):
@@ -954,122 +967,7 @@ if (Serial.available() > 0) {
 
 ### Diagrama de Flujo del Sistema Completo
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                        RASPBERRY PI (ROS 2)                    │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                 │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │               NODO WRO_RETO_ABIERTO                    │   │
-│  │                                                         │   │
-│  │  ┌─────────────────────────────────────────────────┐   │   │
-│  │  │            lidar_callback()                    │   │   │
-│  │  │  ┌────────────────────────────────────────┐   │   │   │
-│  │  │  │  detectardistancias(msg)              │   │   │   │
-│  │  │  │  • Frente (75°-105°) → self.d        │   │   │   │
-│  │  │  │  • Derecha (165°-195°) → self.dd     │   │   │   │
-│  │  │  │  • Izquierda (345°-15°) → self.di    │   │   │   │
-│  │  │  └────────────────────────────────────────┘   │   │   │
-│  │  │                  ↓                            │   │   │
-│  │  │  ┌────────────────────────────────────────┐   │   │   │
-│  │  │  │  ¿self.d < umbral?                    │   │   │   │
-│  │  │  │  ↓ Sí              ↓ No               │   │   │   │
-│  │  │  │  Obstáculo       Sin obstáculo        │   │   │   │
-│  │  │  │  frontal         → Navegación         │   │   │   │
-│  │  │  └────────────────────────────────────────┘   │   │   │
-│  │  │                  ↓                            │   │   │
-│  │  │  ┌────────────────────────────────────────┐   │   │   │
-│  │  │  │  ¿sentido == 0? (primera vez)         │   │   │   │
-│  │  │  │  ↓ Sí                                 │   │   │   │
-│  │  │  │  detectarlado_en_pared()              │   │   │   │
-│  │  │  │  • Si dd < di → sentido = 2          │   │   │   │
-│  │  │  │  • Si di < dd → sentido = 1          │   │   │   │
-│  │  │  └────────────────────────────────────────┘   │   │   │
-│  │  │                  ↓                            │   │   │
-│  │  │  ┌────────────────────────────────────────┐   │   │   │
-│  │  │  │  sentido=1 → detectarizquierda()     │   │   │   │
-│  │  │  │  sentido=2 → detectarderecha()       │   │   │   │
-│  │  │  └────────────────────────────────────────┘   │   │   │
-│  │  └─────────────────────────────────────────────────┘   │   │
-│  │                                                         │   │
-│  │  ┌─────────────────────────────────────────────────┐   │   │
-│  │  │         detectarizquierda() / derecha()        │   │   │
-│  │  │  ┌────────────────────────────────────────┐   │   │   │
-│  │  │  │  obtener_puntos_sector()              │   │   │   │
-│  │  │  │  • Extrae puntos en rango de ángulos  │   │   │   │
-│  │  │  └────────────────────────────────────────┘   │   │   │
-│  │  │                  ↓                            │   │   │
-│  │  │  ┌────────────────────────────────────────┐   │   │   │
-│  │  │  │  calcular_pid_svd()                   │   │   │   │
-│  │  │  │  • SVD: encuentra línea de la pared   │   │   │   │
-│  │  │  │  • PID: calcula corrección            │   │   │   │
-│  │  │  │  • Retorna: corrección_total          │   │   │   │
-│  │  │  └────────────────────────────────────────┘   │   │   │
-│  │  │                  ↓                            │   │   │
-│  │  │  ┌────────────────────────────────────────┐   │   │   │
-│  │  │  │  angulo_servo = rec ± corrección      │   │   │   │
-│  │  │  │  enviar_a_arduino(vel, angulo_servo)  │   │   │   │
-│  │  │  └────────────────────────────────────────┘   │   │   │
-│  │  └─────────────────────────────────────────────────┘   │   │
-│  └─────────────────────────────────────────────────────────┘   │
-│                              ↓                                  │
-│                    ┌──────────────────┐                        │
-│                    │  SERIAL / USB   │                        │
-│                    │  /dev/ttyACM0   │                        │
-│                    └──────────────────┘                        │
-└─────────────────────────────────────────────────────────────────┘
-                               ↓
-┌─────────────────────────────────────────────────────────────────┐
-│                         ARDUINO UNO                            │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                 │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │                    SKETCH.INO                          │   │
-│  │                                                         │   │
-│  │  ┌─────────────────────────────────────────────────┐   │   │
-│  │  │                 setup()                        │   │   │
-│  │  │  • Serial.begin(115200)                       │   │   │
-│  │  │  • Configura pines y servo                    │   │   │
-│  │  │  • miServo.write(57)  (centro)               │   │   │
-│  │  │  • fijarMotor(0)      (reposo)               │   │   │
-│  │  └─────────────────────────────────────────────────┘   │   │
-│  │                  ↓                                      │   │
-│  │  ┌─────────────────────────────────────────────────┐   │   │
-│  │  │                 loop()                         │   │   │
-│  │  │  ┌────────────────────────────────────────┐   │   │   │
-│  │  │  │  ¿Serial.available() > 0?             │   │   │   │
-│  │  │  │  ↓ Sí                                 │   │   │   │
-│  │  │  │  Lee comando (String)                 │   │   │   │
-│  │  │  └────────────────────────────────────────┘   │   │   │
-│  │  │                  ↓                            │   │   │
-│  │  │  ┌────────────────────────────────────────┐   │   │   │
-│  │  │  │  tipoComando = 'S' → S<ángulo>       │   │   │   │
-│  │  │  │  • miServo.write(ángulo)             │   │   │   │
-│  │  │  │  • constrain(30, 90)                 │   │   │   │
-│  │  │  │                                       │   │   │   │
-│  │  │  │  tipoComando = 'M' → M<velocidad>    │   │   │   │
-│  │  │  │  • fijarMotor(velocidad)             │   │   │   │
-│  │  │  │  • constrain(-150, 150)              │   │   │   │
-│  │  │  └────────────────────────────────────────┘   │   │   │
-│  │  └─────────────────────────────────────────────────┘   │   │
-│  │                                                         │   │
-│  │  ┌─────────────────────────────────────────────────┐   │   │
-│  │  │         fijarMotor(int velocidad)              │   │   │
-│  │  │  • Velocidad > 0 → PWM en pinMotor1           │   │   │
-│  │  │  • Velocidad < 0 → PWM en pinMotor2           │   │   │
-│  │  │  • Velocidad = 0 → Motor detenido             │   │   │
-│  │  └─────────────────────────────────────────────────┘   │   │
-│  └─────────────────────────────────────────────────────────┘   │
-│                              ↓                                  │
-│                    ┌──────────────────┐                        │
-│                    │   ACTUADORES    │                        │
-│                    │  • Motor DC     │                        │
-│                    │  • Servo        │                        │
-│                    └──────────────────┘                        │
-└─────────────────────────────────────────────────────────────────┘
-```
-
----
+<img width="732" height="607" alt="Image" src="https://github.com/user-attachments/assets/148062c2-443f-4c86-8c87-0ded89104d98" />
 
 ## Solución de problemas comunes
 
