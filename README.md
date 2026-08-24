@@ -1,5 +1,3 @@
-
-
 # Documento de Ingeniería / Red Machine
 
 Este repositorio muestra todos los componentes para construir a "pompo", este robot autonomo pertenece al equipo "Red Machine" y cumple el proposito de participar en la categoria de futuros ingenieros en la WRO 2026.
@@ -392,6 +390,66 @@ El monitoreo del circuito se lleva a cabo mediante periféricos de alto flujo de
 
 *   **Escaneo Láser (Lidar LDROBOT ST27L):** Aporta la telemetría espacial escaneando los obstáculos a su alrededor en 360 grados. Obtiene tanto su energía como su canal de comunicación a través de un cable USB conectado directo a la Raspberry Pi 5, inyectando su nube de puntos a alta velocidad.
 *   **Visión Computacional (Webcam HD):** Captura las referencias visuales y marcadores de color del circuito. Su interfaz USB envía el flujo de imágenes directamente al procesador de la Raspberry Pi 5 sin pasar por el Arduino, evitando cualquier tipo de retraso o cuello de botella en los buses del microcontrolador de bajo nivel.
+
+
+A continuacion, un diagrama que demuestra de manera mas sencilla la forma en la que se alimenta el robot
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#ffffff', 'edgeLabelBackground':'#ffffff', 'tertiaryColor': '#f4f5f7'}}}%%
+graph TB
+    %% Configuración de Estilos
+    classDef batt fill:#FFD1DC,stroke:#D1495B,stroke-width:2px,color:#000,font-weight:bold;
+    classDef pwr fill:#FFE5D9,stroke:#F77F00,stroke-width:2px,color:#000,font-weight:bold;
+    classDef brain fill:#D8E2DC,stroke:#2A9D8F,stroke-width:2px,color:#000,font-weight:bold;
+    classDef usb fill:#E8E8E4,stroke:#4A4E69,stroke-width:2px,color:#000,font-weight:bold;
+    classDef motor fill:#FCD5CE,stroke:#E63946,stroke-width:2px,color:#000,font-weight:bold;
+
+    subgraph POWER_LAYER [" ⚡ ETAPA DE POTENCIA Y REGULACIÓN "]
+        direction TB
+        BAT["🔋 2x Packs 18650 en Paralelo<br/>(Alimentación Principal)"]:::batt
+        
+        REG_SUB[" "]
+        XL["⚡ Step-Down XL4015<br/>(5V / 5A)"]:::pwr
+        LM["⚡ Step-Down LM2596<br/>(6V Regulado)"]:::pwr
+        TB["🔌 Driver TB6612FNG<br/>(Puente H Dual)"]:::pwr
+    end
+
+    subgraph COMPUTE_LAYER [" 🧠 PROCESAMIENTO Y CONTROL "]
+        direction TB
+        PI["🍓 Raspberry Pi 5<br/>(Cálculo Principal / Visión)"]:::brain
+        ARD["🤖 Arduino Uno<br/>(Control Cinético Tiempo Real)"]:::brain
+    end
+
+    subgraph PERIPHERALS [" 🎯 ACTUADORES Y SENSORES "]
+        SERVO["⚙️ Servomotor REV Robotics<br/>(Dirección)"]:::motor
+        MOT["🛞 2x Motores DC<br/>(Tracción Trasera)"]:::motor
+        LIDAR["📡 LiDAR ST27L"]:::usb
+        CAM["📷 Webcam HD"]:::usb
+    end
+
+    %% Mallas de Alimentación
+    BAT ==>|Línea Directa V+| XL
+    BAT ==>|Línea Directa V+| LM
+    BAT ==>|Alimentación VMOT| TB
+
+    LM -->|Línea limpia 6V| SERVO
+    XL -->|Línea limpia 5V| PI
+
+    %% Bus USB y Datos
+    PI == "🔌 Bus USB" ==> ARD
+    PI == "🔌 Bus USB" ==> LIDAR
+    PI == "🔌 Bus USB" ==> CAM
+
+    %% Control de Motores
+    ARD -->|Señales PWM / GPIO| TB
+    ARD -->|Señal Control PWM| SERVO
+    TB -->|Salida Potencia Motores| MOT
+
+    %% Estilos de las líneas
+    linkStyle 0,1,2,3,4 stroke:#E63946,stroke-width:2px;
+    linkStyle 5,6,7 stroke:#2A9D8F,stroke-width:2px;
+    linkStyle 8,9,10 stroke:#4A4E69,stroke-width:2px;
+```
 
 ## Preparación de la Raspberry Pi
 
