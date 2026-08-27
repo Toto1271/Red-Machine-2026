@@ -243,33 +243,69 @@ Apasionado por el aprendizaje continuo, la resolución creativa de problemas y l
 
 ## 5. Evolución del Chasis y Prototipado CAD
 
-* **Prototipo 1 (Boceto Base y Silueta Monocapa):**
-  * Placa plana inicial para evaluar dimensiones y ubicación de componentes en PETG.
+El desarrollo del chasis no partió de un diseño final, sino de un proceso iterativo de prueba y corrección: cada versión se construyó para resolver un problema concreto detectado en la anterior. A continuación se documenta esa evolución.
 
-  ![Prototipo 1 CAD]([WhatsApp_Image_2026-08-22_at_11.13.13_AM.jpeg](https://github.com/Toto1271/Red-Machine-2026/blob/e65ea9054979a4badf325b7d66e24883e97600a9/PROTO%201.jpeg))
-  > *Ubicación del archivo de imagen: `WhatsApp Image 2026-08-22 at 11.13.13 AM.jpeg`*
+### 5.1. Piso Inferior (Chasis Base)
 
-* **Prototipo 2 (Chasis con Caja Inferior Integrada):**
-  * Estructura encajonada en la parte inferior para alojar el servomotor de dirección y fijar la tracción trasera.
+**Prototipo 1 — Silueta monocapa (boceto de referencia)**
 
-  ![Prototipo 2 CAD]([WhatsApp_Image_2026-08-22_at_11.15.01_AM.jpeg](https://github.com/Toto1271/Red-Machine-2026/blob/e65ea9054979a4badf325b7d66e24883e97600a9/PROTO%202.jpeg))
-  > *Ubicación del archivo de imagen: `WhatsApp Image 2026-08-22 at 11.15.01 AM.jpeg`*
+El primer prototipo fue una placa plana simple, sin ningún detalle funcional. Su objetivo no era ser una pieza definitiva, sino tener por primera vez una base física del robot que permitiera observar el avance real de la estructura y, sobre todo, medir con precisión dónde debían ubicarse los sensores, las tarjetas electrónicas y los motores dentro del chasis. Como era de esperarse, esta primera versión no era funcional: le faltaban todos los detalles específicos (cajas, huecos, anclajes) necesarios para encajar los componentes del robot.
 
-* **Prototipos Intermedios (Evolución del Segundo Piso y Torre LiDAR):**
-  * Rediseño del plato superior con la pestaña frontal elevada en cantiléver para ubicar el LiDAR.
+![Prototipo 1 CAD](PROTO_1.jpeg)
 
-  ![CAD Piso 2 y Torre LiDAR]([WhatsApp_Image_2026-08-22_at_11.17.11_AM.jpeg](https://github.com/Toto1271/Red-Machine-2026/blob/e65ea9054979a4badf325b7d66e24883e97600a9/PROTO%20P2%201.jpeg))
-  > *Ubicación del archivo de imagen: `image_01017c.png`*
+**Prototipo 2 — Caja inferior integrada**
 
-* **Prototipo Final Ensamblado (Red Machine):**
-  * Ensamble funcional de dos niveles con dirección híbrida PETG-Lego, soporte de LiDAR elevado, baterías 18650 laterales y Raspberry Pi 5 superior.
+A partir de las medidas obtenidas en el Prototipo 1, se integró una caja diseñada a medida donde los motores encajan por presión, evitando así depender de tornillos u otro método de fijación adicional para sujetarlos. Este acople resultó tan preciso que se mantiene sin cambios hasta el diseño final. De igual forma, el hueco para el servomotor de dirección quedó correctamente dimensionado desde esta iteración y tampoco requirió modificaciones posteriores.
 
-  ![Robot Impreso con Dirección y LiDAR]()
-  > *Ubicación del archivo de imagen: `WhatsApp Image 2026-08-22 at 11.17.11 AM.jpeg`*
+![Prototipo 2 CAD](PROTO_2.jpeg)
 
-  ![Robot Completo Ensamblado](image_010486.jpg)
-  > *Ubicación del archivo de imagen: `image_010486.jpg`*
+**Prototipo 3 — Nivelación de tracción y liberación de espacio para el LiDAR**
 
+Con la caja de motores ya resuelta, surgió un nuevo problema: las ruedas de tracción trasera y las ruedas de dirección delantera no quedaban al mismo nivel. Para corregirlo, se profundizó la caja inferior hasta emparejar ambos ejes. Además, se eliminó el soporte delantero que existía hasta ese momento, ya que el LiDAR necesitaba ese mismo espacio libre para operar correctamente: mantenerlo habría bloqueado parte de su campo de visión.
+
+![Prototipo 3 CAD](PROTO_FINAL.jpeg)
+
+**Iteración final del piso 1 — Corrección de estabilidad**
+
+Durante las primeras pruebas de rodaje, el robot presentaba derrapes frecuentes por falta de estabilidad. La causa se rastreó hasta la orientación de los motores traseros, por lo que se invirtieron. Este cambio obligó también a repensar cómo se apoyaba el segundo piso sobre el primero, lo que llevó a una decisión clave del diseño: usar los propios portabaterías laterales como columnas estructurales de soporte entre ambos niveles, en lugar de agregar piezas adicionales solo para ese fin.
+
+### 5.2. Segundo Piso y Torre del LiDAR
+
+**Primer prototipo del segundo piso**
+
+Esta primera versión incorporó la base de montaje de la Raspberry Pi y una elevación para sujetar el LiDAR desde arriba, condición necesaria para darle el campo de visión requerido. Ya incluía los agujeros de fijación del LiDAR, aunque el resto de la pieza aún era provisional.
+
+![Prototipo 1 segundo piso](1787852085823_image.png)
+
+**Segundo prototipo del segundo piso — Anclaje delantero**
+
+Al eliminar en el Prototipo 3 del piso inferior el soporte delantero (por interferir con el LiDAR), se perdió también el punto que sostenía la parte frontal del robot. Se resolvió con un tornillo largo de aproximadamente 12 cm que atraviesa todo el vehículo: sujeta el servomotor, separa ambos pisos a la distancia correcta y llega hasta la parte superior del segundo piso, funcionando como eje de unión vertical.
+
+![Prototipo 2 segundo piso](1787852183165_image.png)
+
+**Restricción de altura del LiDAR**
+
+Un condicionante que atravesó todo el rediseño del segundo piso fue que el campo de visión del LiDAR debe mantenerse por debajo de los 10 cm de altura. Los primeros puntos de apoyo ubicados en esa zona no tenían la resistencia estructural necesaria para sostener nada, así que tuvieron que descartarse. La solución definitiva combinó el tornillo largo pasante con los portabaterías laterales actuando como columnas, logrando una sujeción firme sin invadir el espacio que el LiDAR necesita para escanear la pista.
+
+**Diseño final del segundo piso**
+
+La versión definitiva se hizo más ancha para que los portabaterías apoyaran directamente contra el segundo piso (reforzando el punto anterior), e incorporó los huecos exactos para montar la Raspberry Pi de forma visible en la cara superior, y el puente H junto con los reguladores de voltaje boca abajo en la cara inferior, aprovechando así el espacio disponible.
+
+![Prototipo final segundo piso](1787852546166_image.png)
+
+### 5.3. Validación con el Prototipo Ensamblado
+
+Antes de dar por cerrado el diseño, se realizó un primer ensamblaje físico completo (dos pisos, ruedas, motores y estructura de sujeción del sensor) para validar que el conjunto funcionara como se había planeado en CAD. Esta prueba confirmó que el enfoque general era el correcto, y fue precisamente al intentar montar los sensores sobre esta estructura que se detectaron las limitaciones de altura del LiDAR descritas en la sección anterior, lo que disparó los ajustes finales del segundo piso y del sistema de anclaje.
+
+![Primer ensamblaje físico](1787852304812_WhatsApp_Image_2026-08-22_at_11_17_11_AM.jpeg)
+
+### 5.4. Prototipo Final Ensamblado (Red Machine)
+
+Como resultado de todo este proceso iterativo —resolver primero la caja de motores, luego nivelar la tracción, después liberar espacio para el LiDAR, y finalmente resolver el anclaje delantero y la estabilidad del segundo piso— se llegó al ensamble físico final: una estructura de dos niveles con dirección híbrida PETG-Lego, soporte de LiDAR elevado por debajo del límite de 10 cm, portabaterías 18650 laterales que cumplen doble función (energía y soporte estructural), y Raspberry Pi 5 montada en la cara superior del segundo piso junto a su disipador de calor.
+
+![Robot completo ensamblado - resultado final](1787852846798_image.png)
+
+En esta versión final se puede apreciar cómo cada decisión de diseño tomada durante las iteraciones anteriores se materializa en la estructura: el par de baterías 18650 actúa como columna central de soporte entre los dos pisos, el servomotor y el motor de tracción quedan integrados en la torre superior sin interferir entre sí, y el cableado se mantiene ordenado a través de los canales previstos entre niveles.
 ---
 
 ## 6. Módulo de Tracción y Centro de Masa
