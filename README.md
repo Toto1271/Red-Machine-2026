@@ -305,7 +305,7 @@ Como resultado de todo este proceso iterativo —resolver primero la caja de mot
 
 ![Robot completo ensamblado - resultado final](1787852846798_image.png)
 
-En esta versión final se puede apreciar cómo cada decisión de diseño tomada durante las iteraciones anteriores se materializa en la estructura: el par de baterías 18650 actúa como columna central de soporte entre los dos pisos, el servomotor y el motor de tracción quedan integrados en la torre superior sin interferir entre sí, y el cableado se mantiene ordenado a través de los canales previstos entre niveles.
+
 ---
 
 ## 6. Módulo de Tracción y Centro de Masa
