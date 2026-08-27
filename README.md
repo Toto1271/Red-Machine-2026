@@ -246,25 +246,25 @@ Apasionado por el aprendizaje continuo, la resolución creativa de problemas y l
 * **Prototipo 1 (Boceto Base y Silueta Monocapa):**
   * Placa plana inicial para evaluar dimensiones y ubicación de componentes en PETG.
 
-  ![Prototipo 1 CAD](WhatsApp_Image_2026-08-22_at_11.13.13_AM.jpeg)
+  ![Prototipo 1 CAD]([WhatsApp_Image_2026-08-22_at_11.13.13_AM.jpeg](https://github.com/Toto1271/Red-Machine-2026/blob/e65ea9054979a4badf325b7d66e24883e97600a9/PROTO%201.jpeg))
   > *Ubicación del archivo de imagen: `WhatsApp Image 2026-08-22 at 11.13.13 AM.jpeg`*
 
 * **Prototipo 2 (Chasis con Caja Inferior Integrada):**
   * Estructura encajonada en la parte inferior para alojar el servomotor de dirección y fijar la tracción trasera.
 
-  ![Prototipo 2 CAD](WhatsApp_Image_2026-08-22_at_11.15.01_AM.jpeg)
+  ![Prototipo 2 CAD]([WhatsApp_Image_2026-08-22_at_11.15.01_AM.jpeg](https://github.com/Toto1271/Red-Machine-2026/blob/e65ea9054979a4badf325b7d66e24883e97600a9/PROTO%202.jpeg))
   > *Ubicación del archivo de imagen: `WhatsApp Image 2026-08-22 at 11.15.01 AM.jpeg`*
 
 * **Prototipos Intermedios (Evolución del Segundo Piso y Torre LiDAR):**
   * Rediseño del plato superior con la pestaña frontal elevada en cantiléver para ubicar el LiDAR.
 
-  ![CAD Piso 2 y Torre LiDAR](image_01017c.png)
+  ![CAD Piso 2 y Torre LiDAR]([WhatsApp_Image_2026-08-22_at_11.17.11_AM.jpeg](https://github.com/Toto1271/Red-Machine-2026/blob/e65ea9054979a4badf325b7d66e24883e97600a9/PROTO%20P2%201.jpeg))
   > *Ubicación del archivo de imagen: `image_01017c.png`*
 
 * **Prototipo Final Ensamblado (Red Machine):**
   * Ensamble funcional de dos niveles con dirección híbrida PETG-Lego, soporte de LiDAR elevado, baterías 18650 laterales y Raspberry Pi 5 superior.
 
-  ![Robot Impreso con Dirección y LiDAR](WhatsApp_Image_2026-08-22_at_11.17.11_AM.jpeg)
+  ![Robot Impreso con Dirección y LiDAR]()
   > *Ubicación del archivo de imagen: `WhatsApp Image 2026-08-22 at 11.17.11 AM.jpeg`*
 
   ![Robot Completo Ensamblado](image_010486.jpg)
