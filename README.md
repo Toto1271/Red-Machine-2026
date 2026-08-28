@@ -226,20 +226,20 @@ Apasionado por el aprendizaje continuo, la resolución creativa de problemas y l
 ## 4. Módulo de Ruedas y Selección de Neumáticos
 
 ![Vista Lateral del Robot y Ruedas](image_d4dd01.jpg)
-> *Ubicación del archivo de imagen: `image_d4dd01.jpg`*
 
-* **Principio de Selección Combinada:** Se separaron técnicamente las funciones de tracción y dirección mediante la optimización de superficies de contacto, inercias y anchos de trocha.
-* **Tren Trasero (Tracción):**
-  * **Modelo de Rueda:** Ruedas Lego Technic medianas de banda ancha (49.5 x 20 mm).
-  * **Transferencia de Torque y Agarre:** Banda de rodadura ancha y compuesto de goma suave para maximizar la superficie de contacto con la pista, evitando patinajes al acelerar a fondo con los motores DC.
-  * **Empuje Homogéneo:** Diámetro adecuado para equilibrar torque y velocidad lineal sin sobrecargar la etapa de potencia.
-* **Tren Delantero (Dirección):**
-  * **Modelo de Rueda:** Ruedas Lego Technic pequeñas de bajo perfil montadas sobre manguetas articuladas Lego Technic.
-  * **Menor Momento de Inercia:** Diámetro reducido y huella angosta que minimizan la resistencia a la rotación lateral, permitiendo virajes inmediatos sin forzar ni sobrecalentar el servomotor.
-  * **Geometría y Dinámica:** Trocha delantera más estrecha para evitar el sobreviraje (*coleo/drifting*) y lograr curvas fluidas.
-  * **Despeje Espacial:** Perfil bajo que evita interferencias mecánicas con el sensor LiDAR ubicado justo encima.
+La selección de neumáticos se abordó separando técnicamente las funciones de **tracción** y **dirección**, ya que cada una exige propiedades físicas distintas: la tracción necesita maximizar agarre y transferencia de torque, mientras que la dirección necesita minimizar resistencia e inercia al giro. Por eso se optó por un principio de selección combinada, usando dos tipos de rueda Lego Technic distintos según la función de cada eje, en lugar de un único modelo para las cuatro ruedas.
 
----
+### Tren Trasero (Tracción)
+
+Se utilizaron ruedas Lego Technic medianas de banda ancha (49.5 x 20 mm). Su banda de rodadura ancha y su compuesto de goma suave maximizan la superficie de contacto con la pista, lo que evita el patinaje al acelerar a fondo con los motores DC y asegura una transferencia de torque eficiente. El diámetro se eligió específicamente para equilibrar torque y velocidad lineal, evitando sobrecargar la etapa de potencia del sistema.
+
+Esta elección también resultó relevante para la estabilidad general del robot: durante las primeras pruebas de rodaje se detectaron derrapes frecuentes, corregidos finalmente invirtiendo la orientación de los motores traseros (ver Sección 5.1). Una banda de rodadura de menor agarre en este punto habría dificultado aún más esa corrección.
+
+### Tren Delantero (Dirección)
+
+Para el eje delantero se emplearon ruedas Lego Technic pequeñas de bajo perfil, montadas sobre manguetas articuladas Lego Technic. Su diámetro reducido y huella angosta minimizan el momento de inercia y la resistencia a la rotación lateral, permitiendo virajes inmediatos sin forzar ni sobrecalentar el servomotor de dirección.
+
+Además, se definió una trocha delantera más estrecha que la trasera, buscando específicamente evitar el sobreviraje (*drifting*) y lograr curvas más fluidas y predecibles. El perfil bajo de esta rueda también fue una decisión deliberada de espacio: evita interferencias mecánicas con el sensor LiDAR, montado justo por encima de este eje.
 
 ## 5. Evolución del Chasis y Prototipado CAD
 
