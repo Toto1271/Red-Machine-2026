@@ -241,6 +241,8 @@ Para el eje delantero se emplearon ruedas Lego Technic pequeñas de bajo perfil,
 
 Además, se definió una trocha delantera más estrecha que la trasera, buscando específicamente evitar el sobreviraje (*drifting*) y lograr curvas más fluidas y predecibles. El perfil bajo de esta rueda también fue una decisión deliberada de espacio: evita interferencias mecánicas con el sensor LiDAR, montado justo por encima de este eje.
 
+---
+
 ## 5. Evolución del Chasis y Prototipado CAD
 
 El desarrollo del chasis no partió de un diseño final, sino de un proceso iterativo de prueba y corrección: cada versión se construyó para resolver un problema concreto detectado en la anterior. A continuación se documenta esa evolución.
@@ -310,24 +312,31 @@ Como resultado de todo este proceso iterativo —resolver primero la caja de mot
 
 ## 6. Módulo de Tracción y Centro de Masa
 
-* **Tracción Trasera:** Transmisión directa de potencia desde los motores DC traseros.
-* **Centro de Gravedad Bajo (CoG):** Ubicación de los componentes pesados (baterías 18650, Arduino y cableado) en la zona baja e intermedia para evitar vuelcos y dar estabilidad en curvas.
+La tracción del robot es trasera, con transmisión directa de potencia desde los dos motores DC montados en la caja inferior del chasis (ver Sección 5.1). Esta configuración simplifica la cadena mecánica al eliminar la necesidad de un diferencial o transmisión hacia el eje delantero, que queda dedicado exclusivamente a la dirección.
+
+Para mantener un centro de gravedad bajo (CoG), los componentes más pesados —las baterías 18650, la Raspberry Pi 5, el Arduino y el cableado principal— se ubicaron en la zona baja e intermedia del chasis. Esta decisión no solo mejora la estabilidad en curva y reduce el riesgo de vuelco, sino que también aprovecha una solución estructural ya usada en el diseño: los propios portabaterías laterales funcionan como columnas de soporte entre los dos pisos (ver Sección 5.1), por lo que el peso queda distribuido en el mismo punto que sostiene físicamente la estructura superior.
 
 ---
 
 ## 7. Módulo de Dirección y Comportamiento Dinámico
 
-* **Reducción de Trocha Delantera:** Eje delantero más estrecho que el trasero para acortar el brazo de palanca al girar.
-* **Eliminación del Sobreviraje:** Control del agarre en curvas evitando derrapes indeseados (*drifting*) o mordidas bruscas del tren delantero.
-* **Acoplamiento Servo-Lego:** Uso de manguetas Lego Technic accionadas por el servomotor para eliminar holguras y suavizar la dirección.
+El comportamiento dinámico del robot en curva se controló principalmente a través de la geometría del eje delantero. Al reducir la trocha delantera respecto a la trasera, se acorta el brazo de palanca al girar, lo que se traduce en una respuesta de dirección más ágil e inmediata (ver también Sección 4, Tren Delantero).
+
+Esta misma reducción de trocha, junto con la selección de neumáticos delanteros de bajo perfil y menor momento de inercia, ayuda a controlar el agarre en curva y evitar tanto el sobreviraje (*drifting*) como las mordidas bruscas del tren delantero al iniciar un giro.
+
+A nivel mecánico, el acoplamiento entre el servomotor y las ruedas se resuelve mediante manguetas Lego Technic articuladas, accionadas directamente por el servo. Este acoplamiento híbrido PETG-Lego elimina holguras en la transmisión del movimiento y suaviza la respuesta de dirección, evitando el juego mecánico que introduciría un sistema de varillas o engranajes impresos adicionales.
 
 ---
 
 ## 8. Integración de Sensores y Estructura Superior
 
-* **Posición Estratégica del LiDAR:** Elevación a ~10 cm sobre las paredes de la pista para un escaneo claro en ~270°.
-* **Rigidez Estructural:** Fijación rígida entre tornillos pasantes y paredes laterales de baterías que evita flexiones, vibraciones o descalibraciones en las lecturas de los sensores.
-* **Gestión de Cableado:** Canales entre pisos para proteger las conexiones eléctricas entre los componentes.
+La posición del sensor LiDAR fue uno de los factores que más influyó en el diseño del segundo piso (ver Sección 5.2). Se ubicó a una altura de aproximadamente 10 cm sobre el nivel de las paredes de la pista, lo suficiente para lograr un escaneo despejado de ~270° sin que la propia estructura del robot bloquee su campo de visión.
+
+Esta posición elevada exige, a su vez, una fijación especialmente rígida: cualquier flexión o vibración en la torre del LiDAR se traduce directamente en error de lectura. Por eso la sujeción combina tornillos pasantes con las paredes laterales de las baterías, que —como se describió en la Sección 6— ya cumplen función estructural como columnas de soporte. Esta doble función evita agregar piezas exclusivamente dedicadas a rigidizar la torre del sensor.
+
+Finalmente, el cableado entre ambos pisos se organiza a través de canales dedicados en el chasis, protegiendo las conexiones eléctricas de posibles roces, tirones o cortes durante el movimiento del robot, y manteniendo un espacio de trabajo ordenado para mantenimiento y depuración.
+
+---
 # Explicación Detallada de los Componentes
 
 ### Raspberry Pi 5
