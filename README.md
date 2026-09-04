@@ -1205,6 +1205,8 @@ Revisa la lógica de `detectarlado_en_pared()`. Si la pared derecha está más c
 
 
 # Videos
+## Video Actual Reto 1
+[![Reto abierto Red Machine 2026](https://img.youtube.com/vi/zJ_OKyx9S7s/maxresdefault.jpg)](https://www.youtube.com/watch?v=zJ_OKyx9S7s)
 
 ## Videos del robot versión 1.0
 ### Primer reto (prueba abierta)
