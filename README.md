@@ -1509,6 +1509,48 @@ La programación del primer reto avanzó con rapidez, por lo que el trabajo en e
 
 ## Julian, luka and pompo
 
+## Decisiones de Ingeniería
+
+### Filosofía de Diseño y Estrategia
+
+1.  **Gestión Estratégica de Plataformas:**
+    - **Decisión:** El equipo decidió competir con el robot del año anterior (Julián) durante las competencias regionales, para no revelar las mejoras y avances de la nueva plataforma (Luka), reservando el robot nuevo para la competencia nacional.
+    - **Fundamento:** Esta decisión estratégica protegió la propiedad intelectual y las mejoras técnicas del nuevo diseño, evitando que fueran expuestas prematuramente a los competidores, y permitió disponer de más tiempo de desarrollo para la nueva plataforma antes de una competencia de alto calibre.
+
+2.  **Arquitectura Modular y Escalabilidad:**
+    - **Decisión:** El equipo adoptó un diseño de chasis de dos niveles, separando los componentes de alta potencia (baterías, sistema de tracción) de la electrónica sensible (controladores, sensores).
+    - **Fundamento:** Este enfoque modular fue fundamental para reducir la interferencia electromagnética (EMI), mejorar la gestión térmica y facilitar la creación rápida de prototipos y la depuración. Permitió actualizar de forma independiente el sistema de potencia y los subsistemas de control, como se demuestra en el desarrollo iterativo de Julián a Luka.
+
+### Sistema de Alimentación y Tracción
+
+3.  **Optimización de la Fuente de Alimentación:**
+    - **Decisión:** El equipo pasó de utilizar baterías estándar de 9 V a paquetes de baterías personalizados, empleando inicialmente 8 celdas NiMH de 1,2 V (9,6 V) y optimizando posteriormente con celdas de Li-ion de 3,7 V de alta capacidad.
+    - **Fundamento:** Esta fue una decisión crítica para el presupuesto energético. Las baterías de 9 V iniciales se identificaron como una debilidad importante debido a su alta resistencia interna y rápida caída de tensión, lo que provocaba inestabilidad en el sistema. Los paquetes personalizados proporcionaron la corriente necesaria para los motores y un voltaje estable para el microcontrolador y los sensores durante toda la prueba.
+
+4.  **Selección de Actuadores y Reducción de Engranajes:**
+    - **Decisión:** El equipo obtuvo motores y cajas de cambios de coches teledirigidos comerciales (por ejemplo, Nikko Dodge T-rex Ram) y más adelante exploró soluciones personalizadas.
+    - **Fundamento:** Esta fue una decisión de rendimiento frente a coste. Recuperar motores y cajas de cambios de vehículos teledirigidos de alto par proporcionó una solución probada y rentable para alcanzar la velocidad y el par necesarios para las tareas de la competición, reduciendo la necesidad de fabricación mecánica compleja y personalizada en las primeras fases del ciclo de desarrollo.
+
+### Sistemas de Navegación y Sensores
+
+5.  **Arquitectura del Sistema de Visión (Evolución y Retrospectiva):**
+    - **Decisión:** El equipo migró de una ESP32-CAM con lente OV2640 a una cámara Pixy2.
+    - **Fundamento:** Esta decisión se basó en la latencia, la facilidad de integración y el presupuesto energético. La solución con ESP32-CAM, aunque potente, requería una comunicación serie compleja que introducía latencia. La Pixy2 ofreció una ventaja significativa: se trataba de un sistema de visión integrado y dedicado con una interfaz UART/SPI sencilla y podía alimentarse directamente desde el Arduino, simplificando la arquitectura electrónica y reduciendo la carga de procesamiento en el controlador principal.
+
+6.  **Estimación de Estado y Navegación Inercial:**
+    - **Decisión:** El equipo adoptó un enfoque sofisticado de fusión de sensores, evolucionando de un magnetómetro simple (HMC5883L) a un acelerómetro/giróscopo MPU6050, y finalmente a un sensor de orientación absoluta BNO055.
+    - **Fundamento:** Esta fue una decisión crucial para resolver los problemas de deriva y precisión en el segundo reto. El MPU6050, aunque suponía una mejora, sufría una deriva significativa del giroscopio y errores de integración, lo que impedía realizar giros precisos de 90 grados. El BNO055, al combinar un magnetómetro y un acelerómetro, proporciona datos casi exactos, eliminando la deriva y permitiendo una navegación fiable y repetible.
+
+### Integración y Control
+
+7.  **Sistema de Control y Estrategia de Calibración:**
+    - **Decisión:** El equipo optó por una estrategia de calibración basada en las paredes exteriores del campo de juego, en lugar de depender únicamente de datos inerciales para la navegación.
+    - **Fundamento:** Ante las limitaciones de precisión de los sensores inerciales para giros exactos (especialmente con el MPU6050), se decidió utilizar referencias físicas externas (las paredes) como punto de referencia fiable. Esta decisión mejoró drásticamente la robustez y repetibilidad del robot, reduciendo la dependencia de la deriva del sensor y aumentando la fiabilidad general del sistema.
+
+8.  **Adaptación de Plataforma (EV3 a Arduino):**
+    - **Decisión:** Tras encontrar dificultades para integrar la Pixy Cam con el módulo EV3 en el prototipo Pompo 1.0, el equipo decidió volver a la plataforma Arduino para el desarrollo definitivo.
+    - **Fundamento:** Esta decisión se basó en la familiaridad, la velocidad de desarrollo y la compatibilidad de componentes. El ecosistema Arduino ofrecía una curva de aprendizaje más corta, una amplia biblioteca de sensores y motores, y una comunidad de soporte más extensa, lo que permitió resolver el problema de integración de la cámara de forma mucho más ágil y continuar con el desarrollo sin interrupciones prolongadas.
+    - 
 ### JULIAN 1.0
 
 ![Primer Julian ](https://github.com/RoboticaLLR/redmachine2024/assets/155327813/09cf93c9-366d-4cb8-a5c8-3ff131a1eefd)
