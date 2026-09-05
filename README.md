@@ -190,8 +190,7 @@ Apasionado por el aprendizaje continuo, la resolución creativa de problemas y l
 
 ## 2. Análisis Detallado del Chasis Inferior (Placa Base)
 
-![Placa Base CAD](image_d3fc48.png)
-> *Ubicación del archivo de imagen: `image_d3fc48.png`*
+![Placa Base CAD](<img width="442" height="691" alt="Image" src="https://github.com/user-attachments/assets/2db2ff57-f956-4582-b41a-e5b8ee03a490" />)
 
 * **Módulo Frontal de Dirección (Cuello y Alojamiento Servo):**
   * **Hueco Rectangular Central:** Diseñado a medida para embutir el servomotor de dirección a presión, evitando desplazamientos horizontales al aplicar torque.
@@ -207,7 +206,7 @@ Apasionado por el aprendizaje continuo, la resolución creativa de problemas y l
 
 ## 3. Análisis Detallado del Segundo Piso y Unión entre Niveles
 
-![Placa Segundo Piso CAD](image_d4c2dc.png)
+![Placa Segundo Piso CAD](<img width="657" height="720" alt="Image" src="https://github.com/user-attachments/assets/8270071b-fe54-4022-bb67-981e26001467" />)
 > *Ubicación del archivo de imagen: `image_d4c2dc.png`*
 
 * **Unión Física entre el Primer y Segundo Piso:**
@@ -225,7 +224,7 @@ Apasionado por el aprendizaje continuo, la resolución creativa de problemas y l
 
 ## 4. Módulo de Ruedas y Selección de Neumáticos
 
-![Vista Lateral del Robot y Ruedas](image_d4dd01.jpg)
+![Vista Lateral del Robot y Ruedas](<img width="2560" height="1920" alt="Image" src="https://github.com/user-attachments/assets/21bb874d-df9d-4367-851a-6a8568c35939" />)
 
 La selección de neumáticos se abordó separando técnicamente las funciones de **tracción** y **dirección**, ya que cada una exige propiedades físicas distintas: la tracción necesita maximizar agarre y transferencia de torque, mientras que la dirección necesita minimizar resistencia e inercia al giro. Por eso se optó por un principio de selección combinada, usando dos tipos de rueda Lego Technic distintos según la función de cada eje, en lugar de un único modelo para las cuatro ruedas.
 
@@ -253,19 +252,19 @@ El desarrollo del chasis no partió de un diseño final, sino de un proceso iter
 
 El primer prototipo fue una placa plana simple, sin ningún detalle funcional. Su objetivo no era ser una pieza definitiva, sino tener por primera vez una base física del robot que permitiera observar el avance real de la estructura y, sobre todo, medir con precisión dónde debían ubicarse los sensores, las tarjetas electrónicas y los motores dentro del chasis. Como era de esperarse, esta primera versión no era funcional: le faltaban todos los detalles específicos (cajas, huecos, anclajes) necesarios para encajar los componentes del robot.
 
-![Prototipo 1 CAD](PROTO_1.jpeg)
+![Prototipo 1 CAD](<img width="975" height="657" alt="Image" src="https://github.com/user-attachments/assets/a34b02ae-cb94-4f55-b736-19b5d55fb56b" />)
 
 **Prototipo 2 — Caja inferior integrada**
 
 A partir de las medidas obtenidas en el Prototipo 1, se integró una caja diseñada a medida donde los motores encajan por presión, evitando así depender de tornillos u otro método de fijación adicional para sujetarlos. Este acople resultó tan preciso que se mantiene sin cambios hasta el diseño final. De igual forma, el hueco para el servomotor de dirección quedó correctamente dimensionado desde esta iteración y tampoco requirió modificaciones posteriores.
 
-![Prototipo 2 CAD](PROTO_2.jpeg)
+![Prototipo 2 CAD](<img width="841" height="662" alt="Image" src="https://github.com/user-attachments/assets/b86371c9-dd10-42ff-ac70-4d885257badf" />)
 
 **Prototipo 3 — Nivelación de tracción y liberación de espacio para el LiDAR**
 
 Con la caja de motores ya resuelta, surgió un nuevo problema: las ruedas de tracción trasera y las ruedas de dirección delantera no quedaban al mismo nivel. Para corregirlo, se profundizó la caja inferior hasta emparejar ambos ejes. Además, se eliminó el soporte delantero que existía hasta ese momento, ya que el LiDAR necesitaba ese mismo espacio libre para operar correctamente: mantenerlo habría bloqueado parte de su campo de visión.
 
-![Prototipo 3 CAD](PROTO_FINAL.jpeg)
+![Prototipo 3 CAD](<img width="757" height="600" alt="Image" src="https://github.com/user-attachments/assets/8c2bc462-9c5d-4cbf-92c0-4cabc6b50f71" />)
 
 **Iteración final del piso 1 — Corrección de estabilidad**
 
@@ -277,13 +276,13 @@ Durante las primeras pruebas de rodaje, el robot presentaba derrapes frecuentes 
 
 Esta primera versión incorporó la base de montaje de la Raspberry Pi y una elevación para sujetar el LiDAR desde arriba, condición necesaria para darle el campo de visión requerido. Ya incluía los agujeros de fijación del LiDAR, aunque el resto de la pieza aún era provisional.
 
-![Prototipo 1 segundo piso](1787852085823_image.png)
+![Prototipo 1 segundo piso](<img width="1062" height="597" alt="Image" src="https://github.com/user-attachments/assets/76e6c4b5-a425-4cf3-b10a-1c97424be141" />)
 
 **Segundo prototipo del segundo piso — Anclaje delantero**
 
 Al eliminar en el Prototipo 3 del piso inferior el soporte delantero (por interferir con el LiDAR), se perdió también el punto que sostenía la parte frontal del robot. Se resolvió con un tornillo largo de aproximadamente 12 cm que atraviesa todo el vehículo: sujeta el servomotor, separa ambos pisos a la distancia correcta y llega hasta la parte superior del segundo piso, funcionando como eje de unión vertical.
 
-![Prototipo 2 segundo piso](1787852183165_image.png)
+![Prototipo 2 segundo piso](<img width="947" height="517" alt="image" src="https://github.com/user-attachments/assets/58ec7859-b4ae-4210-bea0-6f4b4b88332f" />)
 
 **Restricción de altura del LiDAR**
 
@@ -293,19 +292,19 @@ Un condicionante que atravesó todo el rediseño del segundo piso fue que el cam
 
 La versión definitiva se hizo más ancha para que los portabaterías apoyaran directamente contra el segundo piso (reforzando el punto anterior), e incorporó los huecos exactos para montar la Raspberry Pi de forma visible en la cara superior, y el puente H junto con los reguladores de voltaje boca abajo en la cara inferior, aprovechando así el espacio disponible.
 
-![Prototipo final segundo piso](1787852546166_image.png)
+![Prototipo final segundo piso](<img width="740" height="405" alt="Image" src="https://github.com/user-attachments/assets/b2c8baba-905b-4440-b253-71e25d6748b5" />)
 
 ### 5.3. Validación con el Prototipo Ensamblado
 
 Antes de dar por cerrado el diseño, se realizó un primer ensamblaje físico completo (dos pisos, ruedas, motores y estructura de sujeción del sensor) para validar que el conjunto funcionara como se había planeado en CAD. Esta prueba confirmó que el enfoque general era el correcto, y fue precisamente al intentar montar los sensores sobre esta estructura que se detectaron las limitaciones de altura del LiDAR descritas en la sección anterior, lo que disparó los ajustes finales del segundo piso y del sistema de anclaje.
 
-![Primer ensamblaje físico](1787852304812_WhatsApp_Image_2026-08-22_at_11_17_11_AM.jpeg)
+![Primer ensamblaje físico](<img width="960" height="1280" alt="image" src="https://github.com/user-attachments/assets/bbb0b046-92cc-422a-b017-74c6628e32fa" />)
 
 ### 5.4. Prototipo Final Ensamblado (Red Machine)
 
 Como resultado de todo este proceso iterativo —resolver primero la caja de motores, luego nivelar la tracción, después liberar espacio para el LiDAR, y finalmente resolver el anclaje delantero y la estabilidad del segundo piso— se llegó al ensamble físico final: una estructura de dos niveles con dirección híbrida PETG-Lego, soporte de LiDAR elevado por debajo del límite de 10 cm, portabaterías 18650 laterales que cumplen doble función (energía y soporte estructural), y Raspberry Pi 5 montada en la cara superior del segundo piso junto a su disipador de calor.
 
-![Robot completo ensamblado - resultado final](1787852846798_image.png)
+![Robot completo ensamblado - resultado final](<img width="2560" height="1920" alt="Image" src="https://github.com/user-attachments/assets/4c307e10-52e9-4084-991d-2187023d2f32" />)
 
 
 ---
