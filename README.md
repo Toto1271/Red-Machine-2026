@@ -2,8 +2,7 @@
 
 Este repositorio muestra todos los componentes para construir a "pompo", este robot autonomo pertenece al equipo "Red Machine" y cumple el proposito de participar en la categoria de futuros ingenieros en la WRO 2026.
 
-![Image](https://github.com/user-attachments/assets/1cbe6250-ba27-41c2-bb0b-d5abe1c41ac8)
-
+<img width="1280" height="960" alt="Image" src="https://github.com/user-attachments/assets/bd6b2512-e841-4d3b-aff0-cc07af262557" />
 
 # INDICE - REDMACHINE 2026
 
@@ -167,7 +166,15 @@ Apasionado por el aprendizaje continuo, la resolución creativa de problemas y l
 
 ---
 
+
 ![Image](https://github.com/user-attachments/assets/b1555ddb-f7c7-47b6-b690-13382831a981)
+
+# Fotos desde todos los angulos
+
+
+| ![Image](https://github.com/user-attachments/assets/3aa9a510-c007-47a3-a0b3-a6fee8ebff0d) | ![Image](https://github.com/user-attachments/assets/d1b34a39-9bff-4c7c-bc47-aea313cb8a04) | ![Image](https://github.com/user-attachments/assets/d159d48b-ad4b-4e0a-abe1-97cc937d5c3b) |
+| :----: | :-------------------: | :----------: |
+| ![Image](https://github.com/user-attachments/assets/44764f69-a128-4930-a801-e066622e8f97) | ![Image](https://github.com/user-attachments/assets/9b9e7aa1-4f95-4ef7-a897-2a30fddbbfc0) |  |
 
 # ⚙️ Diseño y Fabricación Mecánica
 
