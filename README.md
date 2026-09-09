@@ -232,8 +232,7 @@ Apasionado por el aprendizaje continuo, la resolución creativa de problemas y l
 
 | ![Image](https://github.com/user-attachments/assets/3aa9a510-c007-47a3-a0b3-a6fee8ebff0d) | ![Image](https://github.com/user-attachments/assets/d1b34a39-9bff-4c7c-bc47-aea313cb8a04) | ![Image](https://github.com/user-attachments/assets/d159d48b-ad4b-4e0a-abe1-97cc937d5c3b) |
 | :----: | :-------------------: | :----------: |
-| ![Image](https://github.com/user-attachments/assets/44764f69-a128-4930-a801-e066622e8f97) | ![Image](https://github.com/user-attachments/assets/9b9e7aa1-4f95-4ef7-a897-2a30fddbbfc0) |  |
-
+| ![Image](https://github.com/user-attachments/assets/44764f69-a128-4930-a801-e066622e8f97) | ![Image](https://github.com/user-attachments/assets/9b9e7aa1-4f95-4ef7-a897-2a30fddbbfc0) | ![Image](https://github.com/user-attachments/assets/aa0c9ccf-9975-4642-99fe-667c9d022cfa) |
 # ⚙️ Diseño y Fabricación Mecánica
 
 ## 1. Fabricación Digital y Selección de Materiales
