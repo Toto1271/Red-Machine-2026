@@ -87,6 +87,7 @@ Este repositorio muestra todos los componentes para construir a "pompo", este ro
 20. [Recomendaciones finales](#recomendaciones-finales)
 21. [Videos del Robot](#videos)
     - [Video Actual Reto 1](#video-actual-reto-1)
+    - [Video Actual Reto 2](#video-actual-reto-2)
     - [Videos del robot versión 1.0](#videos-del-robot-versión-10)
     - [Videos del robot versión 2.0](#videos-del-robot-versión-20)
     - [Demostraciones y pruebas](#videos-del-robot)
@@ -1271,6 +1272,9 @@ Revisa la lógica de `detectarlado_en_pared()`. Si la pared derecha está más c
 # Videos
 ## Video Actual Reto 1
 [![Reto abierto Red Machine 2026](https://img.youtube.com/vi/zJ_OKyx9S7s/maxresdefault.jpg)](https://www.youtube.com/watch?v=zJ_OKyx9S7s)
+
+## Video Actual Reto 2
+[<img width="464" height="228" alt="Image" src="https://github.com/user-attachments/assets/9e3274ef-4923-4cb5-ba8d-bd42b5c70e9e" />](https://youtu.be/Ffp2MwC_Hfk?si=NL7WM5FfkNmI31rE)
 
 ## Videos del robot versión 1.0
 ### Primer reto (prueba abierta)
