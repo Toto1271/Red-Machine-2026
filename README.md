@@ -7,6 +7,9 @@ Este repositorio muestra todos los componentes para construir a "pompo", este ro
 
 # INDICE - REDMACHINE 2026
 
+En este repositorio se puede observar la evolucion del equipo Red Machine asi como su trabajo durante mas de 3 años en la WRO. A través de diversos commits se pueden visualizar los avances que se han tenido durante esta temporada 2026 en procesos de ingeniería, tanto físicos como de computacion y programacion. 
+Aquí se podrá observar las decisiones que se han tomado y el por que, y todas las mejoras que se han tomado para llegar a la ultima version hasta el momento que se tiene del robot. 
+
 ## 📌 CONTENIDO PRINCIPAL
 
 1. [Documento de Ingeniería / Red Machine](#documento-de-ingeniería--red-machine)
@@ -228,12 +231,19 @@ Apasionado por el aprendizaje continuo, la resolución creativa de problemas y l
 
 ![Image](https://github.com/user-attachments/assets/b1555ddb-f7c7-47b6-b690-13382831a981)
 
+
 # Fotos desde todos los angulos
 
+## Montaje actual (WRO nacional) 
+La construcción del robot se mantuvo en su mayor parte, manteniendo la posicion de los sistema de manteniniento, sensores y alimentacion, pudiendose observar dos cambios para el vehículo que competirá en la final nacional: 
+   - **Cambio estructural:** En el robot se añade una nueva parte impresa en material 3D, que cumple la funcion de tener un mejor recubrimiento en la electronica. 
+   - **Fijacion del boton de inicio:** En la nueva estructura impresa se colocó un pequeño espacio para poder fijar el botón de inicio, y mantenerlo estable a la hora de las practicas para impedir daños en dicho sistema. 
 
 | ![Image](https://github.com/user-attachments/assets/3aa9a510-c007-47a3-a0b3-a6fee8ebff0d) | ![Image](https://github.com/user-attachments/assets/d1b34a39-9bff-4c7c-bc47-aea313cb8a04) | ![Image](https://github.com/user-attachments/assets/d159d48b-ad4b-4e0a-abe1-97cc937d5c3b) |
 | :----: | :-------------------: | :----------: |
 | ![Image](https://github.com/user-attachments/assets/44764f69-a128-4930-a801-e066622e8f97) | ![Image](https://github.com/user-attachments/assets/9b9e7aa1-4f95-4ef7-a897-2a30fddbbfc0) | ![Image](https://github.com/user-attachments/assets/aa0c9ccf-9975-4642-99fe-667c9d022cfa) |
+
+
 # ⚙️ Diseño y Fabricación Mecánica
 
 ## 1. Fabricación Digital y Selección de Materiales
@@ -1322,12 +1332,13 @@ Revisa la lógica de `detectarlado_en_pared()`. Si la pared derecha está más c
 
 # Historia y Cronología de Red Machine
 
-1. Temporada 2023
+1. Resumen del diseño evolutivo del robot
+2. Temporada 2023
 - [Julio 2023](https://github.com/Samu4035/REDMACHINE-2025/blob/main/t-photos/Historia.md#Julio-2023)
 - [Agosto 2023](https://github.com/Samu4035/REDMACHINE-2025/blob/main/t-photos/Historia.md#Agosto-2023)
 - [Septiembre 2023](https://github.com/Samu4035/REDMACHINE-2025/blob/main/t-photos/Historia.md#Septiembre-2023)
 - [Octubre 2023](https://github.com/Samu4035/REDMACHINE-2025/blob/main/t-photos/Historia.md#Octubre-2023)
-2. Temporada 2024
+3. Temporada 2024
 - [Febrero 2024](https://github.com/Samu4035/REDMACHINE-2025/blob/main/t-photos/Historia.md#Febrero-2024)
 - [Marzo 2024](https://github.com/Samu4035/REDMACHINE-2025/blob/main/t-photos/Historia.md#Marzo-2024)
 - [Abril 2024](https://github.com/Samu4035/REDMACHINE-2025/blob/main/t-photos/Historia.md#Abril-2024)
@@ -1335,12 +1346,12 @@ Revisa la lógica de `detectarlado_en_pared()`. Si la pared derecha está más c
 - [Junio 2024](https://github.com/Samu4035/REDMACHINE-2025/blob/main/t-photos/Historia.md#Junio-2024)
 - [Octubre 2024](https://github.com/Samu4035/REDMACHINE-2025/blob/main/t-photos/Historia.md#Octubre-2024)
 - [Noviembre 2024](https://github.com/Samu4035/REDMACHINE-2025/blob/main/t-photos/Historia.md#Noviembre-2024)
-3. Temporada 2025
+4. Temporada 2025
 - [Febrero 2025](https://github.com/Samu4035/REDMACHINE-2025/blob/main/t-photos/Historia.md#Febrero-2025)
 - [Marzo 2025](https://github.com/Samu4035/REDMACHINE-2025/blob/main/t-photos/Historia.md#Marzo-2025)
 - [Abril 2025](https://github.com/Samu4035/REDMACHINE-2025/blob/main/t-photos/Historia.md#Abril-2025)
 - [Mayo 2025](https://github.com/Samu4035/REDMACHINE-2025/blob/main/t-photos/Historia.md#Mayo-2025)
-4. Julian, Luka y Pompo
+5. Julian, Luka y Pompo
 - [JULIAN 1.0](https://github.com/Samu4035/REDMACHINE-2025/blob/main/t-photos/Historia.md#JULIAN-1.0)
 - [JULIAN 2.0](https://github.com/Samu4035/REDMACHINE-2025/blob/main/t-photos/Historia.md#JULIAN-2.0)
 - [JULIAN 3.0](https://github.com/Samu4035/REDMACHINE-2025/blob/main/t-photos/Historia.md#JULIAN-3.0)
@@ -1358,7 +1369,28 @@ Revisa la lógica de `detectarlado_en_pared()`. Si la pared derecha está más c
 
 - [POMPO 3.0](https://github.com/Samu4035/REDMACHINE-2025/blob/main/t-photos/Historia.md#POMPO-3.0)
 
-    
+
+## Resumen del diseño evolutivo del robot
+El diseño actual del robot se debe a un avance continuo basado en los resultados de prototipos anteriores. Este avance nace en la primera temporada en la que el equipo participó (2023), y ha continuado evolucionando a lo largo de las temporadas. Esto se puede observar con mayor detalle en la cronología que sigue luego de este corto resumen. 
+Los mayores cambios observables en los prototipos se basan en datos experimentales en el funcionamiento y estabilidad en el robot. Las mayores diferencias entre robots son: 
+- **Julian (2023) -> Luka (2024):**
+1. ESP32-cam a webcam a pixycam: Desde que el equipo comenzo a trabajar en el segundo reto se mantuvo un constante problema en el principio, la deteccion de los obstaculos de la ronda cerrada. Debido a las dificultades y limitaciones de trabajar con ESP32-cam, al comenzar la siguiente temporada se comenzo a trabajar con una webcam usando opencv.
+A pesar de que el funcionamiento con la webcam era muy superior, seguia siendo deficiente durante la transmicion de la informacion, por lo que se decidio migrar a un sistema mucho mas simple de manejar, pixycam con arduino, el cual fue la mejor opcion para el equipo durante un largo tiempo.
+2. Cambios estructurales: Uno de los mayores problemas de Julian era su gran tamaño, que dificultaba la maniobrabilidad en la pista. Luka se diseño para ser mucho mas compacto obteniendose una gran mejora. 
+
+- **Luka (2024) -> pompo (2025):**
+1. Cambios estructurales: Tanto la estructura de julian como la de luka eran diseñadas con cortes de acrilico, lo que dificultaba mucho la precisión en sus componentes mecanicos dificultando la estabilidad en la pista. Al trabajar con pompo se utilizaron piezas de lego disminuyendo en un gran porcentaje este problema.
+
+- **pompo (2025) -> pompo (2026):**
+1. Cambios estructurales: Buscando maximizar la precision mecanica y buscando asimismo tener mayor libertad en el diseño del robot, se paso de trabajar de lego a trabajar con impresion 3D para el chasis y las diversas estructuras de pompo.
+2. Cambios en traccion: En los primeros prototipos se utilizo un motor rev robotics el cual era muy pesado, por lo que al trabajar en este nuevo prototipo se utilizan motores mas livianos que permiten obtener la misma estabilidad minimizando el peso del robot.
+3. Cambios de componentes: Se paso de utilizar sensores de ultrasonido a utilizar un sensor lidar para las distintas detecciones que debe realizar el robot durante su estancia en la pista. 
+
+- **Cambios generales:**
+1. Estructurales: Durante todos los modelos se realizaron cambios para aumentar la precision de los movimientos y disminuir el peso de la estructura
+2. Componentes: El equipo ha utilizado diversos sensores a lo largo de los avances, buscando una mejor deteccion, comunicacion con el cerebro, y consistencia en los resultados. Asi mismo tambien el equipo ha trabajado con dos placas principales: arduinos y raspberry pi, siendo esta ultima el principal controlador del robot actual.
+3. Programacion: Han cambiado programas, metodos, plataformas, etc, utilizando las que mejor permiten comunicarse con las placas. 
+
 ## Temporada 2023
 
 ### Julio 2023
